@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <ScrollView
+        android:id="@+id/scrollView12"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
+
+                <ImageView
+                    android:id="@+id/imgViewPhoto2"
+                    android:layout_width="match_parent"
+                    android:layout_height="350dp"
+                    android:scaleType="centerCrop"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/slider_placeholder" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical" >
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="left"
+                        android:layout_margin="@dimen/dimen_5dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical" >
+
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_weight="1" >
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom|right"
+                        android:background="@color/slider_bg_label"
+                        android:orientation="horizontal"
+                        android:padding="@dimen/dimen_5dp" >
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="bottom|right"
+                            android:gravity="right"
+                            android:layout_weight="1"
+                            android:orientation="vertical" >
+
+                            <TextView
+                                android:id="@+id/tvTitle2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Medium Text"
+                                android:textColor="@color/theme_orange_color"
+                                android:textSize="@dimen/text_size_24sp"
+                                android:textStyle="bold"
+                                android:gravity="right"
+                                android:layout_gravity="right"/>
+
+
+                            <!--
+                            <RatingBar
+                                android:id="@+id/ratingBar2"
+                                style="@style/ratingBarList"
+                                android:layout_width="wrap_content"
+                                android:isIndicator="true"
+                                android:layout_height="wrap_content"
+                                android:gravity="right"
+                                android:layout_gravity="right"/>
+
+                            <TextView
+                                android:id="@+id/tvRatingBarInfo2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:lines="@integer/num_new_lines_2"
+                                android:text="Small Text"
+                                android:textColor="@color/text_white_cloor"
+                                android:textSize="@dimen/text_size_slider_subtitle"
+                                android:gravity="right"
+                                android:layout_gravity="right"/>
+                            -->
+                        </LinearLayout>
+
+
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+
+
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="5dp"
+                android:background="@drawable/line_divider_orange" />
+
+            <TextView
+                android:id="@+id/tvDetails2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dimen_10dp"
+                android:minHeight="100dp"
+                android:text="Medium Text"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:gravity="right"
+                android:layout_gravity="right"/>
+
+            <Button
+                android:id="@+id/cont"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="20dp"
+                android:text="جهت مشاهده متن کامل کلیک کنید"
+                android:layout_gravity="center"
+                android:gravity="center"/>
+
+        </LinearLayout>
+
+
+    </ScrollView>
+
+</LinearLayout>
