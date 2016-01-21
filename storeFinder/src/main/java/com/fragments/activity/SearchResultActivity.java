@@ -138,7 +138,7 @@ public class SearchResultActivity extends FragmentActivity implements OnItemClic
 				
 				
 				// SETTING VALUES
-				float rating = 0;
+				/*float rating = 0;
 				
 				if(store.getRating_total() > 0 && store.getRating_count() > 0)
 					rating = store.getRating_total() / store.getRating_count();
@@ -150,7 +150,7 @@ public class SearchResultActivity extends FragmentActivity implements OnItemClic
 						SearchResultActivity.this.getResources().getString(R.string.rating));
 				
 				RatingBar ratingBar = (RatingBar) v.findViewById(R.id.ratingBar);
-				ratingBar.setRating(rating);
+				ratingBar.setRating(rating);*/
 				
 				//TextView tvRatingBarInfo = (TextView) v.findViewById(R.id.tvRatingBarInfo);
 				
@@ -165,11 +165,11 @@ public class SearchResultActivity extends FragmentActivity implements OnItemClic
 				imgViewStarred.setVisibility(View.VISIBLE);
 
 
-                ImageView imgViewFeatured = (ImageView) v.findViewById(R.id.imgViewFeatured);
+                /*ImageView imgViewFeatured = (ImageView) v.findViewById(R.id.imgViewFeatured);
                 imgViewFeatured.setVisibility(View.INVISIBLE);
 
                 if(store.getFeatured() ==1)
-                    imgViewFeatured.setVisibility(View.VISIBLE);
+                    imgViewFeatured.setVisibility(View.VISIBLE);*/
 
                 Favorite fave = q.getFavoriteByStoreId(store.getStore_id());
                 if(fave == null)
