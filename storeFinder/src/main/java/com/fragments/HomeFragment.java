@@ -357,9 +357,9 @@ public class HomeFragment extends Fragment implements OnItemClickListener, OnCli
 					@Override
 					public void onClick(View v) {
 						// TODO Auto-generated method stub
-						Intent i = new Intent(getActivity(), DetailActivity.class);
+						/*Intent i = new Intent(getActivity(), DetailActivity.class);
 						i.putExtra("store", entry);
-						getActivity().startActivity(i);
+						getActivity().startActivity(i);*/
 					}
 				});
 				
