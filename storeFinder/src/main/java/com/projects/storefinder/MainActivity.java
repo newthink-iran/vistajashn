@@ -48,6 +48,8 @@ import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 
+import com.parse.Parse;
+import com.parse.ParseInstallation;
 import com.projects.storefinder.R;
 import com.location.LocationHelper;
 import com.location.LocationHelper.OnLocationListener;
@@ -64,7 +66,9 @@ import com.usersession.UserAccessSession;
 import com.usersession.UserSession;
 
 import android.app.AlertDialog;
+import android.content.BroadcastReceiver;
 import android.content.DialogInterface;
+import android.content.IntentFilter;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -148,9 +152,12 @@ public class MainActivity extends SwipeRefreshActivity implements LocationListen
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-/*        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1){
+        /*  if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1){
             getWindow().getDecorView().setLayoutDirection(View.LAYOUT_DIRECTION_RTL);
         }*/
+        Parse.initialize(this, "D3lfc61AyqfBGxtkxofFIsAAySdMgejMjlCH1OJl", "HKzjAY6s8vhbqiCW3qIY5b6drt0uGzqSidYSW9Ut");
+        ParseInstallation.getCurrentInstallation().saveInBackground();
+
         super.onCreate(savedInstanceState);
         setDefaultFont(this, "DEFAULT", "BHoma.ttf");
         setDefaultFont(this, "MONOSPACE", "BHoma.ttf");
@@ -238,7 +245,7 @@ public class MainActivity extends SwipeRefreshActivity implements LocationListen
         mGoogleApiClient = new GoogleApiClient.Builder(this)
         .addApi(LocationServices.API)
         .addConnectionCallbacks(this)
-        .addOnConnectionFailedListener(this)
+                .addOnConnectionFailedListener(this)
         .build();
         
         FrameLayout frameAds = (FrameLayout) findViewById(R.id.frameAds);
@@ -967,13 +974,14 @@ public class MainActivity extends SwipeRefreshActivity implements LocationListen
         }
 
     }
-    
+
     @Override
     public void onPause() {
 
         // Save the current setting for updates
         mEditor.putBoolean(LocationUtils.KEY_UPDATES_REQUESTED, mUpdatesRequested);
         mEditor.commit();
+
 
         super.onPause();
     }

@@ -4,30 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
-    
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.4">
-
-        <com.slider.MGSlider
-            android:id="@+id/slider"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/bg_gray_color"
-            android:layout_gravity="right"
-            android:gravity="right"/>
-
-            <FrameLayout
-                android:id="@+id/frameSliderThumb"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom|center" 
-                android:layout_marginBottom="@dimen/dimen_5dp" >
-			</FrameLayout>
-    </FrameLayout>
-
-
 
 
     <LinearLayout
@@ -35,6 +11,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="right">
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="کسب و کارها"
+            android:textColor="@android:color/black"
+            android:textStyle="bold"
+            android:singleLine="false"
+            android:background="@android:color/white" />
 
         <Button
             android:id="@+id/hallBtn"
