@@ -34,7 +34,7 @@
             android:textSize="@dimen/text_size_16sp"
             android:textStyle="bold" />
 
-        <!--
+
         <TextView
             android:id="@+id/tvSubtitle"
             android:layout_width="wrap_content"
@@ -46,10 +46,9 @@
             android:text="Small Text"
             android:textColor="@color/text_white_cloor"
             android:textSize="@dimen/text_size_14sp" />
-        -->
     </LinearLayout>
 
-    <!--
+
     <TextView
         android:id="@+id/tvDate"
         android:layout_width="wrap_content"
@@ -62,5 +61,5 @@
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:textColor="@color/theme_orange_color"
         android:textSize="@dimen/text_size_16sp" />
-    -->
+
 </FrameLayout>

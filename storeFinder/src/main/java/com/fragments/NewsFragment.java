@@ -129,13 +129,13 @@ public class NewsFragment extends Fragment implements OnItemClickListener, OnCli
 				TextView tvTitle = (TextView) v.findViewById(R.id.tvTitle);
 				tvTitle.setText(name);
 				
-				/*TextView tvSubtitle = (TextView) v.findViewById(R.id.tvSubtitle);
-				tvSubtitle.setText(address);*/
+				TextView tvSubtitle = (TextView) v.findViewById(R.id.tvSubtitle);
+				tvSubtitle.setText(address);
 				
 				
-				/*String date = DateTimeHelper.getStringDateFromTimeStamp(news.getCreated_at(), "MM/dd/yyyy" );
+				String date = DateTimeHelper.getStringDateFromTimeStamp(news.getCreated_at(), "MM/dd/yyyy" );
 				TextView tvDate = (TextView) v.findViewById(R.id.tvDate);
-				tvDate.setText(date);*/
+				tvDate.setText(date);
 			}
 		});
 		listView.setAdapter(adapter);
