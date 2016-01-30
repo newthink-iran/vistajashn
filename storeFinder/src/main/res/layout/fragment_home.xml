@@ -12,91 +12,12 @@
         android:layout_height="wrap_content"
         android:layout_gravity="right">
 
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="کسب و کارها"
-            android:textColor="@android:color/black"
-            android:textStyle="bold"
-            android:singleLine="false"
-            android:background="@android:color/white" />
 
-        <Button
-            android:id="@+id/hallBtn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="تالار، هتل و آژانس های مسافرتی"
-            android:textColor="@color/text_white_cloor"
-            android:textStyle="bold"
-            android:background="#ff0087cb" />
-
-        <Button
-            android:id="@+id/flowerBtn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="گل، شیرینی و گروه های سرگرمی"
-            android:textColor="@color/text_white_cloor"
-            android:textStyle="bold"
-            android:background="#ffbd67a2" />
-
-        <Button
-            android:id="@+id/restaurantBtn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="رستوران، کافی شاپ و تهیه غذا"
-            android:textColor="@color/text_white_cloor"
-            android:textStyle="bold"
-            android:background="#ffcc0063" />
-
-        <Button
-            android:id="@+id/photoBtn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="عکاسی، فیلم برداری و کارت دعوت"
-            android:textColor="@color/text_white_cloor"
-            android:textStyle="bold"
-            android:background="#ff8d8d8d" />
-
-        <Button
-            android:id="@+id/beautyBtn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="مراکز و لوازم زیبایی"
-            android:textColor="@color/text_white_cloor"
-            android:textStyle="bold"
-            android:background="#ffe76044" />
-
-        <Button
-            android:id="@+id/mesonBtn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="مزون لباس و تشریفات سفره عقد"
-            android:textColor="@color/text_white_cloor"
-            android:textStyle="bold"
-            android:background="#ffcccccc" />
-
-        <Button
-            android:id="@+id/goldBtn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="سرویس طلا و حلقه ازدواج"
-            android:textColor="@color/text_white_cloor"
-            android:textStyle="bold"
-            android:background="#fff9c802" />
-
-        <Button
-            android:id="@+id/giftBtn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="جهیزیه، کادویی و هدایا"
-            android:textColor="@color/text_white_cloor"
-            android:textStyle="bold"
-            android:background="#ff8c6954" />
 
 
     </LinearLayout>
 
-    <!--
+
     <ListView
         android:id="@+id/listView"
         android:layout_width="match_parent"
@@ -106,6 +27,5 @@
         android:gravity="right">
 
     </ListView>
-    -->
 
 </LinearLayout>
