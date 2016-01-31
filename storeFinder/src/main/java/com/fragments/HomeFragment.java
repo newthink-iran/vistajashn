@@ -1,6 +1,8 @@
 package com.fragments;
 
 import java.util.ArrayList;
+import java.util.Date;
+
 import com.adapters.MGListAdapter;
 import com.adapters.MGListAdapter.OnMGListAdapterAdapterListener;
 import com.asynctask.MGAsyncTask;
@@ -13,6 +15,7 @@ import com.fragments.activity.DetailActivity;
 import com.fragments.activity.NewsDetailActivity;
 import com.fragments.activity.NewsDetailActivity2;
 import com.fragments.activity.StoreActivity;
+import com.fragments.activity.Utilities;
 import com.helpers.DateTimeHelper;
 import com.imageview.MGImageView;
 import com.models.Category;
@@ -290,8 +293,13 @@ public class HomeFragment extends Fragment implements OnItemClickListener, OnCli
 				
 				TextView tvSubtitle = (TextView) v.findViewById(R.id.tvSubtitle);
 				tvSubtitle.setText(address);
-				
-				String date = DateTimeHelper.getStringDateFromTimeStamp(news.getCreated_at(), "MM/dd/yyyy" );
+
+
+				/* elyas : farsi date */
+				Date d = DateTimeHelper.getDateFromTimeStamp(news.getCreated_at());
+				String date = Utilities.FarsiDate(d);
+
+				//String date = DateTimeHelper.getStringDateFromTimeStamp(news.getCreated_at(), "MM/dd/yyyy" );
 				TextView tvDate = (TextView) v.findViewById(R.id.tvDate);
 				tvDate.setText(date);
 			}

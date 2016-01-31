@@ -4,7 +4,7 @@
     <string name="app_id">894251478257928</string>
     <string name="IO_Exception_getFromLocation">خطای ورودی/خروجی در  Geocoder.getFromLocation()</string>
     <string name="no_name"></string>
-    <string name="app_name">ویستا جشن</string>
+    <string name="app_name">اپلیکیشن انتخابات</string>
     <string name="action_settings">تنظیمات</string>
     <string name="hello_world">سلام دنیا!</string>
     <string name="no_results_found">هیچ نتیجه ای پیدا نشد.</string>
@@ -13,8 +13,8 @@
     <string name="starred">علاقه مندی های من</string>
     <string name="featured">محصولات منتخب</string>
     <string name="map">نقشه</string>
-    <string name="search">جستجو</string>
-    <string name="news">مجله تصویری</string>
+    <string name="search">جستجوی خبرها</string>
+    <string name="news">خبرها</string>
     <string name="weather">آب و هوا</string>
     <string name="about_us">درباره ما</string>
     <string name="terms_condition">قوانین و مقررات</string>
@@ -87,11 +87,11 @@
     <string name="share">Share</string>
     <string name="placeholder_review">Review</string>
     <string name="chars_left">Char(s) left</string>
-    <string name="about_us_detail">ویستا جشن : راهنمای برگزاری یک جشن عالی</string>
-    <!--<string name="about_us_detail_1">صنایع چوب و فلز ابراهیمی با بیش از 40 سال فعالیت در امور تولید و فروش مبلمان اداری و دفتری به عنوان یکی از شاخص ترین مراکز به شمار می آید.</string>
-    <string name="about_us_detail_2">این سازمان برای تولید و فروش محصولات خود امکانات فنی مهندسی و نیرو های انسانی مجرب و کار آمدی را گرد هم آورده تا رضایت شما را فراهم سازد.</string>
-    <string name="about_us_detail_3">این سازمان خدمات طراحی و مدل سازی ، کنترل کیفی ، قطعه سازی ، مونتاژ قطعات را در عین رعایت بهینه ی اصول زیبایی شناختی و طبی به مرحله اجرا در آورده است.</string>
-    -->
+    <string name="about_us_detail">"گروه مهندسی ویستا پرداز نواندیش \n شماره تماس: 33517735-031"</string>
+    <string name="about_us_detail_1">"توضیحات لازم"</string>
+    <string name="about_us_detail_2">"توضیحات لازم"</string>
+    <string name="about_us_detail_3">"توضیحات لازم"</string>
+
     <string name="contact_us">تماس با ما</string>
     <string name="terms_and_conditions">ایده، طراحی و اجرا</string>
     <string name="terms_and_conditions_details">مشاوره، نیازسنجی، طراحی و پیاده سازی سیستم های نوین بازاریابی ومبتنی بر فناوری اطلاعات\n\n\n---------------------------------------------------\nدفتر تهران: شرکت مبتکران نوین آویژه\n---------------------------------------------------\n\nآدرس: تهران، میدان هفت تیر، خیابان قائم مقام فراهانی،\nکوچه بهادری، پلاک 2، واحد 7\n\nتلفن: 021-88843022\n\nوبسایت: www.novinavijeh.com\n\nنمابر: 021-89789169\n\nایمیل: onfo@novinavijeh.com\n\n\n---------------------------------------------------\nدفتر اصفهان: شرکت داده گستر خط روشن\n---------------------------------------------------\n\nآدرس: اصفهان،بلوار دانشگاه صنعتی اصفهان، شهرک علمی و تحقیقاتی اصفهان/nساختمان فن آفرینی 2، واحد شماره 122\n\nتلفن: 031-33932087\n\nکد پستی: 84156-83163\n\nنمابر: 021-89783042\n\nایمیل: info@khateroshan.com</string>
@@ -130,5 +130,10 @@
     <string name="title_activity_splash">SplashActivity</string>
     <string name="img_gallery_desc">گالری</string>
     <string name="exit">خروج</string>
+    <string name="about_us1">معرفی و زندگی نامه</string>
+    <string name="about_us2">تاریخچه فعالیت ها و سوابق</string>
+    <string name="about_us3">اهداف و برنامه ها</string>
+    <string name="action_share">اشتراک گذاری این خبر</string>
+    <string name="from">ستاد انتخاباتی آقای ...</string>
 
 </resources>

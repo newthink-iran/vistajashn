@@ -317,7 +317,7 @@ public class NewsDetailActivity2 extends SwipeRefreshActivity implements OnClick
 
     private void website() {
 
-        if(news.getNews_url() == null || news.getNews_url().length() == 0) {
+        /*if(news.getNews_url() == null || news.getNews_url().length() == 0) {
             MGUtilities.showAlertView(
                     this,
                     R.string.action_error,
@@ -333,7 +333,19 @@ public class NewsDetailActivity2 extends SwipeRefreshActivity implements OnClick
         Intent webIntent = new Intent(Intent.ACTION_VIEW);
         webIntent.setData(Uri.parse(strUrl));
         this.startActivity(Intent.createChooser(webIntent,
-                MGUtilities.getStringFromResource(this, R.string.choose_browser)));
+                MGUtilities.getStringFromResource(this, R.string.choose_browser)));*/
+
+        Intent sendIntent = new Intent();
+        sendIntent.setAction(Intent.ACTION_SEND);
+        String strDesc = news.getNews_content().replace("\n", "[{~}]");
+        Spanned details = Html.fromHtml(strDesc);
+        details = Html.fromHtml(details.toString());
+        strDesc = details.toString().replace("[{~}]", "\n");
+        String from = getString(R.string.from);
+        String sendText = from + "\n\n" + Html.fromHtml(news.getNews_title()).toString() + "\n" + strDesc;
+        sendIntent.putExtra(Intent.EXTRA_TEXT, sendText);
+        sendIntent.setType("text/plain");
+        startActivity(Intent.createChooser(sendIntent, getString(R.string.action_share)));
     }
 
     private void shareFB() {

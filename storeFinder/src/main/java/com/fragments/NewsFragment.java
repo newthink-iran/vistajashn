@@ -1,6 +1,8 @@
 package com.fragments;
 
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
 
 import com.adapters.MGListAdapter;
 import com.adapters.MGListAdapter.OnMGListAdapterAdapterListener;
@@ -31,6 +33,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
+import com.fragments.activity.Utilities;
 
 public class NewsFragment extends Fragment implements OnItemClickListener, OnClickListener{
 	
@@ -131,9 +134,13 @@ public class NewsFragment extends Fragment implements OnItemClickListener, OnCli
 				
 				TextView tvSubtitle = (TextView) v.findViewById(R.id.tvSubtitle);
 				tvSubtitle.setText(address);
-				
-				
-				String date = DateTimeHelper.getStringDateFromTimeStamp(news.getCreated_at(), "MM/dd/yyyy" );
+
+				/* elyas : farsi date */
+
+				Date d = DateTimeHelper.getDateFromTimeStamp(news.getCreated_at());
+				String date = Utilities.FarsiDate(d);
+
+				//String date = DateTimeHelper.getStringDateFromTimeStamp(news.getCreated_at(), "MM/dd/yyyy" );
 				TextView tvDate = (TextView) v.findViewById(R.id.tvDate);
 				tvDate.setText(date);
 			}

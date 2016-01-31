@@ -21,6 +21,9 @@ public class UIConfig {
 	public static Menu MENU_NEWS = new Menu(R.string.news, R.drawable.ic_news, R.drawable.ic_news, HeaderType.HeaderType_CATEGORY);
 	public static Menu MENU_WEATHER = new Menu(R.string.weather, R.drawable.ic_weather, R.drawable.ic_weather, HeaderType.HeaderType_CATEGORY);
 	public static Menu MENU_ABOUT_US = new Menu(R.string.about_us, R.drawable.ic_about, R.drawable.ic_about, HeaderType.HeaderType_CATEGORY);
+	public static Menu MENU_ABOUT_US1 = new Menu(R.string.about_us1, R.drawable.ic_about, R.drawable.ic_about, HeaderType.HeaderType_CATEGORY);
+	public static Menu MENU_ABOUT_US2 = new Menu(R.string.about_us2, R.drawable.ic_about, R.drawable.ic_about, HeaderType.HeaderType_CATEGORY);
+	public static Menu MENU_ABOUT_US3 = new Menu(R.string.about_us3, R.drawable.ic_about, R.drawable.ic_about, HeaderType.HeaderType_CATEGORY);
 	public static Menu MENU_TERMS_CONDITION = new Menu(R.string.terms_condition, R.drawable.ic_tc, R.drawable.ic_tc, HeaderType.HeaderType_CATEGORY);
 	public static Menu MENU_ANIMATION = new Menu(R.string.animation, R.drawable.ic_settings, R.drawable.ic_settings, HeaderType.HeaderType_CATEGORY);
 	public static Menu MENU_REGISTER = new Menu(R.string.register, R.drawable.ic_register, R.drawable.ic_register, HeaderType.HeaderType_CATEGORY);
@@ -38,16 +41,20 @@ public class UIConfig {
 		
 	//	HEADER_CATEGORIES,
 		MENU_HOME,
-		MENU_CATEGORIES,
+		MENU_NEWS,
+		MENU_ABOUT_US1,
+		MENU_ABOUT_US2,
+		MENU_ABOUT_US3,
+	//	MENU_CATEGORIES,
 		MENU_STARRED,
 	//	MENU_FEATURED,
 	//	MENU_MAP,
-		MENU_SEARCH,
-		MENU_NEWS,
+	//	MENU_SEARCH,
+	//	MENU_NEWS,
 	//	MENU_WEATHER,
 		
 	//	HEADER_EXTRAS,
-		MENU_ABOUT_US,
+	//	MENU_ABOUT_US,
 	//	MENU_TERMS_CONDITION,
 		
 	//	HEADER_USER,
@@ -69,7 +76,7 @@ public class UIConfig {
 	//	MENU_WEATHER,
 		
 	//	HEADER_EXTRAS,
-		MENU_ABOUT_US,
+	//	MENU_ABOUT_US,
 	//	MENU_TERMS_CONDITION,
 		
 	//	HEADER_USER,

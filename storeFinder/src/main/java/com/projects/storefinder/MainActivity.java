@@ -24,6 +24,9 @@ import com.facebook.SessionState;
 import com.facebook.Settings;
 import com.facebook.model.GraphUser;
 import com.fragments.AboutUsFragment;
+import com.fragments.AboutUsFragment1;
+import com.fragments.AboutUsFragment2;
+import com.fragments.AboutUsFragment3;
 import com.fragments.CategoryFragment;
 import com.fragments.FavoriteFragment;
 import com.fragments.FeaturedFragment;
@@ -155,6 +158,7 @@ public class MainActivity extends SwipeRefreshActivity implements LocationListen
         /*  if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1){
             getWindow().getDecorView().setLayoutDirection(View.LAYOUT_DIRECTION_RTL);
         }*/
+        /* elyas : parse notifications */
         Parse.initialize(this, "D3lfc61AyqfBGxtkxofFIsAAySdMgejMjlCH1OJl", "HKzjAY6s8vhbqiCW3qIY5b6drt0uGzqSidYSW9Ut");
         ParseInstallation.getCurrentInstallation().saveInBackground();
 
@@ -375,9 +379,18 @@ public class MainActivity extends SwipeRefreshActivity implements LocationListen
 	            fragment = new HomeFragment();
 	            break;
 	        case 1:
-	            fragment = new CategoryFragment();
-	            break;
-	        case 2:
+                fragment = new NewsFragment();;
+                break;
+            case 2:
+                fragment = new AboutUsFragment1();
+                break;
+            case 3:
+                fragment = new AboutUsFragment2();
+                break;
+            case 4:
+                fragment = new AboutUsFragment3();
+                break;
+	        case 5:
 	            fragment = new FavoriteFragment();
 	            break;
 	        /*case 4:
@@ -386,19 +399,19 @@ public class MainActivity extends SwipeRefreshActivity implements LocationListen
 	       /* case 5:
 	            fragment = new MapFragment();
 	            break;*/
-	        case 3:
+	        /*case 6:
 	            fragment = new SearchFragment();
-	            break;
-	        case 4:
+	            break;*/
+	        /*case 4:
 	            fragment = new NewsFragment();
-	            break;
+	            break;*/
 	        /*case 7:
 	            fragment = new WeatherFragment();
 	            break;*/
 	            
-	        case 5:
+	        /*case 6:
 	            fragment = new AboutUsFragment();
-	            break;
+	            break;*/
 	        /*case 9:
 	            fragment = new TermsConditionFragment();
 	            break;*/

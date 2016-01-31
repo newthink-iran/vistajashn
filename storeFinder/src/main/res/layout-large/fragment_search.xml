@@ -57,7 +57,7 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="@dimen/dimen_20dp"
                         android:orientation="vertical" >
-	
+
 	                    <TextView
 	                        android:id="@+id/TextView02"
 	                        android:layout_width="match_parent"
@@ -69,7 +69,7 @@
 	                        android:textStyle="bold"
                             android:layout_gravity="right"
                             android:gravity="right"/>
-	
+
 	                    <Spinner
 	                        android:id="@+id/spinnerCategories"
 	                        android:layout_width="match_parent"
