@@ -10,6 +10,7 @@ import com.models.Store;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 public class Queries {
 	
@@ -197,7 +198,7 @@ public class Queries {
 				news.setNews_title( mCursor.getString( mCursor.getColumnIndex("news_title")) );
 				news.setNews_url( mCursor.getString( mCursor.getColumnIndex("news_url")) );
 				news.setPhoto_url( mCursor.getString( mCursor.getColumnIndex("photo_url")) );
-				news.setUpdated_at( mCursor.getInt( mCursor.getColumnIndex("updated_at")) );
+				news.setUpdated_at(mCursor.getInt(mCursor.getColumnIndex("updated_at")));
 				
 				list.add(news);
 			} while (mCursor.moveToNext());
@@ -222,14 +223,14 @@ public class Queries {
 			do {
 				
 				news = new News();
-				news.setCreated_at( mCursor.getInt( mCursor.getColumnIndex("created_at")) );
-				news.setIs_deleted( mCursor.getInt( mCursor.getColumnIndex("is_deleted")) );
-				news.setNews_content( mCursor.getString( mCursor.getColumnIndex("news_content")) );
-				news.setNews_id( mCursor.getInt( mCursor.getColumnIndex("news_id")) );
-				news.setNews_title( mCursor.getString( mCursor.getColumnIndex("news_title")) );
-				news.setNews_url( mCursor.getString( mCursor.getColumnIndex("news_url")) );
-				news.setPhoto_url( mCursor.getString( mCursor.getColumnIndex("photo_url")) );
-				news.setUpdated_at( mCursor.getInt( mCursor.getColumnIndex("updated_at")) );
+				news.setCreated_at(mCursor.getInt(mCursor.getColumnIndex("created_at")));
+				news.setIs_deleted(mCursor.getInt(mCursor.getColumnIndex("is_deleted")));
+				news.setNews_content(mCursor.getString(mCursor.getColumnIndex("news_content")));
+				news.setNews_id(mCursor.getInt(mCursor.getColumnIndex("news_id")));
+				news.setNews_title(mCursor.getString(mCursor.getColumnIndex("news_title")));
+				news.setNews_url(mCursor.getString(mCursor.getColumnIndex("news_url")));
+				news.setPhoto_url(mCursor.getString(mCursor.getColumnIndex("photo_url")));
+				news.setUpdated_at(mCursor.getInt(mCursor.getColumnIndex("updated_at")));
 				
 			} while (mCursor.moveToNext());
 		}
@@ -250,8 +251,8 @@ public class Queries {
 			do {
 				
 				Favorite fave = new Favorite();
-				fave.setFavorite_id( mCursor.getInt( mCursor.getColumnIndex("favorite_id")) );
-				fave.setStore_id( mCursor.getInt( mCursor.getColumnIndex("store_id")) );
+				fave.setFavorite_id(mCursor.getInt(mCursor.getColumnIndex("favorite_id")));
+				fave.setStore_id(mCursor.getInt(mCursor.getColumnIndex("store_id")));
 				
 				list.add(fave);
 			} while (mCursor.moveToNext());
@@ -367,28 +368,28 @@ public class Queries {
 			do {
 				
 				entry = new Store();
-				entry.setCategory_id( mCursor.getInt( mCursor.getColumnIndex("category_id")) );
-				entry.setCreated_at( mCursor.getInt( mCursor.getColumnIndex("created_at")) );
-				entry.setDistance( mCursor.getDouble( mCursor.getColumnIndex("distance")) );
-				entry.setEmail( mCursor.getString( mCursor.getColumnIndex("email")) );
-				entry.setFeatured( mCursor.getInt( mCursor.getColumnIndex("featured")) );
-				entry.setIcon_id( mCursor.getInt( mCursor.getColumnIndex("icon_id")) );
-				entry.setIs_deleted( mCursor.getInt( mCursor.getColumnIndex("is_deleted")) );
-				entry.setLat( mCursor.getDouble( mCursor.getColumnIndex("lat")) );
-				entry.setLon( mCursor.getDouble( mCursor.getColumnIndex("lon")) );
+				entry.setCategory_id(mCursor.getInt(mCursor.getColumnIndex("category_id")));
+				entry.setCreated_at(mCursor.getInt(mCursor.getColumnIndex("created_at")));
+				entry.setDistance(mCursor.getDouble(mCursor.getColumnIndex("distance")));
+				entry.setEmail(mCursor.getString(mCursor.getColumnIndex("email")));
+				entry.setFeatured(mCursor.getInt(mCursor.getColumnIndex("featured")));
+				entry.setIcon_id(mCursor.getInt(mCursor.getColumnIndex("icon_id")));
+				entry.setIs_deleted(mCursor.getInt(mCursor.getColumnIndex("is_deleted")));
+				entry.setLat(mCursor.getDouble(mCursor.getColumnIndex("lat")));
+				entry.setLon(mCursor.getDouble(mCursor.getColumnIndex("lon")));
 				
-				entry.setPhone_no( mCursor.getString( mCursor.getColumnIndex("phone_no")) );
-				entry.setRating_count( mCursor.getInt( mCursor.getColumnIndex("rating_count")) );
-				entry.setRating_total( mCursor.getInt( mCursor.getColumnIndex("rating_total")) );
-				entry.setSms_no( mCursor.getString( mCursor.getColumnIndex("sms_no")) );
+				entry.setPhone_no(mCursor.getString(mCursor.getColumnIndex("phone_no")));
+				entry.setRating_count(mCursor.getInt(mCursor.getColumnIndex("rating_count")));
+				entry.setRating_total(mCursor.getInt(mCursor.getColumnIndex("rating_total")));
+				entry.setSms_no(mCursor.getString(mCursor.getColumnIndex("sms_no")));
 				
-				entry.setStore_address( mCursor.getString( mCursor.getColumnIndex("store_address")) );
-				entry.setStore_desc( mCursor.getString( mCursor.getColumnIndex("store_desc")) );
-				entry.setStore_id( mCursor.getInt( mCursor.getColumnIndex("store_id")) );
+				entry.setStore_address(mCursor.getString(mCursor.getColumnIndex("store_address")));
+				entry.setStore_desc(mCursor.getString(mCursor.getColumnIndex("store_desc")));
+				entry.setStore_id(mCursor.getInt(mCursor.getColumnIndex("store_id")));
 				
-				entry.setStore_name( mCursor.getString( mCursor.getColumnIndex("store_name")) );
-				entry.setUpdated_at( mCursor.getInt( mCursor.getColumnIndex("updated_at")) );
-				entry.setWebsite( mCursor.getString( mCursor.getColumnIndex("website")) );
+				entry.setStore_name(mCursor.getString(mCursor.getColumnIndex("store_name")));
+				entry.setUpdated_at(mCursor.getInt(mCursor.getColumnIndex("updated_at")));
+				entry.setWebsite(mCursor.getString(mCursor.getColumnIndex("website")));
 				
 			} while (mCursor.moveToNext());
 		}
@@ -410,27 +411,27 @@ public class Queries {
 				
 				Store entry = new Store();
 				entry.setCategory_id( mCursor.getInt( mCursor.getColumnIndex("category_id")) );
-				entry.setCreated_at( mCursor.getInt( mCursor.getColumnIndex("created_at")) );
-				entry.setDistance( mCursor.getDouble( mCursor.getColumnIndex("distance")) );
-				entry.setEmail( mCursor.getString( mCursor.getColumnIndex("email")) );
-				entry.setFeatured( mCursor.getInt( mCursor.getColumnIndex("featured")) );
-				entry.setIcon_id( mCursor.getInt( mCursor.getColumnIndex("icon_id")) );
-				entry.setIs_deleted( mCursor.getInt( mCursor.getColumnIndex("is_deleted")) );
-				entry.setLat( mCursor.getDouble( mCursor.getColumnIndex("lat")) );
-				entry.setLon( mCursor.getDouble( mCursor.getColumnIndex("lon")) );
+				entry.setCreated_at(mCursor.getInt(mCursor.getColumnIndex("created_at")));
+				entry.setDistance(mCursor.getDouble(mCursor.getColumnIndex("distance")));
+				entry.setEmail(mCursor.getString(mCursor.getColumnIndex("email")));
+				entry.setFeatured(mCursor.getInt(mCursor.getColumnIndex("featured")));
+				entry.setIcon_id(mCursor.getInt(mCursor.getColumnIndex("icon_id")));
+				entry.setIs_deleted(mCursor.getInt(mCursor.getColumnIndex("is_deleted")));
+				entry.setLat(mCursor.getDouble(mCursor.getColumnIndex("lat")));
+				entry.setLon(mCursor.getDouble(mCursor.getColumnIndex("lon")));
 				
-				entry.setPhone_no( mCursor.getString( mCursor.getColumnIndex("phone_no")) );
-				entry.setRating_count( mCursor.getInt( mCursor.getColumnIndex("rating_count")) );
-				entry.setRating_total( mCursor.getInt( mCursor.getColumnIndex("rating_total")) );
-				entry.setSms_no( mCursor.getString( mCursor.getColumnIndex("sms_no")) );
+				entry.setPhone_no(mCursor.getString(mCursor.getColumnIndex("phone_no")));
+				entry.setRating_count(mCursor.getInt(mCursor.getColumnIndex("rating_count")));
+				entry.setRating_total(mCursor.getInt(mCursor.getColumnIndex("rating_total")));
+				entry.setSms_no(mCursor.getString(mCursor.getColumnIndex("sms_no")));
 				
-				entry.setStore_address( mCursor.getString( mCursor.getColumnIndex("store_address")) );
-				entry.setStore_desc( mCursor.getString( mCursor.getColumnIndex("store_desc")) );
-				entry.setStore_id( mCursor.getInt( mCursor.getColumnIndex("store_id")) );
+				entry.setStore_address(mCursor.getString(mCursor.getColumnIndex("store_address")));
+				entry.setStore_desc(mCursor.getString(mCursor.getColumnIndex("store_desc")));
+				entry.setStore_id(mCursor.getInt(mCursor.getColumnIndex("store_id")));
 				
-				entry.setStore_name( mCursor.getString( mCursor.getColumnIndex("store_name")) );
-				entry.setUpdated_at( mCursor.getInt( mCursor.getColumnIndex("updated_at")) );
-				entry.setWebsite( mCursor.getString( mCursor.getColumnIndex("website")) );
+				entry.setStore_name(mCursor.getString(mCursor.getColumnIndex("store_name")));
+				entry.setUpdated_at(mCursor.getInt(mCursor.getColumnIndex("updated_at")));
+				entry.setWebsite(mCursor.getString(mCursor.getColumnIndex("website")));
 				
 				list.add(entry);
 			} while (mCursor.moveToNext());
@@ -486,12 +487,12 @@ public class Queries {
 				
 				Photo entry = new Photo();
 				entry.setCreated_at( mCursor.getInt( mCursor.getColumnIndex("created_at")) );
-				entry.setIs_deleted( mCursor.getInt( mCursor.getColumnIndex("is_deleted")) );
-				entry.setPhoto_id( mCursor.getInt( mCursor.getColumnIndex("photo_id")) );
-				entry.setPhoto_url( mCursor.getString( mCursor.getColumnIndex("photo_url")) );
-				entry.setStore_id( mCursor.getInt( mCursor.getColumnIndex("store_id")) );
-				entry.setThumb_url( mCursor.getString( mCursor.getColumnIndex("thumb_url")) );
-				entry.setUpdated_at( mCursor.getInt( mCursor.getColumnIndex("updated_at")) );
+				entry.setIs_deleted(mCursor.getInt(mCursor.getColumnIndex("is_deleted")));
+				entry.setPhoto_id(mCursor.getInt(mCursor.getColumnIndex("photo_id")));
+				entry.setPhoto_url(mCursor.getString(mCursor.getColumnIndex("photo_url")));
+				entry.setStore_id(mCursor.getInt(mCursor.getColumnIndex("store_id")));
+				entry.setThumb_url(mCursor.getString(mCursor.getColumnIndex("thumb_url")));
+				entry.setUpdated_at(mCursor.getInt(mCursor.getColumnIndex("updated_at")));
 				
 				list.add(entry);
 			} while (mCursor.moveToNext());
@@ -515,11 +516,11 @@ public class Queries {
 			do {
 				
 				Category entry = new Category();
-				entry.setCategory( mCursor.getString( mCursor.getColumnIndex("category")) );
-				entry.setCategory_icon( mCursor.getString( mCursor.getColumnIndex("category_icon")) );
-				entry.setCategory_id( mCursor.getInt( mCursor.getColumnIndex("category_id")) );
-				entry.setCreated_at( mCursor.getInt( mCursor.getColumnIndex("created_at")) );
-				entry.setIs_deleted( mCursor.getInt( mCursor.getColumnIndex("is_deleted")) );
+				entry.setCategory(mCursor.getString(mCursor.getColumnIndex("category")));
+				entry.setCategory_icon(mCursor.getString(mCursor.getColumnIndex("category_icon")));
+				entry.setCategory_id(mCursor.getInt(mCursor.getColumnIndex("category_id")));
+				entry.setCreated_at(mCursor.getInt(mCursor.getColumnIndex("created_at")));
+				entry.setIs_deleted(mCursor.getInt(mCursor.getColumnIndex("is_deleted")));
 				entry.setUpdated_at( mCursor.getInt( mCursor.getColumnIndex("updated_at")) );
 				
 				list.add(entry);
@@ -571,6 +572,33 @@ public class Queries {
 		mCursor.close();
 		dbHelper.close();
 
+		return list;
+	}
+
+	public ArrayList<News> getNewsFavorites() {
+
+		ArrayList<News> list = new ArrayList<News>();
+		db = dbHelper.getReadableDatabase();
+		Cursor mCursor = db.rawQuery("SELECT * FROM news INNER JOIN favorites ON news.news_id = favorites.store_id ORDER BY news.news_title", null);
+		mCursor.moveToFirst();
+
+		if (!mCursor.isAfterLast()) {
+			do {
+
+				News entry = new News();
+				entry.setCreated_at(mCursor.getInt( mCursor.getColumnIndex("created_at")));
+				entry.setNews_content(mCursor.getString( mCursor.getColumnIndex("news_content")));
+				entry.setNews_id(mCursor.getInt( mCursor.getColumnIndex("news_id")));
+				entry.setNews_title(mCursor.getString( mCursor.getColumnIndex("news_title")));
+				entry.setNews_url(mCursor.getString( mCursor.getColumnIndex("news_url")));
+				entry.setPhoto_url(mCursor.getString( mCursor.getColumnIndex("photo_url")));
+				entry.setUpdated_at(mCursor.getInt( mCursor.getColumnIndex("updated_at")));
+
+				list.add(entry);
+			} while (mCursor.moveToNext());
+		}
+		mCursor.close();
+		dbHelper.close();
 		return list;
 	}
 	

@@ -1,7 +1,9 @@
 .gradle
 /local.properties
 /.idea/workspace.xml
-/.idea/libraries
+/.idea/libraries/*
 .DS_Store
 /build
 Verify if it suits y
+.idea/workspace.xml
+.idea/misc.xml

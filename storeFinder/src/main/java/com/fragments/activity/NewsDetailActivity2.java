@@ -228,7 +228,13 @@ public class NewsDetailActivity2 extends SwipeRefreshActivity implements OnClick
         Button contBtn = (Button) findViewById(R.id.cont);
         contBtn.setOnClickListener(this);
 
-
+        Button buttonFavorite = (Button) findViewById(R.id.ButtonFavorite);
+        buttonFavorite.setOnClickListener(this);
+        Favorite fave = q.getFavoriteByStoreId(news.getNews_id());
+        if(fave != null)
+            buttonFavorite.setText("حذف از علاقه مندی ها");
+        else
+            buttonFavorite.setText("افزودن به علاقه مندی ها");
 
         TextView tvDetails = (TextView) findViewById(R.id.tvDetails2);
 
@@ -311,12 +317,31 @@ public class NewsDetailActivity2 extends SwipeRefreshActivity implements OnClick
                 website();
                 break;
 
+            case R.id.ButtonFavorite:
+                checkFave(v);
+                break;
+
+        }
+    }
+
+
+    private void checkFave(View view) {
+        Favorite fave = q.getFavoriteByStoreId(news.getNews_id());
+        if(fave != null) {
+            q.deleteFavorite(news.getNews_id());
+            ((Button) view).setText("افزودن به علاقه مندی ها");
+
+        }
+        else {
+            fave = new Favorite();
+            fave.setStore_id(news.getNews_id());
+            q.insertFavorite(fave);
+            ((Button) view).setText("حذف از علاقه مندی ها");
         }
     }
 
 
     private void website() {
-
         /*if(news.getNews_url() == null || news.getNews_url().length() == 0) {
             MGUtilities.showAlertView(
                     this,

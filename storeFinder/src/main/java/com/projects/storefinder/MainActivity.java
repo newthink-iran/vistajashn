@@ -29,6 +29,7 @@ import com.fragments.AboutUsFragment2;
 import com.fragments.AboutUsFragment3;
 import com.fragments.CategoryFragment;
 import com.fragments.FavoriteFragment;
+import com.fragments.FavoriteFragment_news;
 import com.fragments.FeaturedFragment;
 import com.fragments.HomeFragment;
 import com.fragments.MapFragment;
@@ -391,7 +392,7 @@ public class MainActivity extends SwipeRefreshActivity implements LocationListen
                 fragment = new AboutUsFragment3();
                 break;
 	        case 5:
-	            fragment = new FavoriteFragment();
+	            fragment = new FavoriteFragment_news();
 	            break;
 	        /*case 4:
 	            fragment = new FeaturedFragment();
