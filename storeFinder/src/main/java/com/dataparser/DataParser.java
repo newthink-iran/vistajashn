@@ -325,9 +325,8 @@ public class DataParser  {
             
             final int statusCode = httpResponse.getStatusLine().getStatusCode();
             
-            if (statusCode != HttpStatus.SC_OK) { 
-            	
-                Log.w("Status Code", "Error " + statusCode + " for URL " + url); 
+            if (statusCode != HttpStatus.SC_OK) {
+				Log.w("Status Code", "Error " + statusCode + " for URL " + url);
                 return null;
              }
             

@@ -9,6 +9,7 @@ import com.asynctask.MGAsyncTask;
 import com.asynctask.MGAsyncTask.OnMGAsyncTaskListener;
 import com.config.Config;
 import com.dataparser.DataParser;
+import com.models.News;
 import com.models.ResponseReview;
 import com.models.Review;
 import com.models.Store;
@@ -41,6 +42,7 @@ import info.semsamot.actionbarrtlizer.RtlizeEverything;
 public class NewReviewActivity extends FragmentActivity {
 
 	private Store store;
+	private News news;
 	private ResponseReview response;
 	MGAsyncTask task;
 	
@@ -60,8 +62,8 @@ public class NewReviewActivity extends FragmentActivity {
         this.getActionBar().setIcon(R.drawable.header_logo);
         this.getActionBar().setTitle("");
         
-		store = (Store) this.getIntent().getSerializableExtra("store");
-		
+		//store = (Store) this.getIntent().getSerializableExtra("store");
+		news = (News) this.getIntent().getSerializableExtra("news");
 		
 		final EditText txtReview = (EditText) findViewById(R.id.txtReview);
 		final TextView tvMaxCharCount = (TextView) findViewById(R.id.tvMaxCharCount);
@@ -157,6 +159,26 @@ public class NewReviewActivity extends FragmentActivity {
 			
 			return;
 		}
+
+		EditText txtFullName = (EditText) findViewById(R.id.txtFullName);
+		String fullName = txtFullName.getText().toString();
+		if(fullName.length() == 0) {
+			MGUtilities.showAlertView(
+					this,
+					R.string.empty_name_error,
+					R.string.empty_name_error_details);
+			return;
+		}
+
+		EditText txtMobileNumber = (EditText) findViewById(R.id.mobileNumber);
+		String mobileNumber = txtMobileNumber.getText().toString();
+		if(mobileNumber.length() == 0) {
+			MGUtilities.showAlertView(
+					this,
+					R.string.empty_mobile_error,
+					R.string.empty_mobile_details);
+			return;
+		}
 		
 		EditText txtReview = (EditText) findViewById(R.id.txtReview);
 		String reviewStr = txtReview.getText().toString().trim();
@@ -167,8 +189,9 @@ public class NewReviewActivity extends FragmentActivity {
 					R.string.empty_error_details);
 			return;
 		}
-		
-        task = new MGAsyncTask(NewReviewActivity.this);
+
+
+		task = new MGAsyncTask(NewReviewActivity.this);
         task.setMGAsyncTaskListener(new OnMGAsyncTaskListener() {
 			
 			@Override
@@ -206,31 +229,48 @@ public class NewReviewActivity extends FragmentActivity {
 //		reviewStr = reviewStr.replace("\"", "");
 //		reviewStr = reviewStr.replace("'", "");
 		
-		UserAccessSession userAccess = UserAccessSession.getInstance(NewReviewActivity.this);
-		UserSession userSession = userAccess.getUserSession();
-		
+		//UserAccessSession userAccess = UserAccessSession.getInstance(NewReviewActivity.this);
+		//UserSession userSession = userAccess.getUserSession();
+
+		EditText txtFullName = (EditText) findViewById(R.id.txtFullName);
+		String fullName = txtFullName.getText().toString();
+
+
+		EditText txtMobileNumber = (EditText) findViewById(R.id.mobileNumber);
+		String mobileNumber = txtMobileNumber.getText().toString();
+
 		try {
 //			String reviewString = URLEncoder.encode(txtReview.getText().toString(), "UTF-8");
 			SpannedString span = new SpannedString(reviewStr);
 			String reviewString1 = Html.toHtml(span);
 			String reviewString = Html.escapeHtml(span);
-			
+
+			SpannedString span1 = new SpannedString(fullName);
+			String fullNameString = Html.escapeHtml(span1);
+
+			SpannedString span2 = new SpannedString(mobileNumber);
+			String mobileNumberString = Html.escapeHtml(span2);
+
 			Log.e("toHtml", reviewString1);
 			Log.e("escapeHtml", reviewString);
-			
+
 			ArrayList<NameValuePair> params = new ArrayList<NameValuePair>();
-			params.add(new BasicNameValuePair("store_id", String.valueOf(store.getStore_id()) ));
+			//params.add(new BasicNameValuePair("store_id", String.valueOf(store.getStore_id()) ));
+			params.add(new BasicNameValuePair("store_id", String.valueOf(news.getNews_id()) ));
 			params.add(new BasicNameValuePair("review", reviewString ));
-			params.add(new BasicNameValuePair("user_id", String.valueOf(userSession.getUser_id()) ));
-			params.add(new BasicNameValuePair("login_hash", userSession.getLogin_hash() ));
+			//params.add(new BasicNameValuePair("user_id", String.valueOf(userSession.getUser_id()) ));
+			params.add(new BasicNameValuePair("user_id","1"));
+			//params.add(new BasicNameValuePair("login_hash", userSession.getLogin_hash() ));
+			params.add(new BasicNameValuePair("login_hash", "1" ));
+			params.add(new BasicNameValuePair("full_name", fullNameString ));
+			params.add(new BasicNameValuePair("mobile_number",mobileNumberString ));
 
 	        response = DataParser.getJSONFromUrlReview(Config.POST_REVIEW_URL, params);
-	        
-	        if(response != null) {
-	        	
-	        	if(response.getReturn_count() < response.getTotal_row_count()) {
-	        		
-	                if(response.getReviews() != null) {
+
+	        if(response != null) {;
+				if(response.getReturn_count() < response.getTotal_row_count()) {
+
+					if(response.getReviews() != null) {
 	                	Review review = new Review();
 	                	review.setReview_id(-1);
 	                	response.getReviews().add(0, review);
@@ -249,8 +289,8 @@ public class NewReviewActivity extends FragmentActivity {
 	public void reloadDataToReview() {
 			
 		Intent returnIntent = new Intent();
-//		returnIntent.putExtra("response",response);
-//		returnIntent.putExtra("store",store);
+		//returnIntent.putExtra("response",response);
+		//returnIntent.putExtra("news",news);
 		setResult(RESULT_OK, returnIntent);
 		finish();
 		

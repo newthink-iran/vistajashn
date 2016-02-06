@@ -6,9 +6,32 @@
     
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="300dp"
         android:layout_margin="@dimen/dimen_10dp"
         android:orientation="vertical" >
+
+        <EditText
+            android:id="@+id/txtFullName"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@drawable/textbox_bg_review"
+            android:ems="10"
+            android:layout_marginTop="@dimen/dimen_5dp"
+            android:hint="نام و نام خانوادگی" >
+
+        </EditText>
+
+        <EditText
+            android:id="@+id/mobileNumber"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@drawable/textbox_bg_review"
+            android:ems="10"
+            android:layout_marginTop="@dimen/dimen_5dp"
+            android:hint="شماره موبایل"
+            android:inputType="number">
+
+        </EditText>
 
         <EditText
             android:id="@+id/txtReview"
@@ -21,6 +44,7 @@
             android:gravity="top|right"
             android:hint="@string/placeholder_review"
             android:maxLines="@integer/num_new_lines_5"
+            android:layout_marginTop="@dimen/dimen_5dp"
             
             android:textSize="@dimen/text_size_18sp" >
 

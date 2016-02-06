@@ -85,8 +85,8 @@
     <string name="route_error">حطای مسیریابی</string>
     <string name="route_error_details">امکان مسیریابی مکان فعلی وجود ندارد</string>
     <string name="share">Share</string>
-    <string name="placeholder_review">Review</string>
-    <string name="chars_left">Char(s) left</string>
+    <string name="placeholder_review">نظر شما</string>
+    <string name="chars_left">کاراکتر باقی مانده است</string>
     <string name="about_us_detail">"گروه مهندسی ویستا پرداز نواندیش \n شماره تماس: 33517735-031"</string>
     <string name="about_us_detail_1">"توضیحات لازم"</string>
     <string name="about_us_detail_2">"توضیحات لازم"</string>
@@ -110,8 +110,8 @@
     <string name="anim_slide">اسلاید به بالا</string>
     <string name="mi">Mi</string>
     <string name="find_nearby">Find Nearby</string>
-    <string name="empty_error">Text Empty Error</string>
-    <string name="empty_error_details">Provide text for review.</string>
+    <string name="empty_error">متن نظر خالی است. </string>
+    <string name="empty_error_details">لطفا یک متن وارد نمایید</string>
     <string name="searching">در حال جستجو ...</string>
     <string name="found_stores">Store(s) Nearby</string>
     <string name="type">نوع</string>
@@ -135,5 +135,9 @@
     <string name="about_us3">اهداف و برنامه ها</string>
     <string name="action_share">اشتراک گذاری این خبر</string>
     <string name="from">ستاد انتخاباتی آقای ...</string>
+    <string name="empty_name_error">فیلد نام خالی است.</string>
+    <string name="empty_name_error_details">لطفا نام خود را وارد نمایید</string>
+    <string name="empty_mobile_error">فیلد موبایل خالی است.</string>
+    <string name="empty_mobile_details">لطفا شماره موبایل خود را وارد نمایید</string>
 
 </resources>

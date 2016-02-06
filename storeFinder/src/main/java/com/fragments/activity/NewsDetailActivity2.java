@@ -236,6 +236,9 @@ public class NewsDetailActivity2 extends SwipeRefreshActivity implements OnClick
         else
             buttonFavorite.setText("افزودن به علاقه مندی ها");
 
+        Button comments = (Button) findViewById(R.id.comments);
+        comments.setOnClickListener(this);
+
         TextView tvDetails = (TextView) findViewById(R.id.tvDetails2);
 
 /*        ImageView imgViewCall = (ImageView) findViewById(R.id.imgViewCall2);
@@ -319,6 +322,12 @@ public class NewsDetailActivity2 extends SwipeRefreshActivity implements OnClick
 
             case R.id.ButtonFavorite:
                 checkFave(v);
+                break;
+
+            case R.id.comments:
+                Intent i = new Intent(this, ReviewActivity.class);
+                i.putExtra("news", news);
+                startActivity(i);
                 break;
 
         }

@@ -8,6 +8,7 @@ import com.config.Config;
 import com.config.UIConfig;
 import com.dataparser.DataParser;
 import com.imageview.RoundedImageView;
+import com.models.News;
 import com.models.ResponseReview;
 import com.models.Review;
 import com.models.Store;
@@ -45,6 +46,7 @@ import info.semsamot.actionbarrtlizer.RtlizeEverything;
 public class ReviewActivity extends SwipeRefreshActivity implements OnItemClickListener{
 
 	private Store store;
+	private News news;
 	private int reviewCount;
 	private ResponseReview response;
 	DisplayImageOptions options;
@@ -76,21 +78,20 @@ public class ReviewActivity extends SwipeRefreshActivity implements OnItemClickL
 			.considerExifParams(true)
 			.bitmapConfig(Bitmap.Config.RGB_565)
 			.build();
-		
-		store = (Store) this.getIntent().getSerializableExtra("store");
+
+		//store = (Store) this.getIntent().getSerializableExtra("store");
+		news = (News) this.getIntent().getSerializableExtra("news");
 		reviewCount = Config.MAX_REVIEW_COUNT_PER_LISTING;
 		response = (ResponseReview) this.getIntent().getSerializableExtra("response");
-		
 		Handler h = new Handler();
 		h.postDelayed(new Runnable() {
-			
+
 			@Override
 			public void run() {
 				// TODO Auto-generated method stub
-				if(response == null) {
+				if (response == null) {
 					getReviews();
-				}
-				else {
+				} else {
 					showList();
 				}
 			}
@@ -153,16 +154,17 @@ public class ReviewActivity extends SwipeRefreshActivity implements OnItemClickL
     }
     
     private void newReview() {
-    	UserAccessSession userAccess = UserAccessSession.getInstance(ReviewActivity.this);
-		UserSession userSession = userAccess.getUserSession();
+    	//UserAccessSession userAccess = UserAccessSession.getInstance(ReviewActivity.this);
+		//UserSession userSession = userAccess.getUserSession();
 		
-		if(userSession == null) {
-			MGUtilities.showAlertView(ReviewActivity.this, R.string.login_error, R.string.login_error_review);
-			return;
-		}
+		//if(userSession == null) {
+		//	MGUtilities.showAlertView(ReviewActivity.this, R.string.login_error, R.string.login_error_review);
+		//	return;
+		//}
 		
 		Intent i = new Intent(this, NewReviewActivity.class);
-		i.putExtra("store", store);
+		//i.putExtra("store", store);
+		i.putExtra("news", news);
 		startActivityForResult(i, NEW_REVIEW_REQUEST_CODE);
     }
 	
@@ -212,8 +214,10 @@ public class ReviewActivity extends SwipeRefreshActivity implements OnItemClickL
 	@SuppressLint("DefaultLocale") 
 	public void parseReviews() {
 		
-		String reviewUrl = String.format("%s?count=%d&store_id=%s", 
-				Config.REVIEWS_URL, reviewCount, store.getStore_id());
+		//String reviewUrl = String.format("%s?count=%d&store_id=%s",
+		//		Config.REVIEWS_URL, reviewCount, store.getStore_id());
+		String reviewUrl = String.format("%s?count=%d&store_id=%s",
+				Config.REVIEWS_URL, reviewCount, news.getNews_id());
 
         response = DataParser.getJSONFromUrlReview(reviewUrl, null);
         if(response != null) {
@@ -234,7 +238,6 @@ public class ReviewActivity extends SwipeRefreshActivity implements OnItemClickL
 		
 		if(response.getReviews() == null)
 			return;
-		
 		ListView listView = (ListView) findViewById(R.id.listView);
 		listView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
 		listView.setOnItemClickListener(this);
@@ -257,7 +260,6 @@ public class ReviewActivity extends SwipeRefreshActivity implements OnItemClickL
 				LinearLayout linearMain = (LinearLayout) v.findViewById(R.id.linearMain);
 				linearLoadMore.setVisibility(View.VISIBLE);
 				linearMain.setVisibility(View.VISIBLE);
-				
 				if(review.getReview_id() > 0) {
 					
 					linearLoadMore.setVisibility(View.GONE);

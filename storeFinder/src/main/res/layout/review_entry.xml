@@ -23,7 +23,8 @@
 	            android:baselineAlignBottom="false"
 	            android:scaleType="center"
 	            android:src="@drawable/review_thumb_placeholder"
-	            app:mutate_background="false" />
+	            app:mutate_background="false"
+				android:visibility="invisible"/>
 	
 	        <LinearLayout
 	            android:layout_width="match_parent"
