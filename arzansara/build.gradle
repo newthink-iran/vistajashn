@@ -1,0 +1,48 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 21
+    buildToolsVersion "21.1.2"
+
+    defaultConfig {
+        applicationId "com.projects.arzansara"
+        minSdkVersion 14
+        targetSdkVersion 21
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+        }
+    }
+
+    packagingOptions {
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/NOTICE.txt'
+    }
+}
+
+dependencies {
+    compile project(':facebookSDK')
+    compile 'com.android.support:support-v4:21.0.3'
+    compile 'com.google.android.gms:play-services:5.0.89'
+    compile 'info.semsamot:actionbar-rtlizer:2.+@aar'
+    compile files('libs/apache-mime4j-0.6.jar')
+    compile files('libs/httpclient-4.3.4.jar')
+    compile files('libs/httpcore-4.3.2.jar')
+    compile files('libs/httpmime-4.3.4.jar')
+    compile files('libs/jackson-annotations-2.2.2.jar')
+    compile files('libs/jackson-core-2.2.2.jar')
+    compile files('libs/jackson-databind-2.2.2.jar')
+    compile files('libs/twitter4j-async-4.0.2.jar')
+    compile files('libs/twitter4j-core-4.0.2.jar')
+    compile files('libs/twitter4j-media-support-4.0.2.jar')
+    compile files('libs/twitter4j-stream-4.0.2.jar')
+    compile files('libs/universal-image-loader-1.9.2-SNAPSHOT-with-sources.jar')
+    //compile files('libs/bolts-tasks-1.3.0.jar')
+    compile files('libs/Parse-1.7.1.jar')
+}
