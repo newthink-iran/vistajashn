@@ -28,6 +28,7 @@ import com.fragments.AboutUsFragment1;
 import com.fragments.AboutUsFragment2;
 import com.fragments.AboutUsFragment3;
 import com.fragments.CategoryFragment;
+import com.fragments.DiscountFragment;
 import com.fragments.FavoriteFragment;
 import com.fragments.FavoriteFragment_news;
 import com.fragments.FeaturedFragment;
@@ -383,15 +384,18 @@ public class MainActivity extends SwipeRefreshActivity implements LocationListen
                 fragment = new NewsFragment();;
                 break;
             case 2:
-                fragment = new AboutUsFragment1();
+                fragment = new DiscountFragment();
                 break;
             case 3:
-                fragment = new AboutUsFragment2();
+                fragment = new AboutUsFragment1();
                 break;
             case 4:
+                fragment = new AboutUsFragment2();
+                break;
+            case 5:
                 fragment = new AboutUsFragment3();
                 break;
-	        case 5:
+	        case 6:
 	            fragment = new FavoriteFragment_news();
 	            break;
 	        /*case 4:
@@ -417,7 +421,7 @@ public class MainActivity extends SwipeRefreshActivity implements LocationListen
 	            fragment = new TermsConditionFragment();
 	            break;*/
 
-            case 6:
+            case 7:
                 doExit();
                 break;
 	            

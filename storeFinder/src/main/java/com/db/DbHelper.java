@@ -100,6 +100,20 @@ public class DbHelper extends SQLiteOpenHelper {
 	    		+ "favorite_id INTEGER PRIMARY KEY AUTOINCREMENT," //AUTOINCREMENT
 	    		+ "store_id INTEGER"
 	    		+ ");");
+
+
+		db.execSQL("CREATE TABLE IF NOT EXISTS discounts("
+				+ "discount_id INTEGER PRIMARY KEY," //AUTOINCREMENT
+				+ "store_id INTEGER,"
+				+ "created_at INTEGER,"
+				+ "discount_content TEXT,"
+				+ "discount_title TEXT,"
+				+ "photo_url TEXT,"
+				+ "is_deleted INTEGER, "
+				+ "updated_at INTEGER, "
+				+ "exp_date INTEGER, "
+				+ "discount_val INTEGER "
+				+ ");");
 	    
 	}
 	
@@ -113,7 +127,7 @@ public class DbHelper extends SQLiteOpenHelper {
 		db.execSQL("DROP TABLE IF EXISTS photos");
 		db.execSQL("DROP TABLE IF EXISTS news");
 		db.execSQL("DROP TABLE IF EXISTS favorites");
-		
+		db.execSQL("DROP TABLE IF EXISTS discounts");
 	}
 
 }

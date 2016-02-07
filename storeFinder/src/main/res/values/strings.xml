@@ -134,10 +134,11 @@
     <string name="about_us2">تاریخچه فعالیت ها و سوابق</string>
     <string name="about_us3">اهداف و برنامه ها</string>
     <string name="action_share">اشتراک گذاری این خبر</string>
-    <string name="from">ستاد انتخاباتی آقای ...</string>
+    <string name="from">ارزان سرای...</string>
     <string name="empty_name_error">فیلد نام خالی است.</string>
     <string name="empty_name_error_details">لطفا نام خود را وارد نمایید</string>
     <string name="empty_mobile_error">فیلد موبایل خالی است.</string>
     <string name="empty_mobile_details">لطفا شماره موبایل خود را وارد نمایید</string>
+    <string name="discounts">تخفیفات</string>
 
 </resources>

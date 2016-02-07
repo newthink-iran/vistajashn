@@ -21,6 +21,7 @@ import com.imageview.MGImageView;
 import com.models.Category;
 import com.models.Data;
 import com.models.DataNews;
+import com.models.Discount;
 import com.models.News;
 import com.models.Photo;
 import com.models.Store;
@@ -194,6 +195,15 @@ public class HomeFragment extends Fragment implements OnItemClickListener, OnCli
 						}
 						Log.e("HOME FRAGMENT LOG", "Store count =" + data.getStores().size());
 					}
+
+					if(data.getDiscounts() != null && data.getDiscounts().size() > 0) {
+
+						q.deleteTable("discounts");
+						for(Discount discount : data.getDiscounts()) {
+							q.insertDiscount(discount);
+						}
+						Log.e("HOME FRAGMENT LOG", "Discount count =" + data.getDiscounts().size());
+					}
 					
 					if(dataNews.getNews() != null && dataNews.getNews().size() > 0) {
 						
@@ -203,6 +213,7 @@ public class HomeFragment extends Fragment implements OnItemClickListener, OnCli
 						}
 						Log.e("HOME FRAGMENT LOG", "Store count =" + dataNews.getNews().size());
 					}
+
 				}
 				catch(Exception e) {
 					e.printStackTrace();

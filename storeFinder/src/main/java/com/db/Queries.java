@@ -2,6 +2,7 @@ package com.db;
 
 import java.util.ArrayList;
 import com.models.Category;
+import com.models.Discount;
 import com.models.Favorite;
 import com.models.News;
 import com.models.Photo;
@@ -49,6 +50,25 @@ public class Queries {
 		values.put("updated_at", entry.getUpdated_at());
 
 		db.insert("news", null, values);
+		db.close();
+	}
+
+	public void insertDiscount(Discount entry) {
+
+		db = dbHelper.getWritableDatabase();
+		ContentValues values = new ContentValues();
+		values.put("discount_id", entry.getDiscount_id());
+		values.put("store_id", entry.getStore_id());
+		values.put("discount_content", entry.getDiscount_content());
+		values.put("discount_title", entry.getDiscount_title());
+		values.put("photo_url", entry.getPhoto_url());
+		values.put("created_at", entry.getCreated_at());
+		values.put("updated_at", entry.getUpdated_at());
+		values.put("is_deleted", entry.getIs_deleted());
+		values.put("discount_val", entry.getDiscount_val());
+		values.put("exp_date", entry.getExp_date());
+
+		db.insert("discounts", null, values);
 		db.close();
 	}
 	
@@ -208,6 +228,40 @@ public class Queries {
 
 		return list;
 	}
+
+
+	public ArrayList<Discount> getDiscounts() {
+
+		ArrayList<Discount> list = new ArrayList<Discount>();
+		db = dbHelper.getReadableDatabase();
+
+		//Cursor mCursor = db.rawQuery("SELECT * FROM discounts ORDER BY updated_at DESC", null);
+		Cursor mCursor = db.rawQuery("SELECT * FROM discounts", null);
+		mCursor.moveToFirst();
+
+		if (!mCursor.isAfterLast()) {
+			do {
+				Discount discount = new Discount();
+
+				discount.setDiscount_id(mCursor.getInt(mCursor.getColumnIndex("discount_id")));
+				discount.setStore_id(mCursor.getInt(mCursor.getColumnIndex("store_id")));
+				discount.setDiscount_content(mCursor.getString(mCursor.getColumnIndex("discount_content")));
+				discount.setDiscount_title(mCursor.getString(mCursor.getColumnIndex("discount_title")));
+				discount.setPhoto_url(mCursor.getString(mCursor.getColumnIndex("photo_url")));
+				discount.setCreated_at(mCursor.getInt(mCursor.getColumnIndex("created_at")));
+				discount.setUpdated_at(mCursor.getInt(mCursor.getColumnIndex("updated_at")));
+				discount.setIs_deleted(mCursor.getInt(mCursor.getColumnIndex("is_deleted")));
+				discount.setDiscount_val(mCursor.getInt(mCursor.getColumnIndex("discount_val")));
+				discount.setExp_date(mCursor.getInt(mCursor.getColumnIndex("exp_date")));
+				Log.d("alaki", "psdasdk");
+				list.add(discount);
+			} while (mCursor.moveToNext());
+		}
+		mCursor.close();
+		dbHelper.close();
+
+		return list;
+	}
 	
 	public News getNewsByNewsId(int newsId) {
 		
@@ -238,6 +292,40 @@ public class Queries {
 		dbHelper.close();
 
 		return news;
+	}
+
+
+	public Discount getDiscountByDiscountId(int discount_id) {
+
+		Discount discount = null;
+		db = dbHelper.getReadableDatabase();
+
+		//String sql = String.format("SELECT * FROM news WHERE news_id = %d", newsId);
+		String sql = "SELECT * FROM discounts WHERE discount_id = " + discount_id;
+		Cursor mCursor = db.rawQuery(sql, null);
+		mCursor.moveToFirst();
+
+		if (!mCursor.isAfterLast()) {
+			do {
+
+				discount = new Discount();
+				discount.setDiscount_id(mCursor.getInt(mCursor.getColumnIndex("discount_id")));
+				discount.setStore_id(mCursor.getInt(mCursor.getColumnIndex("store_id")));
+				discount.setDiscount_content(mCursor.getString(mCursor.getColumnIndex("discount_content")));
+				discount.setDiscount_title(mCursor.getString(mCursor.getColumnIndex("discount_title")));
+				discount.setPhoto_url(mCursor.getString(mCursor.getColumnIndex("photo_url")));
+				discount.setCreated_at(mCursor.getInt(mCursor.getColumnIndex("created_at")));
+				discount.setUpdated_at(mCursor.getInt(mCursor.getColumnIndex("updated_at")));
+				discount.setIs_deleted(mCursor.getInt(mCursor.getColumnIndex("is_deleted")));
+				discount.setDiscount_val(mCursor.getInt(mCursor.getColumnIndex("discount_val")));
+				discount.setExp_date(mCursor.getInt(mCursor.getColumnIndex("exp_date")));
+
+			} while (mCursor.moveToNext());
+		}
+		mCursor.close();
+		dbHelper.close();
+
+		return discount;
 	}
 	
 	public ArrayList<Favorite> getFavorites() {
@@ -593,6 +681,38 @@ public class Queries {
 				entry.setNews_url(mCursor.getString( mCursor.getColumnIndex("news_url")));
 				entry.setPhoto_url(mCursor.getString( mCursor.getColumnIndex("photo_url")));
 				entry.setUpdated_at(mCursor.getInt( mCursor.getColumnIndex("updated_at")));
+
+				list.add(entry);
+			} while (mCursor.moveToNext());
+		}
+		mCursor.close();
+		dbHelper.close();
+		return list;
+	}
+
+
+	public ArrayList<Discount> getDiscountsFavorites() {
+
+		ArrayList<Discount> list = new ArrayList<Discount>();
+		db = dbHelper.getReadableDatabase();
+		Cursor mCursor = db.rawQuery("SELECT * FROM discounts INNER JOIN favorites ON discounts.discount_id = favorites.store_id ORDER BY discounts.discount_title", null);
+		mCursor.moveToFirst();
+
+		if (!mCursor.isAfterLast()) {
+			do {
+
+				Discount entry = new Discount();
+
+				entry.setDiscount_id(mCursor.getInt(mCursor.getColumnIndex("discount_id")));
+				entry.setStore_id(mCursor.getInt(mCursor.getColumnIndex("store_id")));
+				entry.setDiscount_content(mCursor.getString(mCursor.getColumnIndex("discount_content")));
+				entry.setDiscount_title(mCursor.getString(mCursor.getColumnIndex("discount_title")));
+				entry.setPhoto_url(mCursor.getString(mCursor.getColumnIndex("photo_url")));
+				entry.setCreated_at(mCursor.getInt(mCursor.getColumnIndex("created_at")));
+				entry.setUpdated_at(mCursor.getInt(mCursor.getColumnIndex("updated_at")));
+				entry.setIs_deleted(mCursor.getInt(mCursor.getColumnIndex("is_deleted")));
+				entry.setDiscount_val(mCursor.getInt(mCursor.getColumnIndex("discount_val")));
+				entry.setExp_date(mCursor.getInt(mCursor.getColumnIndex("exp_date")));
 
 				list.add(entry);
 			} while (mCursor.moveToNext());

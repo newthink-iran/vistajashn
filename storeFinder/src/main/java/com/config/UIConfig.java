@@ -19,6 +19,7 @@ public class UIConfig {
 	public static Menu MENU_MAP = new Menu(R.string.map, R.drawable.ic_map, R.drawable.ic_map, HeaderType.HeaderType_CATEGORY);
 	public static Menu MENU_SEARCH = new Menu(R.string.search, R.drawable.ic_search, R.drawable.ic_search, HeaderType.HeaderType_CATEGORY);
 	public static Menu MENU_NEWS = new Menu(R.string.news, R.drawable.ic_news, R.drawable.ic_news, HeaderType.HeaderType_CATEGORY);
+	public static Menu MENU_DISCOUNTS = new Menu(R.string.discounts, R.drawable.ic_news, R.drawable.ic_news, HeaderType.HeaderType_CATEGORY);
 	public static Menu MENU_WEATHER = new Menu(R.string.weather, R.drawable.ic_weather, R.drawable.ic_weather, HeaderType.HeaderType_CATEGORY);
 	public static Menu MENU_ABOUT_US = new Menu(R.string.about_us, R.drawable.ic_about, R.drawable.ic_about, HeaderType.HeaderType_CATEGORY);
 	public static Menu MENU_ABOUT_US1 = new Menu(R.string.about_us1, R.drawable.ic_about, R.drawable.ic_about, HeaderType.HeaderType_CATEGORY);
@@ -42,6 +43,7 @@ public class UIConfig {
 	//	HEADER_CATEGORIES,
 		MENU_HOME,
 		MENU_NEWS,
+		MENU_DISCOUNTS,
 		MENU_ABOUT_US1,
 		MENU_ABOUT_US2,
 		MENU_ABOUT_US3,
