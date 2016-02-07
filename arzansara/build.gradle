@@ -31,6 +31,7 @@ dependencies {
     compile 'com.android.support:support-v4:21.0.3'
     compile 'com.google.android.gms:play-services:5.0.89'
     compile 'info.semsamot:actionbar-rtlizer:2.+@aar'
+    //compile 'info.semsamot:actionbar-rtlizer:2.1.0'
     compile files('libs/apache-mime4j-0.6.jar')
     compile files('libs/httpclient-4.3.4.jar')
     compile files('libs/httpcore-4.3.2.jar')

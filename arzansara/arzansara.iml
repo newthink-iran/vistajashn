@@ -88,6 +88,7 @@
     <orderEntry type="library" exported="" name="twitter4j-async-4.0.2" level="project" />
     <orderEntry type="library" exported="" name="twitter4j-media-support-4.0.2" level="project" />
     <orderEntry type="library" exported="" name="jackson-core-2.2.2" level="project" />
+    <orderEntry type="library" exported="" name="actionbar-rtlizer-2.1.0" level="project" />
     <orderEntry type="library" exported="" name="jackson-databind-2.2.2" level="project" />
     <orderEntry type="library" exported="" name="twitter4j-stream-4.0.2" level="project" />
     <orderEntry type="library" exported="" name="Parse-1.7.1" level="project" />

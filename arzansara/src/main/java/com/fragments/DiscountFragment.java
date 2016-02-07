@@ -22,6 +22,7 @@ import com.adapters.MGListAdapter.OnMGListAdapterAdapterListener;
 import com.config.Config;
 import com.config.UIConfig;
 import com.db.Queries;
+import com.fragments.activity.DetailActivity;
 import com.fragments.activity.DiscountsActivity;
 import com.fragments.activity.NewsDetailActivity2;
 import com.fragments.activity.Utilities;
@@ -111,12 +112,22 @@ public class DiscountFragment extends Fragment implements OnItemClickListener, O
 					int position, ViewGroup viewGroup) {
 				// TODO Auto-generated method stub
 				
-				Discount discount = arrayData.get(position);
+				final Discount discount = arrayData.get(position);
 				
 				MGImageView imgViewPhoto = (MGImageView) v.findViewById(R.id.imgViewPhoto);
 				imgViewPhoto.setCornerRadius(0.0f);
 				imgViewPhoto.setBorderWidth(UIConfig.BORDER_WIDTH);
 				imgViewPhoto.setBorderColor(getResources().getColor(UIConfig.THEME_BLACK_COLOR));
+				imgViewPhoto.setOnClickListener(new OnClickListener() {
+
+					@Override
+					public void onClick(View arg0) {
+						// TODO Auto-generated method stub
+						Intent i = new Intent(getActivity(), DiscountsActivity.class);
+						i.putExtra("discount", discount);
+						getActivity().startActivity(i);
+					}
+				});
 				
 				if(discount.getPhoto_url() != null) {
 					MainActivity.getImageLoader().displayImage(discount.getPhoto_url(), imgViewPhoto, options);
@@ -158,7 +169,7 @@ public class DiscountFragment extends Fragment implements OnItemClickListener, O
 	@Override
 	public void onItemClick(AdapterView<?> adapterView, View v, int pos, long resId) {
 		// TODO Auto-generated method stub
-		Discount discount = arrayData.get(pos);
+		//Discount discount = arrayData.get(pos);
 //		NewsDetailFragment fragment = new NewsDetailFragment();
 //		
 //		Bundle b = new Bundle();
@@ -169,10 +180,11 @@ public class DiscountFragment extends Fragment implements OnItemClickListener, O
 //		main.switchContent(fragment, true);
 		
 		//Intent i = new Intent(getActivity(), NewsDetailActivity.class);
-		Intent i = new Intent(getActivity(), DiscountsActivity.class);
-		i.putExtra("news", discount);
+		/*Intent i = new Intent(getActivity(), DiscountsActivity.class);
+		i.putExtra("discount", discount);
+		Log.d("alaki", "00000033311");
 		getActivity().startActivity(i);
-		Log.d("alaki", "000000333");
+		Log.d("alaki", "000000333");*/
 	}
 
 
