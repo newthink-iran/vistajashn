@@ -118,6 +118,9 @@
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/app_id" />
 
+        <meta-data android:name="com.parse.push.gcm_sender_id"
+            android:value="id:AIzaSyCDVjGuZhoTJ2n-kFeg4PqHbcZLN9uU1Nw" />
+
         <!--
         <provider
             android:name="com.facebook.NativeAppCallContentProvider"
