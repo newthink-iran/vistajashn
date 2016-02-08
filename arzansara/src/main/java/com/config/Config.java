@@ -26,7 +26,7 @@ public class Config {
 	public static final String BANNER_UNIT_ID = "ca-app-pub-2513284293470814/4631467285";
 	
 	// Change this url depending on the name of your web hosting.
-	public static String BASE_URL = "http://phone.vistajashn.com/";
+	public static String BASE_URL = "http://arzansara.vistajashn.com/";
 	
 	// Your email that you wish that users on your app will contact you.
 	public static String ABOUT_US_EMAIL = "info@vistajashn.com";

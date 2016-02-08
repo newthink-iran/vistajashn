@@ -287,12 +287,15 @@ public class NewsDetailActivity2 extends SwipeRefreshActivity implements OnClick
        // tvRatingBarInfo.setText(date);
 
 
-        String strDesc = news.getNews_content().replace("\n", "[{~}]");
-        Spanned details = Html.fromHtml(strDesc);
-        details = Html.fromHtml(details.toString());
-        strDesc = details.toString().replace("[{~}]", "\n");
+        //String strDesc = news.getNews_content().replace("\n", "[{~}]");
+        //Spanned details = Html.fromHtml(strDesc);
+        //details = Html.fromHtml(details.toString());
+        //strDesc = details.toString().replace("[{~}]", "\n");
+        String address = news.getNews_content();
+        address = address.replace("&amp;lt;", "<");
+        address = address.replace("&amp;gt;", ">");
 
-        tvDetails.setText(strDesc);
+        tvDetails.setText(Html.fromHtml(address));
 
 
         Handler h = new Handler();

@@ -158,13 +158,16 @@ public class FeaturedFragment extends Fragment implements OnItemClickListener, O
 				}
 				
 				Spanned name = Html.fromHtml(store.getStore_name());
-				Spanned address = Html.fromHtml(store.getStore_address());
+				//Spanned address = Html.fromHtml(store.getStore_address());
+				String address = store.getStore_address();
+				address = address.replace("&amp;lt;", "<");
+				address = address.replace("&amp;gt;", ">");
 				
 				TextView tvTitle = (TextView) v.findViewById(R.id.tvTitle);
 				tvTitle.setText(name);
 				
 				TextView tvSubtitle = (TextView) v.findViewById(R.id.tvSubtitle);
-				tvSubtitle.setText(address);
+				tvSubtitle.setText(Html.fromHtml(address));
 				
 				
 				// SETTING VALUES

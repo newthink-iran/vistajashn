@@ -43,7 +43,7 @@
       to match your app's package name + ".permission.C2D_MESSAGE".
     -->
     <permission android:protectionLevel="signature"
-        android:name="com.projects.storefinder.permission.C2D_MESSAGE" />
+        android:name="com.projects.arzansara.permission.C2D_MESSAGE" />
     <uses-permission android:name="com.projects.arzansara.permission.C2D_MESSAGE" />
 
 
@@ -153,7 +153,7 @@
                 <!--
                   IMPORTANT: Change "com.parse.starter" to match your app's package name.
                 -->
-                <category android:name="com.projects.storefinder" />
+                <category android:name="com.projects.arzansara" />
             </intent-filter>
         </receiver>
 

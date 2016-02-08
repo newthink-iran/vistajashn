@@ -161,7 +161,7 @@ public class MainActivity extends SwipeRefreshActivity implements LocationListen
             getWindow().getDecorView().setLayoutDirection(View.LAYOUT_DIRECTION_RTL);
         }*/
         /* elyas : parse notifications */
-        Parse.initialize(this, "D3lfc61AyqfBGxtkxofFIsAAySdMgejMjlCH1OJl", "HKzjAY6s8vhbqiCW3qIY5b6drt0uGzqSidYSW9Ut");
+        Parse.initialize(this, "fbKtzdL75vwh2WbcewIs43hzw5KrlbbfnmghsyCa", "2zHVLwdpq5wKikqQPAl50QWoglHgeq0R4iAJBlua");
         ParseInstallation.getCurrentInstallation().saveInBackground();
 
         super.onCreate(savedInstanceState);

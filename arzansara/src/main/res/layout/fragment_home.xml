@@ -3,16 +3,28 @@
     
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical">
+
+<!--
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="کسب و کارها"
+        android:textColor="@android:color/black"
+        android:textStyle="bold"
+        android:singleLine="false"
+        android:background="@android:color/white"
+ /> -->
 
 
+   <!--
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="right">
 
-        <!--
+
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -95,7 +107,7 @@
             android:background="#ff8c6954" />  -->
 
 
-    </LinearLayout>
+    <!-- </LinearLayout> -->
 
 
     <ListView

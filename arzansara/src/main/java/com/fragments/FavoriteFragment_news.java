@@ -146,13 +146,16 @@ public class FavoriteFragment_news extends Fragment implements OnItemClickListen
 				imgViewPhoto.setTag(position);
 				
 				Spanned name = Html.fromHtml(news.getNews_title());
-				Spanned address = Html.fromHtml(news.getNews_content());
+				//Spanned address = Html.fromHtml(news.getNews_content());
+				String address = news.getNews_content();
+				address = address.replace("&amp;lt;", "<");
+				address = address.replace("&amp;gt;", ">");
 				
 				TextView tvTitle = (TextView) v.findViewById(R.id.tvTitle);
 				tvTitle.setText(name);
 				
 				TextView tvSubtitle = (TextView) v.findViewById(R.id.tvSubtitle);
-				tvSubtitle.setText(address);
+				tvSubtitle.setText(Html.fromHtml(address));
 				
 				
 				// SETTING VALUES

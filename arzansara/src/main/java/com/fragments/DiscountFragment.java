@@ -139,14 +139,18 @@ public class DiscountFragment extends Fragment implements OnItemClickListener, O
 				imgViewPhoto.setTag(position);
 				
 				Spanned name = Html.fromHtml(discount.getDiscount_title());
-				Spanned address = Html.fromHtml(discount.getDiscount_content());
+				//Spanned address = Html.fromHtml(discount.getDiscount_content());
+				String address = discount.getDiscount_content();
+				address = address.replace("&amp;lt;", "<");
+				address = address.replace("&amp;gt;", ">");
+
 				Spanned discountValue = Html.fromHtml(String.valueOf(discount.getDiscount_val()));
 				
 				TextView tvTitle = (TextView) v.findViewById(R.id.tvTitle);
 				tvTitle.setText(name);
 				
 				TextView tvSubtitle = (TextView) v.findViewById(R.id.tvSubtitle);
-				tvSubtitle.setText(address);
+				tvSubtitle.setText(Html.fromHtml(address));
 
 				TextView tvDiscountVal = (TextView) v.findViewById(R.id.tvDiscountVal);
 				tvDiscountVal.setText(discountValue + "% تخفیف");
