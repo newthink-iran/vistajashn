@@ -7,27 +7,15 @@ import org.apache.http.message.BasicNameValuePair;
 
 import info.semsamot.actionbarrtlizer.ActionBarRtlizer;
 import info.semsamot.actionbarrtlizer.RtlizeEverything;
-import twitter4j.Twitter;
-import twitter4j.TwitterException;
-import twitter4j.auth.AccessToken;
 import com.asynctask.MGAsyncTask;
 import com.asynctask.MGAsyncTask.OnMGAsyncTaskListener;
 import com.config.Config;
 import com.dataparser.DataParser;
-import com.facebook.LoggingBehavior;
-import com.facebook.Request;
-import com.facebook.Response;
-import com.facebook.Session;
-import com.facebook.SessionState;
-import com.facebook.Settings;
-import com.facebook.model.GraphUser;
 import com.models.DataResponse;
 import com.models.Status;
 import com.models.User;
 import com.projects.storefinder.MainActivity;
 import com.projects.storefinder.R;
-import com.social.twitter.TwitterApp;
-import com.social.twitter.TwitterApp.TwitterAppListener;
 import com.usersession.UserAccessSession;
 import com.usersession.UserSession;
 import com.utilities.MGUtilities;
@@ -49,8 +37,6 @@ public class LoginActivity extends FragmentActivity implements OnClickListener {
 
 	
 	private Bundle savedInstanceState;
-	private Session.StatusCallback statusCallback;
-	private TwitterApp mTwitter;
 	MGAsyncTask task;
 	
 	
@@ -79,9 +65,7 @@ public class LoginActivity extends FragmentActivity implements OnClickListener {
 		btnTwitter.setOnClickListener(this);
 		
 		this.savedInstanceState = savedInstanceState;
-		
-		statusCallback = new SessionStatusCallback();
-        mTwitter = new TwitterApp(this, twitterAppListener);
+
 	}
 	
 	
@@ -93,27 +77,7 @@ public class LoginActivity extends FragmentActivity implements OnClickListener {
 			case R.id.btnLogin:
 				login();
 				break;
-				
-			case R.id.btnFacebook:
 
-				Session session = Session.getActiveSession();
-		        if (session == null) { // not logged in
-		        	loginToFacebook(savedInstanceState);
-		        }
-		        else if(!session.isOpened() && session.isClosed()){
-		        	loginToFacebook(savedInstanceState);
-		        }
-		        else {
-		        	getUsername(session);
-		        }
-				
-				break;
-				
-			case R.id.btnTwitter:
-				
-				loginToTwitter();
-				
-				break;
 		}
 	}
 	
@@ -226,278 +190,8 @@ public class LoginActivity extends FragmentActivity implements OnClickListener {
         }
 	}
 	
-	public void syncFacebookUser(final GraphUser user) {
-		
-		if(!MGUtilities.hasConnection(LoginActivity.this)) {
-			
-			MGUtilities.showAlertView(
-					LoginActivity.this, 
-					R.string.network_error, 
-					R.string.no_network_connection);
-			return;
-		}
-		
-        task = new MGAsyncTask(LoginActivity.this);
-        task.setMGAsyncTaskListener(new OnMGAsyncTaskListener() {
-			
-        	DataResponse response;
-        	
-			@Override
-			public void onAsyncTaskProgressUpdate(MGAsyncTask asyncTask) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			@Override
-			public void onAsyncTaskPreExecute(MGAsyncTask asyncTask) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			@Override
-			public void onAsyncTaskPostExecute(MGAsyncTask asyncTask) {
-				// TODO Auto-generated method stub
-				
-				updateLogin(response);
-			}
-			
-			@Override
-			public void onAsyncTaskDoInBackground(MGAsyncTask asyncTask) {
-				// TODO Auto-generated method stub
-				
-				ArrayList<NameValuePair> params = new ArrayList<NameValuePair>();
-				
-				String imageURL = String.format("https://graph.facebook.com/%s/picture?type=large", user.getId());
-				String email = user.asMap().get("email").toString();
-				params.add(new BasicNameValuePair("facebook_id", user.getId() ));
-				params.add(new BasicNameValuePair("full_name", user.getName() ));
-				params.add(new BasicNameValuePair("thumb_url", imageURL ));
-				params.add(new BasicNameValuePair("email", email != null ? email : "" ));
-				
-				Log.e("FB IMAGE URL", imageURL);
-				
-				response = DataParser.getJSONFromUrlWithPostRequest(Config.REGISTER_URL, params);
-			}
-		});
-        task.execute();
-	}
-	
-	public void syncTwitterUser(final AccessToken accessToken, final String screenName) {
-		
-		if(!MGUtilities.hasConnection(this)) {
-			
-			MGUtilities.showAlertView(
-					LoginActivity.this, 
-					R.string.network_error, 
-					R.string.no_network_connection);
-			return;
-		}
-		
-        task = new MGAsyncTask(LoginActivity.this);
-        task.setMGAsyncTaskListener(new OnMGAsyncTaskListener() {
-			
-        	DataResponse response;
-        	
-			@Override
-			public void onAsyncTaskProgressUpdate(MGAsyncTask asyncTask) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			@Override
-			public void onAsyncTaskPreExecute(MGAsyncTask asyncTask) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			@Override
-			public void onAsyncTaskPostExecute(MGAsyncTask asyncTask) {
-				// TODO Auto-generated method stub
-				
-				updateLogin(response);
-			}
-			
-			@Override
-			public void onAsyncTaskDoInBackground(MGAsyncTask asyncTask) {
-				// TODO Auto-generated method stub
-				@SuppressWarnings("static-access")
-				Twitter tw = MainActivity.getTwitterAppInstance().getTwitterInstance();
-				twitter4j.User user = null;
-					
-				try {
-					user = tw.showUser(accessToken.getUserId());
-				} catch (TwitterException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				
-				ArrayList<NameValuePair> params = new ArrayList<NameValuePair>();
-				
-				if(user != null) {
-					String imageURL = user.getOriginalProfileImageURL();
-					params.add(new BasicNameValuePair("thumb_url", imageURL ));
-					Log.e("TWITTER IMAGE URL", imageURL);
-				}
-				
-				params.add(new BasicNameValuePair("twitter_id", String.valueOf(accessToken.getUserId()) ));
-				params.add(new BasicNameValuePair("full_name", String.valueOf(screenName) ));
-				params.add(new BasicNameValuePair("email", "" ));
-				
-				response = DataParser.getJSONFromUrlWithPostRequest(Config.REGISTER_URL, params);
-			}
-		});
-        task.execute();
-	}
-	
-	
-	// FACEBOOK
-	@Override
-	public void onSaveInstanceState(Bundle outState) {
-		super.onSaveInstanceState(outState);
-        Session session = Session.getActiveSession();
-        Session.saveSession(session, outState);
-	}
-	
-	@Override
-    public void onStart()  {
-        super.onStart();
-        
-        if(Session.getActiveSession() != null)
-        	Session.getActiveSession().addCallback(statusCallback);
-    }
 
-    @Override
-    public void onStop() {
-        super.onStop();
-        
-        if(Session.getActiveSession() != null)
-        	Session.getActiveSession().removeCallback(statusCallback);
-    }
 
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        
-        Session.getActiveSession().onActivityResult(this, requestCode, resultCode, data);
-    }
-    
-    // ###############################################################################################
-   	// FACEBOOK INTEGRATION METHODS
-   	// ###############################################################################################
-    public void loginToFacebook(Bundle savedInstanceState) {
-      	Settings.addLoggingBehavior(LoggingBehavior.INCLUDE_ACCESS_TOKENS);
-
-      	Session session = Session.getActiveSession();
-      	
-      	if (session == null) {
-      
-      		session = new Session(this);
-             Session.setActiveSession(session);
-      	}
-      	
-      	if (!session.isOpened() && !session.isClosed()) {
-             session.openForRead(new Session.OpenRequest(this)
-                 .setPermissions(Arrays.asList("public_profile", "email"))
-                 .setCallback(statusCallback));
-        } else {
-             Session.openActiveSession(this, true, statusCallback);
-             updateView();
-        }
-    }
-      
-	private void updateView() {
-		Session session = Session.getActiveSession();
-			if (session.isOpened()) {
-//            URL_PREFIX_FRIENDS + session.getAccessToken();
-          	getUsername(session);
-			} 
-      }
-      
-	private void getUsername(final Session session) {
-       	Request request = Request.newMeRequest(session, 
-       	        new Request.GraphUserCallback() {
-       		
-   			@Override
-   			public void onCompleted(GraphUser user, Response response) {
-   				// If the response is successful
-       	        if (session == Session.getActiveSession()) {
-       	            if (user != null) {
-       	                // Set the id for the ProfilePictureView
-       	                // view that in turn displays the profile picture.
-       	            	Log.e("FACEBOOK USERNAME**", user.getName());
-       	            	Log.e("FACEBOOK ID**", user.getId());
-       	            	Log.e("FACEBOOK EMAIL**", ""+user.asMap().get("email"));
-       	            	
-       	            	syncFacebookUser(user);
-       	            	
-       	            }
-       	        }
-       	        
-       	        if (response.getError() != null) {
-       	            // Handle errors, will do so later.
-       	        	Log.e("ERROR", response.getError().getErrorMessage());
-       	        }
-   			}
-
-       	});
-       	request.executeAsync();
-	}
-	
-	private class SessionStatusCallback implements Session.StatusCallback {
-        @Override
-        public void call(Session session, SessionState state, Exception exception) {
-            updateView();
-        }
-    }
-	
-	
-//	private void onClickLogin() {
-//        Session session = Session.getActiveSession();
-//        if (!session.isOpened() && !session.isClosed()) {
-//            session.openForRead(new Session.OpenRequest(this).setCallback(statusCallback));
-//        } else  {
-//            Session.openActiveSession(this, true, Arrays.asList("user_likes", "user_status"), statusCallback);
-//        }
-//    }
-	
-	// ###############################################################################################
-   	// TWITTER INTEGRATION METHODS
-   	// ###############################################################################################
-   	public void loginToTwitter() {
-   		if (mTwitter.hasAccessToken() == true) {
-   			try {
-   				syncTwitterUser(mTwitter.getAccessToken(), mTwitter.getScreenName());
-   			} 
-   			catch (Exception e) {
-   				e.printStackTrace();
-   			}
-   		} 
-   		else {
-   			mTwitter.loginToTwitter();
-   		}
-   	}
-   	
-   	TwitterAppListener twitterAppListener = new TwitterAppListener() {
- 		
- 		@Override
- 		public void onError(String value)  {
- 			// TODO Auto-generated method stub
- 			Log.e("TWITTER ERROR**", value);
- 		}
- 		
- 		@Override
- 		public void onComplete(AccessToken accessToken) {
- 			// TODO Auto-generated method stub
- 			runOnUiThread(new Runnable() {
-				@Override
-				public void run() {
-					// TODO Auto-generated method stub
-					syncTwitterUser(mTwitter.getAccessToken(), mTwitter.getScreenName());
-				}
-			});
- 		}
- 	};
-	
  	@Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // toggle nav drawer on selecting action bar app icon/title

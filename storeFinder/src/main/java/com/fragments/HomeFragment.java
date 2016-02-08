@@ -217,8 +217,8 @@ public class HomeFragment extends Fragment implements OnItemClickListener, OnCli
             ViewGroup parentViewGroup = (ViewGroup) viewInflate.getParent();
             if (parentViewGroup != null) {
             	
-            	MGSlider slider = (MGSlider) viewInflate.findViewById(R.id.slider);
-        		slider.pauseSliderAnimation();
+            	//MGSlider slider = (MGSlider) viewInflate.findViewById(R.id.slider);
+        		//slider.pauseSliderAnimation();
         		
                 parentViewGroup.removeAllViews();
             }
@@ -304,8 +304,8 @@ public class HomeFragment extends Fragment implements OnItemClickListener, OnCli
 	public void onItemClick(AdapterView<?> adapterView, View v, int pos, long resId) {
 		// TODO Auto-generated method stub
 		
-		MGSlider slider = (MGSlider) viewInflate.findViewById(R.id.slider);
-		slider.stopSliderAnimation();
+		//MGSlider slider = (MGSlider) viewInflate.findViewById(R.id.slider);
+		//slider.stopSliderAnimation();
 		
 		News news = newsList.get(pos);
 		//Intent i = new Intent(getActivity(), NewsDetailActivity.class);
@@ -325,8 +325,8 @@ public class HomeFragment extends Fragment implements OnItemClickListener, OnCli
 		final MainActivity main = (MainActivity) getActivity();
 		final Queries q = main.getQueries();
 		
-		MGSlider slider = (MGSlider) viewInflate.findViewById(R.id.slider);
-		slider.setMaxSliderThumb(storeList.size());
+		//MGSlider slider = (MGSlider) viewInflate.findViewById(R.id.slider);
+		//slider.setMaxSliderThumb(storeList.size());
     	MGSliderAdapter adapter = new MGSliderAdapter(
     			R.layout.slider_entry, storeList.size(), storeList.size());
     	
@@ -373,7 +373,7 @@ public class HomeFragment extends Fragment implements OnItemClickListener, OnCli
 			}
 		});
     	
-    	slider.setOnMGSliderListener(new OnMGSliderListener() {
+    	/*slider.setOnMGSliderListener(new OnMGSliderListener() {
 			
 			@Override
 			public void onItemThumbSelected(MGSlider slider, ImageView[] buttonPoint,
@@ -402,15 +402,15 @@ public class HomeFragment extends Fragment implements OnItemClickListener, OnCli
     	slider.setAdapter(adapter);
     	slider.setActivity(this.getActivity());
     	slider.setSliderAnimation(5000);
-    	slider.resumeSliderAnimation();
+    	slider.resumeSliderAnimation();*/
 	}
 
 	@Override
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
 		
-		MGSlider slider = (MGSlider) viewInflate.findViewById(R.id.slider);
-		slider.stopSliderAnimation();
+		//MGSlider slider = (MGSlider) viewInflate.findViewById(R.id.slider);
+		//slider.stopSliderAnimation();
 
 		MainActivity main = (MainActivity) this.getActivity();
 		final Queries q = main.getQueries();
@@ -468,16 +468,16 @@ public class HomeFragment extends Fragment implements OnItemClickListener, OnCli
 	public void onResume() {
 		// TODO Auto-generated method stub
 		super.onResume();
-		MGSlider slider = (MGSlider) viewInflate.findViewById(R.id.slider);
-		slider.resumeSliderAnimation();
+		//MGSlider slider = (MGSlider) viewInflate.findViewById(R.id.slider);
+		//slider.resumeSliderAnimation();
 	}
 	
 	@Override
 	public void onPause() {
 		// TODO Auto-generated method stub
 		super.onPause();
-		MGSlider slider = (MGSlider) viewInflate.findViewById(R.id.slider);
-		slider.pauseSliderAnimation();
+		//MGSlider slider = (MGSlider) viewInflate.findViewById(R.id.slider);
+		//slider.pauseSliderAnimation();
 	}
 	
 }
