@@ -161,7 +161,7 @@ public class MainActivity extends SwipeRefreshActivity implements LocationListen
             getWindow().getDecorView().setLayoutDirection(View.LAYOUT_DIRECTION_RTL);
         }*/
         /* elyas : parse notifications */
-        Parse.initialize(this, "fbKtzdL75vwh2WbcewIs43hzw5KrlbbfnmghsyCa", "2zHVLwdpq5wKikqQPAl50QWoglHgeq0R4iAJBlua");
+        Parse.initialize(this,"fbKtzdL75vwh2WbcewIs43hzw5KrlbbfnmghsyCa", "2zHVLwdpq5wKikqQPAl50QWoglHgeq0R4iAJBlua");
         ParseInstallation.getCurrentInstallation().saveInBackground();
 
         super.onCreate(savedInstanceState);
@@ -278,7 +278,7 @@ public class MainActivity extends SwipeRefreshActivity implements LocationListen
     }
     void doExit()
     {
-        AlertDialog.Builder alertDialog = new AlertDialog.Builder(MainActivity.this);
+        /*AlertDialog.Builder alertDialog = new AlertDialog.Builder(MainActivity.this);
         alertDialog.setPositiveButton("بله",new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
@@ -288,7 +288,8 @@ public class MainActivity extends SwipeRefreshActivity implements LocationListen
         alertDialog.setNegativeButton("خیر",null);
         alertDialog.setMessage("آیا میخواهید خارج شوید؟");
         alertDialog.setTitle(R.string.app_name);
-        alertDialog.show();
+        alertDialog.show();*/
+        finish();
     }
 
     public void showMainView() {
@@ -389,13 +390,13 @@ public class MainActivity extends SwipeRefreshActivity implements LocationListen
             case 3:
                 fragment = new AboutUsFragment1();
                 break;
-            case 4:
+            /*case 4:
                 fragment = new AboutUsFragment2();
                 break;
             case 5:
                 fragment = new AboutUsFragment3();
-                break;
-	        case 6:
+                break;*/
+	        case 4:
 	            fragment = new FavoriteFragment_news();
 	            break;
 	        /*case 4:
@@ -421,7 +422,7 @@ public class MainActivity extends SwipeRefreshActivity implements LocationListen
 	            fragment = new TermsConditionFragment();
 	            break;*/
 
-            case 7:
+            case 5:
                 doExit();
                 break;
 	            

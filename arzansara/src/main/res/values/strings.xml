@@ -88,7 +88,9 @@
     <string name="placeholder_review">نظر شما</string>
     <string name="chars_left">کاراکتر باقی مانده است</string>
     <string name="about_us_detail">"گروه مهندسی ویستا پرداز نواندیش \n شماره تماس: 33517735-031"</string>
-    <string name="about_us_detail_1">"توضیحات لازم"</string>
+    <string name="about_us_detail_1">ارزانسرای رضوی در سال 1392 در مساحتی حدود 700متر با هدف دسترسی اسان و ارزان همشهریان گرامی به مایحتاج خود افتتاح گردید.\n به همینی بامنظور با استفاده از جدید ترین دانش روز و به کارگیری کارمندان آشنا به امور مشتری مداری اقدام به چیدمان حرفه ایی محصولات نموده ایم.\n فروشگاه مواد غذایی رضوی  با بهره گیر از مدیریتی با تجربه سعی بر آن داشته تا بتواند مرغوبترین کالاها را با نازل ترین قیمت و در حداقل زمان در اختیار مشتریان خود قرار دهد \n همچنین در جهت سلامت همشهریان عزیز اقدام به تهیه و توزیع برترین محصولات از لحاظ کیفی نموده ایم.\n امید است این اقدامات مورد رضایت حق تعالی و مردم شریف شهرستان واقع گردد.\n ساعات کار:\n همه روزه  صبح از ساعت 8 الی 10 شب    (حتی روزهای تعطیل)
+
+</string>
     <string name="about_us_detail_2">"توضیحات لازم"</string>
     <string name="about_us_detail_3">"توضیحات لازم"</string>
 
@@ -130,7 +132,7 @@
     <string name="title_activity_splash">SplashActivity</string>
     <string name="img_gallery_desc">گالری</string>
     <string name="exit">خروج</string>
-    <string name="about_us1">معرفی و زندگی نامه</string>
+    <string name="about_us1">درباره ما</string>
     <string name="about_us2">تاریخچه فعالیت ها و سوابق</string>
     <string name="about_us3">اهداف و برنامه ها</string>
     <string name="action_share">اشتراک گذاری این خبر</string>

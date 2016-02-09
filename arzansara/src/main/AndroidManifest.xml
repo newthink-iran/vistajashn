@@ -37,7 +37,7 @@
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
-
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <!--
       IMPORTANT: Change "com.parse.starter.permission.C2D_MESSAGE" in the lines below
       to match your app's package name + ".permission.C2D_MESSAGE".
@@ -118,8 +118,12 @@
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/app_id" />
 
-        <meta-data android:name="com.parse.push.gcm_sender_id"
-            android:value="id:AIzaSyCDVjGuZhoTJ2n-kFeg4PqHbcZLN9uU1Nw" />
+        <meta-data
+            android:name="com.parse.APPLICATION_ID"
+            android:value="fbKtzdL75vwh2WbcewIs43hzw5KrlbbfnmghsyCa" />
+        <meta-data
+            android:name="com.parse.CLIENT_KEY"
+            android:value="2zHVLwdpq5wKikqQPAl50QWoglHgeq0R4iAJBlua" />
 
         <!--
         <provider
