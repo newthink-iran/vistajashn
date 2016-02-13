@@ -18,6 +18,8 @@ import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.utilities.MGUtilities;
 import com.projects.arzansara.MainActivity;
 import com.projects.arzansara.R;
+
+import android.app.FragmentManager;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -25,6 +27,8 @@ import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.text.Html;
 import android.text.Spanned;
+import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -62,6 +66,23 @@ public class NewsFragment extends Fragment implements OnItemClickListener, OnCli
 		
 		MainActivity main = (MainActivity) this.getActivity();
 		final Queries q = main.getQueries();
+
+		view.setFocusableInTouchMode(true);
+		view.requestFocus();
+		view.setOnKeyListener(new View.OnKeyListener() {
+			@Override
+			public boolean onKey(View v, int keyCode, KeyEvent event) {
+
+				if( keyCode == KeyEvent.KEYCODE_BACK ) {
+					android.support.v4.app.FragmentManager fm = getFragmentManager();
+					if(fm.getBackStackEntryCount() > 0)
+						getFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+					return true;
+				} else {
+					return false;
+				}
+			}
+		});
 		
 		options = new DisplayImageOptions.Builder()
 			.showImageOnLoading(UIConfig.SLIDER_PLACEHOLDER)
@@ -75,11 +96,11 @@ public class NewsFragment extends Fragment implements OnItemClickListener, OnCli
 		
 		Handler h = new Handler();
 		h.postDelayed(new Runnable() {
-			
+
 			@Override
 			public void run() {
 				// TODO Auto-generated method stub
-				arrayData  = q.getNews();
+				arrayData = q.getNews();
 				showList();
 			}
 		}, Config.DELAY_SHOW_ANIMATION);
@@ -179,4 +200,7 @@ public class NewsFragment extends Fragment implements OnItemClickListener, OnCli
 		// TODO Auto-generated method stub
 		
 	}
+
+
+
 }

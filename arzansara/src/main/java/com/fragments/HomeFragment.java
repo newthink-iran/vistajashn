@@ -40,10 +40,13 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.text.Html;
 import android.text.Spanned;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -245,6 +248,23 @@ public class HomeFragment extends Fragment implements OnItemClickListener, OnCli
 		listView.setOnItemClickListener(this);
 		listView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
 
+		TextView btn1 = (TextView) viewInflate.findViewById(R.id.button1);
+		btn1.setOnClickListener(this);
+
+		TextView btn2 = (TextView) viewInflate.findViewById(R.id.button2);
+		btn2.setOnClickListener(this);
+
+		TextView btn3 = (TextView) viewInflate.findViewById(R.id.button3);
+		btn3.setOnClickListener(this);
+
+		TextView btn4 = (TextView) viewInflate.findViewById(R.id.button4);
+		btn4.setOnClickListener(this);
+
+		TextView btn5 = (TextView) viewInflate.findViewById(R.id.button5);
+		btn5.setOnClickListener(this);
+
+
+
 		/*Button hallBtn = (Button) viewInflate.findViewById(R.id.hallBtn);
 		hallBtn.setOnClickListener(this);
 
@@ -443,7 +463,51 @@ public class HomeFragment extends Fragment implements OnItemClickListener, OnCli
 		categoryList = q.getCategories();
 		Intent i = new Intent(getActivity(), StoreActivity.class);
 		Category category;
-		
+
+		Fragment fragment = null;
+		FragmentTransaction ft = null;
+
+		switch(v.getId()){
+			case R.id.button1:
+				fragment = new NewsFragment();
+				ft = getFragmentManager().beginTransaction();
+				ft.replace(R.id.frame_container, fragment);
+				ft.addToBackStack(null);
+				ft.commit();
+				break;
+			case R.id.button2:
+				fragment = new DiscountFragment();
+				ft = getFragmentManager().beginTransaction();
+				ft.replace(R.id.frame_container, fragment);
+				ft.addToBackStack(null);
+				ft.commit();
+				break;
+			case R.id.button3:
+				fragment = new AboutUsFragment1();
+				ft = getFragmentManager().beginTransaction();
+				ft.replace(R.id.frame_container, fragment);
+				ft.addToBackStack(null);
+				ft.commit();
+				break;
+			case R.id.button4:
+				fragment = new FavoriteFragment_news();
+				ft = getFragmentManager().beginTransaction();
+				ft.replace(R.id.frame_container, fragment);
+				ft.addToBackStack(null);
+				ft.commit();
+				break;
+			case R.id.button5:
+				fragment = new AboutUsFragment();
+				ft = getFragmentManager().beginTransaction();
+				ft.replace(R.id.frame_container, fragment);
+				ft.addToBackStack(null);
+				ft.commit();
+				break;
+		}
+
+
+
+
 		/*switch(v.getId()) {
 			case R.id.hallBtn:
 				category = categoryList.get(0);

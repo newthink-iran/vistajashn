@@ -1,6 +1,7 @@
 package com.fragments;
 
 import android.annotation.SuppressLint;
+import android.app.FragmentManager;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -9,6 +10,7 @@ import android.support.v4.app.Fragment;
 import android.text.Html;
 import android.text.Spanned;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -68,6 +70,23 @@ public class FavoriteFragment_news extends Fragment implements OnItemClickListen
 		
 		MainActivity main = (MainActivity) this.getActivity();
 		final Queries q = main.getQueries();
+
+		view.setFocusableInTouchMode(true);
+		view.requestFocus();
+		view.setOnKeyListener(new View.OnKeyListener() {
+			@Override
+			public boolean onKey(View v, int keyCode, KeyEvent event) {
+
+				if( keyCode == KeyEvent.KEYCODE_BACK ) {
+					android.support.v4.app.FragmentManager fm = getFragmentManager();
+					if(fm.getBackStackEntryCount() > 0)
+						getFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+					return true;
+				} else {
+					return false;
+				}
+			}
+		});
 		
 		options = new DisplayImageOptions.Builder()
 			.showImageOnLoading(UIConfig.SLIDER_PLACEHOLDER)

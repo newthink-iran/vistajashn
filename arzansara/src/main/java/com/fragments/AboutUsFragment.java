@@ -3,9 +3,12 @@ package com.fragments;
 import com.config.Config;
 import com.projects.arzansara.R;
 import com.utilities.MGUtilities;
+
+import android.app.FragmentManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -34,6 +37,23 @@ public class AboutUsFragment extends Fragment implements OnClickListener{
 	public void onViewCreated(View view, Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onViewCreated(view, savedInstanceState);
+
+		view.setFocusableInTouchMode(true);
+		view.requestFocus();
+		view.setOnKeyListener(new View.OnKeyListener() {
+			@Override
+			public boolean onKey(View v, int keyCode, KeyEvent event) {
+
+				if (keyCode == KeyEvent.KEYCODE_BACK) {
+					android.support.v4.app.FragmentManager fm = getFragmentManager();
+					if (fm.getBackStackEntryCount() > 0)
+						getFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+					return true;
+				} else {
+					return false;
+				}
+			}
+		});
 		
 		Button btnContactUs = (Button) viewInflate.findViewById(R.id.btnContactUs);
 		btnContactUs.setOnClickListener(new OnClickListener() {
