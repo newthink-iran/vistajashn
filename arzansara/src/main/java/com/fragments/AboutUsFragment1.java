@@ -2,22 +2,39 @@ package com.fragments;
 
 import android.app.FragmentManager;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.Html;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.config.Config;
+import com.db.DbHelper;
+import com.db.Queries;
+import com.models.Setting;
+import com.projects.arzansara.MainActivity;
 import com.projects.arzansara.R;
 import com.utilities.MGUtilities;
+
+import java.util.ArrayList;
 
 public class AboutUsFragment1 extends Fragment implements OnClickListener{
 
 	private View viewInflate;
+
+	private Queries q;
+	private SQLiteDatabase db;
+
+	//setting in json
+	private ArrayList<Setting> settings;
+	//end of setting in json
 
 	public AboutUsFragment1() { }
 	
@@ -46,9 +63,11 @@ public class AboutUsFragment1 extends Fragment implements OnClickListener{
 
 				if (keyCode == KeyEvent.KEYCODE_BACK) {
 					android.support.v4.app.FragmentManager fm = getFragmentManager();
-					if (fm.getBackStackEntryCount() > 0)
+					if (fm.getBackStackEntryCount() > 0){
 						getFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
-					return true;
+						return true;
+					}
+					return false;
 				} else {
 					return false;
 				}
@@ -57,13 +76,28 @@ public class AboutUsFragment1 extends Fragment implements OnClickListener{
 		
 		Button btnContactUs = (Button) viewInflate.findViewById(R.id.btnContactUs);
 		btnContactUs.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				email();
 			}
 		});
+
+		MainActivity main = (MainActivity) this.getActivity();
+		DbHelper dbHelper = new DbHelper(main);
+		q = new Queries(db, dbHelper);
+
+		//setting in json
+		settings = q.getSettings();
+		//end of setting in json
+
+		String about_content = settings.get(0).getAbout1();
+		about_content =  about_content.replace("&lt;", "<");
+		about_content =  about_content.replace("&gt;", ">");
+
+		TextView textView2 = (TextView) viewInflate.findViewById(R.id.textView2);
+		textView2.setText(Html.fromHtml(about_content));
 	}
 
 	@Override

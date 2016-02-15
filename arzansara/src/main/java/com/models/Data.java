@@ -8,6 +8,7 @@ public class Data {
 	private ArrayList<Category> categories;
 	private ArrayList<Photo> photos;
 	private ArrayList<Discount> discounts;
+	private ArrayList<Setting> settings;
 
 	public void setStores(ArrayList<Store> s) {
 	    stores = s;
@@ -40,5 +41,13 @@ public class Data {
 
 	public ArrayList<Discount> getDiscounts() {
 		return discounts;
+	}
+
+	public void setSettings(ArrayList<Setting> s) {
+		settings = s;
+	}
+
+	public ArrayList<Setting> getSettings() {
+		return settings;
 	}
 }

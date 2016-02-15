@@ -114,6 +114,16 @@ public class DbHelper extends SQLiteOpenHelper {
 				+ "exp_date INTEGER, "
 				+ "discount_val INTEGER "
 				+ ");");
+
+		db.execSQL("CREATE TABLE IF NOT EXISTS settings("
+				+ "setting_id INTEGER PRIMARY KEY," //AUTOINCREMENT
+				+ "about1 TEXT,"
+				+ "about2 TEXT,"
+				+ "about3 TEXT,"
+				+ "about_img1 TEXT,"
+				+ "about_img2 TEXT,"
+				+ "about_img3 TEXT"
+				+ ");");
 	    
 	}
 	
@@ -128,6 +138,7 @@ public class DbHelper extends SQLiteOpenHelper {
 		db.execSQL("DROP TABLE IF EXISTS news");
 		db.execSQL("DROP TABLE IF EXISTS favorites");
 		db.execSQL("DROP TABLE IF EXISTS discounts");
+		db.execSQL("DROP TABLE IF EXISTS settings");
 	}
 
 }

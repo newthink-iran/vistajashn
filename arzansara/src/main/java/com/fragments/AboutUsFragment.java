@@ -46,9 +46,11 @@ public class AboutUsFragment extends Fragment implements OnClickListener{
 
 				if (keyCode == KeyEvent.KEYCODE_BACK) {
 					android.support.v4.app.FragmentManager fm = getFragmentManager();
-					if (fm.getBackStackEntryCount() > 0)
+					if (fm.getBackStackEntryCount() > 0){
 						getFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
-					return true;
+						return true;
+					}
+					return false;
 				} else {
 					return false;
 				}
@@ -57,7 +59,7 @@ public class AboutUsFragment extends Fragment implements OnClickListener{
 		
 		Button btnContactUs = (Button) viewInflate.findViewById(R.id.btnContactUs);
 		btnContactUs.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub

@@ -3,7 +3,8 @@
 
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    android:background="@drawable/bg_splash">
 
 <!--
     <Button
@@ -168,7 +169,7 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:layout_alignBaseline="@+id/button3"
-        android:text="علاقه مندی های \u0020\u0020\u0020من"
+        android:text="علاقه مندی های من"
         android:textColor="#ffffff"
         android:rotation="270"
         android:background="@drawable/rounded_textview"
@@ -197,7 +198,8 @@
         android:layout_height="0dp"
         android:layout_weight="0.6"
         android:layout_gravity="right"
-        android:gravity="right">
+        android:gravity="right"
+        android:visibility="invisible">
 
     </ListView>
 

@@ -73,11 +73,13 @@ public class NewsFragment extends Fragment implements OnItemClickListener, OnCli
 			@Override
 			public boolean onKey(View v, int keyCode, KeyEvent event) {
 
-				if( keyCode == KeyEvent.KEYCODE_BACK ) {
+				if (keyCode == KeyEvent.KEYCODE_BACK) {
 					android.support.v4.app.FragmentManager fm = getFragmentManager();
-					if(fm.getBackStackEntryCount() > 0)
+					if (fm.getBackStackEntryCount() > 0){
 						getFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
-					return true;
+						return true;
+					}
+					return false;
 				} else {
 					return false;
 				}

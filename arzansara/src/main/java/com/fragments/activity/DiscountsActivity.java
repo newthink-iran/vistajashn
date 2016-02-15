@@ -186,8 +186,6 @@ public class DiscountsActivity extends SwipeRefreshActivity implements OnClickLi
     @SuppressLint("DefaultLocale")
     private void updateStore() {
 
-        Log.d("alaki", "987928347");
-
         ImageView imgViewPhoto = (ImageView) findViewById(R.id.imgViewPhoto2);
 
 
@@ -266,12 +264,16 @@ public class DiscountsActivity extends SwipeRefreshActivity implements OnClickLi
         // tvRatingBarInfo.setText(date);
 
 
-        String strDesc = discount.getDiscount_content().replace("\n", "[{~}]");
+        /*String strDesc = discount.getDiscount_content().replace("\n", "[{~}]");
         Spanned details = Html.fromHtml(strDesc);
         details = Html.fromHtml(details.toString());
-        strDesc = details.toString().replace("[{~}]", "\n");
+        strDesc = details.toString().replace("[{~}]", "\n");*/
 
-        tvDetails.setText(strDesc);
+        String address = discount.getDiscount_content();
+        address = address.replace("&lt;", "<");
+        address = address.replace("&gt;", ">");
+
+        tvDetails.setText(Html.fromHtml(address));
 
 
         Handler h = new Handler();

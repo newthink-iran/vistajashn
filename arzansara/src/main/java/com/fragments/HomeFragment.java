@@ -24,6 +24,7 @@ import com.models.DataNews;
 import com.models.Discount;
 import com.models.News;
 import com.models.Photo;
+import com.models.Setting;
 import com.models.Store;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.projects.arzansara.MainActivity;
@@ -110,9 +111,9 @@ public class HomeFragment extends Fragment implements OnItemClickListener, OnCli
         Queries q = main.getQueries();
         storeList = q.getStoresFeatured();
         newsList = q.getNews();
-        if(!storeList.isEmpty() || !newsList.isEmpty() )
-        createSlider();
-        showList();
+        //if(!storeList.isEmpty() || !newsList.isEmpty() )
+        //createSlider();
+        //showList();
 
         // end my edit //
 
@@ -206,6 +207,15 @@ public class HomeFragment extends Fragment implements OnItemClickListener, OnCli
 							q.insertDiscount(discount);
 						}
 						Log.e("HOME FRAGMENT LOG", "Discount count =" + data.getDiscounts().size());
+					}
+
+					if(data.getSettings() != null && data.getSettings().size() > 0) {
+
+						q.deleteTable("settings");
+						for(Setting setting : data.getSettings()) {
+							q.insertSettings(setting);
+						}
+						Log.e("HOME FRAGMENT LOG", "Discount count =" + data.getSettings().size());
 					}
 					
 					if(dataNews.getNews() != null && dataNews.getNews().size() > 0) {

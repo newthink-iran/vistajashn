@@ -6,6 +6,7 @@ import com.models.Discount;
 import com.models.Favorite;
 import com.models.News;
 import com.models.Photo;
+import com.models.Setting;
 import com.models.Store;
 
 import android.content.ContentValues;
@@ -70,6 +71,50 @@ public class Queries {
 
 		db.insert("discounts", null, values);
 		db.close();
+	}
+
+	public void insertSettings(Setting entry) {
+
+		db = dbHelper.getWritableDatabase();
+		ContentValues values = new ContentValues();
+		values.put("setting_id", entry.getSetting_id());
+		values.put("about1", entry.getAbout1());
+		values.put("about2", entry.getAbout2());
+		values.put("about3", entry.getAbout3());
+		values.put("about_img1", entry.getAbout_img1());
+		values.put("about_img2", entry.getAbout_img2());
+		values.put("about_img3", entry.getAbout_img3());
+
+		db.insert("settings", null, values);
+		db.close();
+	}
+
+	public ArrayList<Setting> getSettings() {
+
+		ArrayList<Setting> list = new ArrayList<Setting>();
+		db = dbHelper.getReadableDatabase();
+		Cursor mCursor = db.rawQuery("SELECT * FROM settings", null);
+		mCursor.moveToFirst();
+
+		if (!mCursor.isAfterLast()) {
+			do {
+
+				Setting setting = new Setting();
+				setting.setSetting_id(mCursor.getInt(mCursor.getColumnIndex("setting_id")));
+				setting.setAbout1(mCursor.getString(mCursor.getColumnIndex("about1")));
+				setting.setAbout2(mCursor.getString(mCursor.getColumnIndex("about2")));
+				setting.setAbout3(mCursor.getString(mCursor.getColumnIndex("about3")));
+				setting.setAbout_img1(mCursor.getString(mCursor.getColumnIndex("about_img1")));
+				setting.setAbout_img2(mCursor.getString(mCursor.getColumnIndex("about_img2")));
+				setting.setAbout_img3(mCursor.getString(mCursor.getColumnIndex("about_img3")));
+
+				list.add(setting);
+			} while (mCursor.moveToNext());
+		}
+		mCursor.close();
+		dbHelper.close();
+
+		return list;
 	}
 	
 	public void insertStore(Store entry) {

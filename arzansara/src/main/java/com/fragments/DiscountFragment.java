@@ -74,11 +74,13 @@ public class DiscountFragment extends Fragment implements OnItemClickListener, O
 			@Override
 			public boolean onKey(View v, int keyCode, KeyEvent event) {
 
-				if( keyCode == KeyEvent.KEYCODE_BACK ) {
+				if (keyCode == KeyEvent.KEYCODE_BACK) {
 					android.support.v4.app.FragmentManager fm = getFragmentManager();
-					if(fm.getBackStackEntryCount() > 0)
+					if (fm.getBackStackEntryCount() > 0){
 						getFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
-					return true;
+						return true;
+					}
+					return false;
 				} else {
 					return false;
 				}
@@ -160,8 +162,8 @@ public class DiscountFragment extends Fragment implements OnItemClickListener, O
 				Spanned name = Html.fromHtml(discount.getDiscount_title());
 				//Spanned address = Html.fromHtml(discount.getDiscount_content());
 				String address = discount.getDiscount_content();
-				address = address.replace("&amp;lt;", "<");
-				address = address.replace("&amp;gt;", ">");
+				address = address.replace("&lt;", "<");
+				address = address.replace("&gt;", ">");
 
 				Spanned discountValue = Html.fromHtml(String.valueOf(discount.getDiscount_val()));
 				
