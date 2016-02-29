@@ -11,6 +11,7 @@ import com.config.Config;
 import com.config.UIConfig;
 import com.dataparser.DataParser;
 import com.db.Queries;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fragments.activity.DetailActivity;
 import com.fragments.activity.NewsDetailActivity;
 import com.fragments.activity.NewsDetailActivity2;
@@ -58,6 +59,12 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.protocol.BasicHttpContext;
+import org.apache.http.protocol.HttpContext;
 
 public class HomeFragment extends Fragment implements OnItemClickListener, OnClickListener {
 	

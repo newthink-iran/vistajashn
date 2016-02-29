@@ -3,6 +3,7 @@ package com.fragments.activity;
 import java.util.ArrayList;
 import com.adapters.MGListAdapter;
 import com.adapters.MGListAdapter.OnMGListAdapterAdapterListener;
+import com.amplitude.api.Amplitude;
 import com.config.UIConfig;
 import com.db.DbHelper;
 import com.db.Queries;
@@ -122,6 +123,7 @@ public class StoreActivity extends SwipeRefreshActivity implements OnItemClickLi
 					@Override
 					public void onClick(View arg0) {
 						// TODO Auto-generated method stub
+						Amplitude.getInstance().logEvent(store.getStore_name());
 						Intent i = new Intent(StoreActivity.this, DetailActivity.class);
 						i.putExtra("store", store);
 						StoreActivity.this.startActivity(i);

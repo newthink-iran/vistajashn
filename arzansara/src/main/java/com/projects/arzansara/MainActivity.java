@@ -1,6 +1,9 @@
 package com.projects.arzansara;
 
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.URL;
+import java.net.URLConnection;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
@@ -12,6 +15,7 @@ import info.semsamot.actionbarrtlizer.RtlizeEverything;
 import twitter4j.auth.AccessToken;
 import com.adapters.MGListAdapter;
 import com.adapters.MGListAdapter.OnMGListAdapterAdapterListener;
+import com.amplitude.api.Amplitude;
 import com.config.Config;
 import com.config.UIConfig;
 import com.db.DbHelper;
@@ -53,8 +57,7 @@ import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 
-import com.parse.Parse;
-import com.parse.ParseInstallation;
+import com.onesignal.OneSignal;
 import com.projects.arzansara.R;
 import com.location.LocationHelper;
 import com.location.LocationHelper.OnLocationListener;
@@ -120,6 +123,9 @@ import java.lang.reflect.Field;
 import android.content.Context;
 import android.graphics.Typeface;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class MainActivity extends SwipeRefreshActivity implements LocationListener, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener  {
 
     private static boolean DrawerFlag = false;
@@ -160,9 +166,11 @@ public class MainActivity extends SwipeRefreshActivity implements LocationListen
         /*  if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1){
             getWindow().getDecorView().setLayoutDirection(View.LAYOUT_DIRECTION_RTL);
         }*/
-        /* elyas : parse notifications */
-        Parse.initialize(this,"fbKtzdL75vwh2WbcewIs43hzw5KrlbbfnmghsyCa", "2zHVLwdpq5wKikqQPAl50QWoglHgeq0R4iAJBlua");
-        ParseInstallation.getCurrentInstallation().saveInBackground();
+
+        Amplitude.getInstance().initialize(this, "cb4b1ef78f74bfec992fe6500fd21f4c").enableForegroundTracking(getApplication());
+
+        OneSignal.startInit(this).init();
+        //OneSignal.enableNotificationsWhenActive(true);
 
         super.onCreate(savedInstanceState);
         setDefaultFont(this, "DEFAULT", "BHoma.ttf");
@@ -1167,4 +1175,30 @@ public class MainActivity extends SwipeRefreshActivity implements LocationListen
             e.printStackTrace();
         }
     }
+
+    /*private class ExampleNotificationOpenedHandler implements OneSignal.NotificationOpenedHandler {
+        @Override
+        public void notificationOpened(String message, JSONObject additionalData, boolean isActive) {
+            String messageTitle = "پیام جدید", messageBody = message;
+
+            try {
+                if (additionalData != null) {
+                    if (additionalData.has("title"))
+                        messageTitle = additionalData.getString("title");
+                    if (additionalData.has("actionSelected"))
+                        messageBody += "\nPressed ButtonID: " + additionalData.getString("actionSelected");
+
+                    messageBody = message + "\n\n توضیحات تکمیلی :\n" + additionalData.toString();
+                }
+            } catch (JSONException e) {
+            }
+
+            new AlertDialog.Builder(MainActivity.this)
+                    .setTitle(messageTitle)
+                    .setMessage(messageBody)
+                    .setCancelable(true)
+                    .setPositiveButton("OK", null)
+                    .create().show();
+        }
+    }*/
 }

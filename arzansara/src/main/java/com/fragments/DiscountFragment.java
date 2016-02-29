@@ -21,6 +21,7 @@ import android.widget.TextView;
 
 import com.adapters.MGListAdapter;
 import com.adapters.MGListAdapter.OnMGListAdapterAdapterListener;
+import com.amplitude.api.Amplitude;
 import com.config.Config;
 import com.config.UIConfig;
 import com.db.Queries;
@@ -144,6 +145,7 @@ public class DiscountFragment extends Fragment implements OnItemClickListener, O
 					@Override
 					public void onClick(View arg0) {
 						// TODO Auto-generated method stub
+						Amplitude.getInstance().logEvent(discount.getDiscount_title());
 						Intent i = new Intent(getActivity(), DiscountsActivity.class);
 						i.putExtra("discount", discount);
 						getActivity().startActivity(i);

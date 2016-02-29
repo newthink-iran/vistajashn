@@ -22,7 +22,6 @@
     <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
     <uses-feature
@@ -118,13 +117,6 @@
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/app_id" />
 
-        <meta-data
-            android:name="com.parse.APPLICATION_ID"
-            android:value="fbKtzdL75vwh2WbcewIs43hzw5KrlbbfnmghsyCa" />
-        <meta-data
-            android:name="com.parse.CLIENT_KEY"
-            android:value="2zHVLwdpq5wKikqQPAl50QWoglHgeq0R4iAJBlua" />
-
         <!--
         <provider
             android:name="com.facebook.NativeAppCallContentProvider"
@@ -142,27 +134,6 @@
             android:label="@string/app_name" >
         </activity>
 
-        <service android:name="com.parse.PushService" />
-        <receiver android:name="com.fragments.activity.Receiver"
-            android:exported="false">
-            <intent-filter>
-                <action android:name="com.parse.push.intent.RECEIVE" />
-                <action android:name="com.parse.push.intent.DELETE" />
-                <action android:name="com.parse.push.intent.OPEN" />
-            </intent-filter>
-        </receiver>
-        <receiver android:name="com.parse.GcmBroadcastReceiver"
-            android:permission="com.google.android.c2dm.permission.SEND">
-            <intent-filter>
-                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
-                <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
-
-                <!--
-                  IMPORTANT: Change "com.parse.starter" to match your app's package name.
-                -->
-                <category android:name="com.projects.arzansara" />
-            </intent-filter>
-        </receiver>
 
     </application>
 

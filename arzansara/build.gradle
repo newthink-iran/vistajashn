@@ -5,6 +5,9 @@ android {
     buildToolsVersion "21.1.2"
 
     defaultConfig {
+        manifestPlaceholders = [manifestApplicationId: "${applicationId}",
+                                onesignal_app_id: "2f0edd02-4b5d-47da-8c66-5a11beaaeaee",
+                                onesignal_google_project_number: "576054748157"]
         applicationId "com.projects.arzansara"
         minSdkVersion 14
         targetSdkVersion 21
@@ -47,5 +50,6 @@ dependencies {
     //compile files('libs/bolts-tasks-1.3.0.jar')
     //compile files('libs/Parse-1.12.0.jar')
     //compile 'com.parse.bolts:bolts-android:1.+'
-    compile files('libs/Parse-1.7.1.jar')
+    compile 'com.onesignal:OneSignal:2.+@aar'
+    compile 'com.amplitude:android-sdk:2.5.0'
 }
