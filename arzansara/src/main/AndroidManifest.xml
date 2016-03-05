@@ -110,11 +110,6 @@
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
-        <activity
-            android:name="com.facebook.LoginActivity"
-            android:label="@string/app_name"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/app_id" />
@@ -125,11 +120,7 @@
             android:authorities="com.facebook.app.NativeAppCallContentProvider894251437257928"
             android:exported="true" /> -->
 
-        <receiver android:name="com.receiver.StoreFinderBroadcastReceiver" >
-            <intent-filter>
-                <action android:name="com.facebook.platform.AppCallResultBroadcast" />
-            </intent-filter>
-        </receiver>
+
 
         <activity
             android:name="com.fragments.activity.NewsDetailActivity2"

@@ -11,7 +11,6 @@ import org.apache.http.message.BasicNameValuePair;
 
 import info.semsamot.actionbarrtlizer.ActionBarRtlizer;
 import info.semsamot.actionbarrtlizer.RtlizeEverything;
-import twitter4j.auth.AccessToken;
 
 import com.asynctask.MGAsyncTask;
 import com.asynctask.MGAsyncTask.OnMGAsyncTaskListener;
@@ -20,15 +19,6 @@ import com.config.UIConfig;
 import com.dataparser.DataParser;
 import com.db.DbHelper;
 import com.db.Queries;
-import com.facebook.FacebookException;
-import com.facebook.FacebookOperationCanceledException;
-import com.facebook.LoggingBehavior;
-import com.facebook.Session;
-import com.facebook.SessionState;
-import com.facebook.Settings;
-import com.facebook.widget.FacebookDialog;
-import com.facebook.widget.WebDialog;
-import com.facebook.widget.WebDialog.OnCompleteListener;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -50,8 +40,6 @@ import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.projects.arzansara.MainActivity;
 import com.projects.arzansara.R;
 import com.refreshlayout.SwipeRefreshActivity;
-import com.social.twitter.TwitterApp;
-import com.social.twitter.TwitterApp.TwitterAppListener;
 import com.usersession.UserAccessSession;
 import com.usersession.UserSession;
 import com.utilities.MGUtilities;
@@ -100,8 +88,6 @@ public class NewsDetailActivity2 extends SwipeRefreshActivity implements OnClick
     private GoogleMap googleMap;
     private Queries q;
     private SQLiteDatabase db;
-    private Session.StatusCallback statusCallback;
-    private TwitterApp mTwitter;
     private boolean isPending = false;
     private Bundle savedInstanceState;
     private boolean isUserCanRate = false;
@@ -140,8 +126,6 @@ public class NewsDetailActivity2 extends SwipeRefreshActivity implements OnClick
 
 
         this.savedInstanceState = savedInstanceState;
-        statusCallback = new SessionStatusCallback();
-        mTwitter = new TwitterApp(this, twitterAppListener);
 
 
         showSwipeProgress();
@@ -385,140 +369,6 @@ public class NewsDetailActivity2 extends SwipeRefreshActivity implements OnClick
         startActivity(Intent.createChooser(sendIntent, getString(R.string.action_share)));
     }
 
-    private void shareFB() {
-
-        if(isLoggedInToFacebook()) {
-
-            Photo p = photoList != null && photoList.size() > 0 ? photoList.get(0) : null;
-
-            if (FacebookDialog.canPresentShareDialog(this,
-                    FacebookDialog.ShareDialogFeature.SHARE_DIALOG)) {
-                // Publish the post using the Share Dialog
-                FacebookDialog shareDialog = null;
-
-                if(p != null) {
-                    shareDialog =
-                            new FacebookDialog.ShareDialogBuilder(this)
-
-                                    .setLink(store.getWebsite())
-                                    .setPicture(p.getThumb_url())
-                                    .build();
-                }
-                else {
-
-                    shareDialog =
-                            new FacebookDialog.ShareDialogBuilder(this)
-
-                                    .setLink(store.getWebsite())
-                                    .build();
-                }
-
-                shareDialog.present();
-            } else {
-                // Fallback. For example, publish the post using the Feed Dialog
-                Bundle params = new Bundle();
-                params.putString("link", store.getWebsite());
-
-                if(p != null)
-                    params.putString("picture", p.getThumb_url());
-
-                WebDialog feedDialog = (
-                        new WebDialog.FeedDialogBuilder(this,
-                                Session.getActiveSession(),
-                                params))
-                        .setOnCompleteListener(new OnCompleteListener() {
-
-                            @Override
-                            public void onComplete(Bundle values,
-                                                   FacebookException error) {
-                                // TODO Auto-generated method stub
-
-                                if (error == null) {
-                                    // When the story is posted, echo the success
-                                    // and the post Id.
-                                    final String postId = values.getString("post_id");
-                                    if (postId != null) {
-                                        // publish successful
-
-                                    } else {
-                                        // User clicked the Cancel button
-                                        MGUtilities.showAlertView(
-                                                NewsDetailActivity2.this,
-                                                R.string.publish_error,
-                                                R.string.publish_cancelled);
-                                    }
-                                } else if (error instanceof FacebookOperationCanceledException) {
-                                    // User clicked the "x" button
-
-                                    MGUtilities.showAlertView(
-                                            NewsDetailActivity2.this,
-                                            R.string.publish_error,
-                                            R.string.publish_cancelled);
-                                } else {
-                                    MGUtilities.showAlertView(
-                                            NewsDetailActivity2.this,
-                                            R.string.network_error,
-                                            R.string.problems_encountered_facebook);
-                                }
-                            }
-
-                        })
-                        .build();
-                feedDialog.show();
-            }
-        }
-        else {
-            isPending = true;
-            loginToFacebook(savedInstanceState);
-        }
-    }
-
-
-    @SuppressLint("InflateParams")
-    private void postToTwitter() {
-
-        isPending = false;
-
-        LayoutInflater inflate = (LayoutInflater)
-                this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-
-        final View view = inflate.inflate(R.layout.twitter_dialog, null);
-
-        // create dialog
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setIcon(android.R.drawable.ic_dialog_info);
-        builder.setView(view);
-        builder.setTitle("Twitter Status");
-        builder.setCancelable(false);
-
-        final EditText txtStatus = (EditText) view.findViewById(R.id.txtStatus);
-        txtStatus.setText("");
-
-        // set dialog button
-        builder.setPositiveButton("Tweet!", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int id) {
-
-                String tweet = txtStatus.getText().toString().trim();
-
-                InputStream is = getImage();
-
-                if(is == null)
-                    mTwitter.updateStatus(tweet);
-                else
-                    mTwitter.updateStatusWithLogo(is, tweet);
-
-            }
-        })
-                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        dialog.cancel();
-                    }
-                });
-
-        // show dialog
-        AlertDialog alert = builder.create();
-        alert.show();
-    }
 
     public InputStream getImage() {
 
@@ -542,129 +392,26 @@ public class NewsDetailActivity2 extends SwipeRefreshActivity implements OnClick
     }
 
 
-
-
-
-
     // FACEBOOK
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        Session session = Session.getActiveSession();
-        Session.saveSession(session, outState);
     }
 
     @Override
     public void onStart()  {
         super.onStart();
-
-        if(Session.getActiveSession() != null)
-            Session.getActiveSession().addCallback(statusCallback);
     }
 
     @Override
     public void onStop() {
         super.onStop();
-
-        if(Session.getActiveSession() != null)
-            Session.getActiveSession().removeCallback(statusCallback);
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
-        Session.getActiveSession().onActivityResult(this, requestCode, resultCode, data);
     }
-
-    // ###############################################################################################
-    // FACEBOOK INTEGRATION METHODS
-    // ###############################################################################################
-    public void loginToFacebook(Bundle savedInstanceState) {
-        Settings.addLoggingBehavior(LoggingBehavior.INCLUDE_ACCESS_TOKENS);
-
-        Session session = Session.getActiveSession();
-
-        if (session == null) {
-
-            session = new Session(this);
-            Session.setActiveSession(session);
-        }
-
-        if (!session.isOpened() && session.isClosed()) {
-            session.openForRead(new Session.OpenRequest(this)
-                    .setPermissions(Arrays.asList("public_profile", "email"))
-                    .setCallback(statusCallback));
-        } else {
-            Session.openActiveSession(this, true, statusCallback);
-            updateView();
-        }
-    }
-
-    private void updateView() {
-        Session session = Session.getActiveSession();
-        if (session.isOpened()) {
-//	            URL_PREFIX_FRIENDS + session.getAccessToken();
-            isPending = false;
-            shareFB();
-        }
-    }
-
-
-    private class SessionStatusCallback implements Session.StatusCallback {
-        @Override
-        public void call(Session session, SessionState state, Exception exception) {
-            updateView();
-        }
-    }
-
-    // ###############################################################################################
-    // TWITTER INTEGRATION METHODS
-    // ###############################################################################################
-    public void loginToTwitter() {
-        if (mTwitter.hasAccessToken() == true) {
-            try {
-                postToTwitter();
-            }
-            catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-        else {
-
-            isPending = true;
-            mTwitter.loginToTwitter();
-        }
-    }
-
-    TwitterAppListener twitterAppListener = new TwitterAppListener() {
-
-        @Override
-        public void onError(String value)  {
-            // TODO Auto-generated method stub
-            Log.e("TWITTER ERROR**", value);
-        }
-
-        @Override
-        public void onComplete(AccessToken accessToken) {
-            // TODO Auto-generated method stub
-            NewsDetailActivity2.this.runOnUiThread(new Runnable() {
-
-                @Override
-                public void run() {
-                    // TODO Auto-generated method stub
-                    postToTwitter();
-                }
-            });
-        }
-    };
-
-    public boolean isLoggedInToFacebook() {
-        Session session = Session.getActiveSession();
-        return (session != null && session.isOpened());
-    }
-
-
 
 
 }
