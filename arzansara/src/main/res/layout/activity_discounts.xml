@@ -106,7 +106,7 @@
                 android:textStyle="bold"
                 android:layout_gravity="center"
                 android:gravity="right"
-                android:layout_marginTop="@dimen/com_facebook_loginview_padding_top"/>
+                android:layout_marginTop="10dp"/>
 
             <TextView
                 android:id="@+id/tvDetails2"

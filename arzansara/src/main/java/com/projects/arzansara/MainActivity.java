@@ -12,7 +12,6 @@ import java.util.Locale;
 
 import info.semsamot.actionbarrtlizer.ActionBarRtlizer;
 import info.semsamot.actionbarrtlizer.RtlizeEverything;
-import twitter4j.auth.AccessToken;
 import com.adapters.MGListAdapter;
 import com.adapters.MGListAdapter.OnMGListAdapterAdapterListener;
 import com.amplitude.api.Amplitude;
@@ -22,13 +21,6 @@ import com.config.UIConfig;
 import com.dataparser.DataParser;
 import com.db.DbHelper;
 import com.db.Queries;
-import com.facebook.LoggingBehavior;
-import com.facebook.Request;
-import com.facebook.Response;
-import com.facebook.Session;
-import com.facebook.SessionState;
-import com.facebook.Settings;
-import com.facebook.model.GraphUser;
 import com.fragments.AboutUsFragment;
 import com.fragments.AboutUsFragment1;
 import com.fragments.AboutUsFragment2;
@@ -77,9 +69,6 @@ import com.models.Menu.HeaderType;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.refreshlayout.SwipeRefreshActivity;
-import com.social.twitter.AlertDialogManager;
-import com.social.twitter.TwitterApp;
-import com.social.twitter.TwitterApp.TwitterAppListener;
 import com.usersession.UserAccessSession;
 import com.usersession.UserSession;
 
@@ -204,9 +193,7 @@ public class MainActivity extends SwipeRefreshActivity implements LocationListen
 		
 		imageLoader = ImageLoader.getInstance();
         imageLoader.init(ImageLoaderConfiguration.createDefault(getBaseContext()));
-        
-        statusCallback = new SessionStatusCallback();
-        mTwitter = new TwitterApp(this, twitterAppListener);
+
  
         mTitle = mDrawerTitle = "";
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -651,25 +638,14 @@ public class MainActivity extends SwipeRefreshActivity implements LocationListen
 	public static ImageLoader getImageLoader() {
 		return imageLoader;
 	}
-	
-	
-	OnSocialAuthenticationListener mCallback;
+
 	OnActivityResultListener mCallbackActivityResult;
-	private static TwitterApp mTwitter;
 	private AdView adView;
-	private Session.StatusCallback statusCallback;
-	
-	public static TwitterApp getTwitterAppInstance() {
-		
-		return mTwitter;
-	}
+
 	
 	@Override
     public void onStart()  {
         super.onStart();
-
-        if(Session.getActiveSession() != null)
-        	Session.getActiveSession().addCallback(statusCallback);
         
         mGoogleApiClient.connect();
     }
@@ -678,9 +654,6 @@ public class MainActivity extends SwipeRefreshActivity implements LocationListen
     public void onStop() {
         super.onStop();
         
-        if(Session.getActiveSession() != null)
-        	Session.getActiveSession().removeCallback(statusCallback);
-        
         // After disconnect() is called, the client is considered "dead".
         mGoogleApiClient.disconnect();
     }
@@ -688,116 +661,13 @@ public class MainActivity extends SwipeRefreshActivity implements LocationListen
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        
+
         if(mCallbackActivityResult != null) {
         	mCallbackActivityResult.onActivityResultCallback(this, requestCode, resultCode, data);
         }
-        else {
-        	Session.getActiveSession().onActivityResult(this, requestCode, resultCode, data);
-        }
     }
 
-    // ###############################################################################################
-  	// FACEBOOK INTEGRATION METHODS
-  	// ###############################################################################################
-     public void loginToFacebook(Bundle savedInstanceState) {
-     	Settings.addLoggingBehavior(LoggingBehavior.INCLUDE_ACCESS_TOKENS);
 
-     	Session session = Session.getActiveSession();
-     	
-     	if (session == null) {
-     
-     		session = new Session(this);
-            Session.setActiveSession(session);
-        }
-     	
-        if (!session.isOpened() && !session.isClosed()) {
-            session.openForRead(new Session.OpenRequest(this)
-                .setPermissions(Arrays.asList("public_profile", "email"))
-                .setCallback(statusCallback));
-        } else {
-            Session.openActiveSession(this, true, statusCallback);
-        }
-         
-         updateView();
-     }
-     
-     private void updateView() {
-         Session session = Session.getActiveSession();
-         if (session.isOpened()) {
-//           URL_PREFIX_FRIENDS + session.getAccessToken();
-         	getUsername(session);
-         	
-         } 
-         else {
-        	 session.openForRead(new Session.OpenRequest(this).setCallback(statusCallback));
-//         	onClickLogin();
-         }
-     }
-     
-//     private void onClickLogin() {
-//         Session session = Session.getActiveSession();
-//         if (!session.isOpened() && !session.isClosed()) {
-//             session.openForRead(new Session.OpenRequest(this).setCallback(statusCallback));
-//         } else  {
-//             Session.openActiveSession(this, true, Arrays.asList("user_likes", "user_status"), statusCallback);
-//         }
-//     }
-     
-     public void onClickLogout() {
-         Session session = Session.getActiveSession();
-         if (session != null && !session.isClosed()) {
-             session.closeAndClearTokenInformation();
-         }
-
-     }
-
-     private class SessionStatusCallback implements Session.StatusCallback {
-         
-    	 @Override
-         public void call(Session session, SessionState state, Exception exception) {
-             updateView();
-         }
-     }
-     
-     private void getUsername(final Session session) {
-     	Request request = Request.newMeRequest(session, 
-     	        new Request.GraphUserCallback() {
-     		
- 			@Override
- 			public void onCompleted(GraphUser user, Response response) {
- 				// If the response is successful
-     	        if (session == Session.getActiveSession()) {
-     	            if (user != null) {
-     	                // Set the id for the ProfilePictureView
-     	                // view that in turn displays the profile picture.
-     	            	Log.e("FACEBOOK USERNAME**", user.getName());
-     	            	Log.e("FACEBOOK ID**", user.getId());
-     	            	Log.e("FACEBOOK EMAIL**", ""+user.asMap().get("email"));
-     	            	
-     	            	if(mCallback != null) {
-     	            		mCallback.socialAuthenticationFacebookCompleted(
-     	            				MainActivity.this, 
-     	            				user, 
-     	            				response);
-     	            	}
-     	            		
-     	            	
-//     	            	facebookSession.storeAccessToken(session, user.getName());
-//     	            	grantApplication();
-     	            	
-     	            }
-     	        }
-     	        
-     	        if (response.getError() != null) {
-     	            // Handle errors, will do so later.
-     	        }
- 			}
-
-     	});
-     	request.executeAsync();
-     }
-     
      public void getDebugKey() {
  		try {
  	        PackageInfo info = getPackageManager().getPackageInfo(
@@ -817,70 +687,13 @@ public class MainActivity extends SwipeRefreshActivity implements LocationListen
  	    	e.printStackTrace();
  	    }
  	}
-     
-     
-    // ###############################################################################################
- 	// TWITTER INTEGRATION METHODS
- 	// ###############################################################################################
- 	public void loginToTwitter() {
- 		if (mTwitter.hasAccessToken() == true) {
- 			try {
-// 				grantApplication();
- 			} 
- 			catch (Exception e) {
- 				e.printStackTrace();
- 			}
- 		} 
- 		else {
- 			mTwitter.loginToTwitter();
- 		}
- 	}
- 	
- 	
- 	public TwitterApp getTwitterApp() {
- 		return mTwitter;
- 	}
- 	
- 	TwitterAppListener twitterAppListener = new TwitterAppListener() {
- 		
- 		@Override
- 		public void onError(String value)  {
- 			// TODO Auto-generated method stub
- 			Log.e("TWITTER ERROR**", value);
- 		}
- 		
- 		@Override
- 		public void onComplete(AccessToken accessToken) {
- 			// TODO Auto-generated method stub
-// 			grantApplication();
- 		}
- 	};
- 	
- 	public boolean isLoggedInToFacebook() {
- 	    Session session = Session.getActiveSession();
- 	    return (session != null && session.isOpened());
- 	}
- 	
- // LISTENERS
-  	public interface OnSocialAuthenticationListener {
-         public void socialAuthenticationFacebookCompleted(
-        		 Activity activity, GraphUser user, Response response);
-     }
- 	
- 	public void setOnSocialAuthenticationListener(OnSocialAuthenticationListener listener) {
- 		try {
-             mCallback = (OnSocialAuthenticationListener) listener;
-         } catch (ClassCastException e)  {
-             throw new ClassCastException(this.toString() + " must implement OnSocialAuthenticationListener");
-         }
- 	}
  	
  	
  	public interface OnActivityResultListener {
          public void onActivityResultCallback(
          		Activity activity, int requestCode, int resultCode, Intent data);
      }
- 	
+
  	public void setOnActivityResultListener(OnActivityResultListener listener) {
  		try {
  			mCallbackActivityResult = (OnActivityResultListener) listener;
@@ -1193,117 +1006,6 @@ public class MainActivity extends SwipeRefreshActivity implements LocationListen
         }
     }
 
-
-
-    public void getData() {
-
-        MGAsyncTask task;
-        task = new MGAsyncTask(this);
-        task.setMGAsyncTaskListener(new MGAsyncTask.OnMGAsyncTaskListener() {
-
-            @Override
-            public void onAsyncTaskProgressUpdate(MGAsyncTask asyncTask) { }
-
-            @Override
-            public void onAsyncTaskPreExecute(MGAsyncTask asyncTask) {
-
-                asyncTask.dialog.hide();
-            }
-
-            @Override
-            public void onAsyncTaskPostExecute(MGAsyncTask asyncTask) {
-                // TODO Auto-generated method stub
-                //MainActivity main = (MainActivity) getActivity();
-                //Queries q = main.getQueries();
-                //storeList = q.getStoresFeatured();
-                //newsList = q.getNews();
-
-                //createSlider();
-                //showList();
-
-
-            }
-
-            @Override
-            public void onAsyncTaskDoInBackground(MGAsyncTask asyncTask) {
-                // TODO Auto-generated method stub
-                try {
-                    DataParser parser = new DataParser();
-                    Data data = parser.getData(Config.DATA_JSON_URL);
-                    DataNews dataNews = parser.getDataNews(Config.DATA_NEWS_URL);
-
-                    //MainActivity main = (MainActivity) getActivity();
-
-                    //if(main == null)
-                    //    return;
-
-                    Queries q = getQueries();
-
-                    if(data == null)
-                        return;
-
-                    if(data.getCategories() != null && data.getCategories().size() > 0) {
-
-                        q.deleteTable("categories");
-                        for(Category cat : data.getCategories()) {
-                            q.insertCategory(cat);
-                        }
-                        Log.e("HOME FRAGMENT LOG", "Store count =" + data.getCategories().size());
-                    }
-
-                    if(data.getPhotos() != null && data.getPhotos().size() > 0) {
-
-                        q.deleteTable("photos");
-                        for(Photo photo : data.getPhotos()) {
-                            q.insertPhoto(photo);
-                        }
-                    }
-
-                    if(data.getStores() != null && data.getStores().size() > 0) {
-
-                        q.deleteTable("stores");
-                        for(Store store : data.getStores()) {
-                            q.insertStore(store);
-                        }
-                        Log.e("HOME FRAGMENT LOG", "Store count =" + data.getStores().size());
-                    }
-
-                    if(data.getDiscounts() != null && data.getDiscounts().size() > 0) {
-
-                        q.deleteTable("discounts");
-                        for(Discount discount : data.getDiscounts()) {
-                            q.insertDiscount(discount);
-                        }
-                        Log.e("HOME FRAGMENT LOG", "Discount count =" + data.getDiscounts().size());
-                    }
-
-                    if(data.getSettings() != null && data.getSettings().size() > 0) {
-
-                        q.deleteTable("settings");
-                        for(Setting setting : data.getSettings()) {
-                            q.insertSettings(setting);
-                        }
-                        Log.e("HOME FRAGMENT LOG", "Discount count =" + data.getSettings().size());
-                    }
-
-                    if(dataNews.getNews() != null && dataNews.getNews().size() > 0) {
-
-                        q.deleteTable("news");
-                        for(News news : dataNews.getNews()) {
-                            q.insertNews(news);
-                        }
-                        Log.e("HOME FRAGMENT LOG", "Store count =" + dataNews.getNews().size());
-                    }
-
-                }
-                catch(Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-        task.execute();
-
-    }
 
     private class ExampleNotificationOpenedHandler implements OneSignal.NotificationOpenedHandler {
         @Override

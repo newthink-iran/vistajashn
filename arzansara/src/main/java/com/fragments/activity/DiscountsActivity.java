@@ -29,15 +29,6 @@ import com.asynctask.MGAsyncTask;
 import com.config.UIConfig;
 import com.db.DbHelper;
 import com.db.Queries;
-import com.facebook.FacebookException;
-import com.facebook.FacebookOperationCanceledException;
-import com.facebook.LoggingBehavior;
-import com.facebook.Session;
-import com.facebook.SessionState;
-import com.facebook.Settings;
-import com.facebook.widget.FacebookDialog;
-import com.facebook.widget.WebDialog;
-import com.facebook.widget.WebDialog.OnCompleteListener;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.helpers.DateTimeHelper;
@@ -52,8 +43,6 @@ import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.projects.arzansara.MainActivity;
 import com.projects.arzansara.R;
 import com.refreshlayout.SwipeRefreshActivity;
-import com.social.twitter.TwitterApp;
-import com.social.twitter.TwitterApp.TwitterAppListener;
 import com.utilities.MGUtilities;
 
 import java.io.ByteArrayInputStream;
@@ -65,7 +54,6 @@ import java.util.Date;
 
 import info.semsamot.actionbarrtlizer.ActionBarRtlizer;
 import info.semsamot.actionbarrtlizer.RtlizeEverything;
-import twitter4j.auth.AccessToken;
 
 public class DiscountsActivity extends SwipeRefreshActivity implements OnClickListener {
 
@@ -79,9 +67,7 @@ public class DiscountsActivity extends SwipeRefreshActivity implements OnClickLi
     private SupportMapFragment mapFragment;
     private GoogleMap googleMap;
     private Queries q;
-    private SQLiteDatabase db;
-    private Session.StatusCallback statusCallback;
-    private TwitterApp mTwitter;
+    private SQLiteDatabase db;;
     private boolean isPending = false;
     private Bundle savedInstanceState;
     private boolean isUserCanRate = false;

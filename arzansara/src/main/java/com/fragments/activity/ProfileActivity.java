@@ -20,13 +20,11 @@ import org.apache.http.message.BasicNameValuePair;
 
 import info.semsamot.actionbarrtlizer.ActionBarRtlizer;
 import info.semsamot.actionbarrtlizer.RtlizeEverything;
-import twitter4j.auth.AccessToken;
 import com.asynctask.MGAsyncTask;
 import com.asynctask.MGAsyncTask.OnMGAsyncTaskListener;
 import com.config.Config;
 import com.config.UIConfig;
 import com.dataparser.DataParser;
-import com.facebook.Session;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -37,8 +35,6 @@ import com.models.User;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.projects.arzansara.MainActivity;
 import com.projects.arzansara.R;
-import com.social.twitter.TwitterApp;
-import com.social.twitter.TwitterApp.TwitterAppListener;
 import com.usersession.UserAccessSession;
 import com.usersession.UserSession;
 import com.utilities.MGUtilities;
@@ -539,30 +535,6 @@ public class ProfileActivity extends FragmentActivity implements OnClickListener
 		UserAccessSession accessSession = UserAccessSession.getInstance(this);
 		if(accessSession != null)
 			accessSession.clearUserSession();
-		
-		Session session = Session.getActiveSession();
-        if (session != null) { // not logged in
-        	session.closeAndClearTokenInformation();
-        }
-        
-        TwitterApp mTwitter = new TwitterApp(this, new TwitterAppListener() {
-			
-			@Override
-			public void onError(String value) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			@Override
-			public void onComplete(AccessToken accessToken) {
-				// TODO Auto-generated method stub
-				
-			}
-		});
-        
-        
-        if(mTwitter.isLoggedInTwitter())
-        	mTwitter.resetAccessToken();
         
         finish();
 	}

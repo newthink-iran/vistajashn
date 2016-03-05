@@ -107,7 +107,7 @@
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:layout_gravity="right"
                 android:gravity="right"
-                android:layout_marginTop="@dimen/com_facebook_loginview_padding_top"/>
+                android:layout_marginTop="10dp"/>
 
             <LinearLayout
                 android:layout_width="wrap_content"
