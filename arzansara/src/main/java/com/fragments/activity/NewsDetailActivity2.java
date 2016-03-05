@@ -225,18 +225,18 @@ public class NewsDetailActivity2 extends SwipeRefreshActivity implements OnClick
 //        TextView tvGalleryCount = (TextView) findViewById(R.id.tvGalleryCount2);
 //
 //
-        Button contBtn = (Button) findViewById(R.id.cont);
+        ImageView contBtn = (ImageView) findViewById(R.id.cont);
         contBtn.setOnClickListener(this);
 
-        Button buttonFavorite = (Button) findViewById(R.id.ButtonFavorite);
+        /*ImageView buttonFavorite = (ImageView) findViewById(R.id.ButtonFavorite);
         buttonFavorite.setOnClickListener(this);
         Favorite fave = q.getFavoriteByStoreId(news.getNews_id());
         if(fave != null)
-            buttonFavorite.setText("حذف از علاقه مندی ها");
+            buttonFavorite.setImageResource(R.drawable.button_call);
         else
-            buttonFavorite.setText("افزودن به علاقه مندی ها");
+            buttonFavorite.setImageResource(R.drawable.button_fav);*/
 
-        Button comments = (Button) findViewById(R.id.comments);
+        ImageView comments = (ImageView) findViewById(R.id.comments);
         comments.setOnClickListener(this);
 
         TextView tvDetails = (TextView) findViewById(R.id.tvDetails2);
@@ -323,9 +323,9 @@ public class NewsDetailActivity2 extends SwipeRefreshActivity implements OnClick
                 website();
                 break;
 
-            case R.id.ButtonFavorite:
+            /*case R.id.ButtonFavorite:
                 checkFave(v);
-                break;
+                break;*/
 
             case R.id.comments:
                 Intent i = new Intent(this, ReviewActivity.class);

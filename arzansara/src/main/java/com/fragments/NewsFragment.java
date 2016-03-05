@@ -6,6 +6,7 @@ import java.util.Locale;
 
 import com.adapters.MGListAdapter;
 import com.adapters.MGListAdapter.OnMGListAdapterAdapterListener;
+import com.amplitude.api.Amplitude;
 import com.config.Config;
 import com.config.UIConfig;
 import com.db.Queries;
@@ -159,8 +160,12 @@ public class NewsFragment extends Fragment implements OnItemClickListener, OnCli
 				TextView tvTitle = (TextView) v.findViewById(R.id.tvTitle);
 				tvTitle.setText(name);
 				
-				TextView tvSubtitle = (TextView) v.findViewById(R.id.tvSubtitle);
-				tvSubtitle.setText(Html.fromHtml(address));
+				//TextView tvSubtitle = (TextView) v.findViewById(R.id.tvSubtitle);
+				//tvSubtitle.setText(Html.fromHtml(address));
+
+				TextView tvViewCount = (TextView) v.findViewById(R.id.tvViewCount);
+				tvViewCount.setText("تعداد بازدید: " + String.valueOf(news.getViewCount()));
+
 
 				/* elyas : farsi date */
 
@@ -169,7 +174,7 @@ public class NewsFragment extends Fragment implements OnItemClickListener, OnCli
 
 				//String date = DateTimeHelper.getStringDateFromTimeStamp(news.getCreated_at(), "MM/dd/yyyy" );
 				TextView tvDate = (TextView) v.findViewById(R.id.tvDate);
-				tvDate.setText(date);
+				tvDate.setText("تاریخ: " + date);
 			}
 		});
 		listView.setAdapter(adapter);
@@ -192,6 +197,7 @@ public class NewsFragment extends Fragment implements OnItemClickListener, OnCli
 		
 		//Intent i = new Intent(getActivity(), NewsDetailActivity.class);
 		Intent i = new Intent(getActivity(), NewsDetailActivity2.class);
+		Amplitude.getInstance().logEvent(news.getNews_title());
 		i.putExtra("news", news);
 		getActivity().startActivity(i);
 	}

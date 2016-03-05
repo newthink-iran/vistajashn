@@ -8,12 +8,15 @@ import android.app.FragmentManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.Html;
+import android.text.Spanned;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 public class AboutUsFragment extends Fragment implements OnClickListener{
 	
@@ -46,7 +49,7 @@ public class AboutUsFragment extends Fragment implements OnClickListener{
 
 				if (keyCode == KeyEvent.KEYCODE_BACK) {
 					android.support.v4.app.FragmentManager fm = getFragmentManager();
-					if (fm.getBackStackEntryCount() > 0){
+					if (fm.getBackStackEntryCount() > 0) {
 						getFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
 						return true;
 					}
@@ -56,8 +59,12 @@ public class AboutUsFragment extends Fragment implements OnClickListener{
 				}
 			}
 		});
+
+		TextView tv2 = (TextView) viewInflate.findViewById(R.id.textView2);
+		String str = MGUtilities.getStringFromResource(getActivity(), R.string.about_us_detail);
+		tv2.setText(str);
 		
-		Button btnContactUs = (Button) viewInflate.findViewById(R.id.btnContactUs);
+		/*Button btnContactUs = (Button) viewInflate.findViewById(R.id.btnContactUs);
 		btnContactUs.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -65,7 +72,7 @@ public class AboutUsFragment extends Fragment implements OnClickListener{
 				// TODO Auto-generated method stub
 				email();
 			}
-		});
+		});*/
 	}
 
 	@Override

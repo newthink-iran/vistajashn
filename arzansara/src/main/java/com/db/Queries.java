@@ -49,6 +49,7 @@ public class Queries {
 		values.put("is_deleted", entry.getIs_deleted());
 		values.put("news_id", entry.getNews_id());
 		values.put("updated_at", entry.getUpdated_at());
+		values.put("viewCount", entry.getViewCount());
 
 		db.insert("news", null, values);
 		db.close();
@@ -68,6 +69,7 @@ public class Queries {
 		values.put("is_deleted", entry.getIs_deleted());
 		values.put("discount_val", entry.getDiscount_val());
 		values.put("exp_date", entry.getExp_date());
+		values.put("viewCount", entry.getViewCount());
 
 		db.insert("discounts", null, values);
 		db.close();
@@ -257,13 +259,14 @@ public class Queries {
 				
 				News news = new News();
 				news.setCreated_at( mCursor.getInt( mCursor.getColumnIndex("created_at")) );
-				news.setIs_deleted( mCursor.getInt( mCursor.getColumnIndex("is_deleted")) );
-				news.setNews_content( mCursor.getString( mCursor.getColumnIndex("news_content")) );
-				news.setNews_id( mCursor.getInt( mCursor.getColumnIndex("news_id")) );
-				news.setNews_title( mCursor.getString( mCursor.getColumnIndex("news_title")) );
-				news.setNews_url( mCursor.getString( mCursor.getColumnIndex("news_url")) );
-				news.setPhoto_url( mCursor.getString( mCursor.getColumnIndex("photo_url")) );
+				news.setIs_deleted(mCursor.getInt(mCursor.getColumnIndex("is_deleted")));
+				news.setNews_content(mCursor.getString(mCursor.getColumnIndex("news_content")));
+				news.setNews_id(mCursor.getInt(mCursor.getColumnIndex("news_id")));
+				news.setNews_title(mCursor.getString(mCursor.getColumnIndex("news_title")));
+				news.setNews_url(mCursor.getString(mCursor.getColumnIndex("news_url")));
+				news.setPhoto_url(mCursor.getString(mCursor.getColumnIndex("photo_url")));
 				news.setUpdated_at(mCursor.getInt(mCursor.getColumnIndex("updated_at")));
+				news.setViewCount(mCursor.getInt(mCursor.getColumnIndex("viewCount")));
 				
 				list.add(news);
 			} while (mCursor.moveToNext());
@@ -298,7 +301,8 @@ public class Queries {
 				discount.setIs_deleted(mCursor.getInt(mCursor.getColumnIndex("is_deleted")));
 				discount.setDiscount_val(mCursor.getInt(mCursor.getColumnIndex("discount_val")));
 				discount.setExp_date(mCursor.getInt(mCursor.getColumnIndex("exp_date")));
-				Log.d("alaki", "psdasdk");
+				discount.setViewCount(mCursor.getInt(mCursor.getColumnIndex("viewCount")));
+
 				list.add(discount);
 			} while (mCursor.moveToNext());
 		}
@@ -330,6 +334,7 @@ public class Queries {
 				news.setNews_url(mCursor.getString(mCursor.getColumnIndex("news_url")));
 				news.setPhoto_url(mCursor.getString(mCursor.getColumnIndex("photo_url")));
 				news.setUpdated_at(mCursor.getInt(mCursor.getColumnIndex("updated_at")));
+				news.setViewCount(mCursor.getInt(mCursor.getColumnIndex("viewCount")));
 				
 			} while (mCursor.moveToNext());
 		}
@@ -364,6 +369,7 @@ public class Queries {
 				discount.setIs_deleted(mCursor.getInt(mCursor.getColumnIndex("is_deleted")));
 				discount.setDiscount_val(mCursor.getInt(mCursor.getColumnIndex("discount_val")));
 				discount.setExp_date(mCursor.getInt(mCursor.getColumnIndex("exp_date")));
+				discount.setViewCount(mCursor.getInt(mCursor.getColumnIndex("viewCount")));
 
 			} while (mCursor.moveToNext());
 		}
@@ -758,6 +764,7 @@ public class Queries {
 				entry.setIs_deleted(mCursor.getInt(mCursor.getColumnIndex("is_deleted")));
 				entry.setDiscount_val(mCursor.getInt(mCursor.getColumnIndex("discount_val")));
 				entry.setExp_date(mCursor.getInt(mCursor.getColumnIndex("exp_date")));
+				entry.setViewCount(mCursor.getInt(mCursor.getColumnIndex("viewCount")));
 
 				list.add(entry);
 			} while (mCursor.moveToNext());

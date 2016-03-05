@@ -17,10 +17,10 @@
 
     	        <ImageView
     	            android:id="@+id/imageView2"
-    	            android:layout_width="match_parent"
-    	            android:layout_height="wrap_content"
+					android:layout_width="match_parent"
+					android:layout_height="250dp"
     	            android:scaleType="centerCrop"
-    	            android:src="@drawable/bg_header_aboutus_large" />
+    	            android:src="@drawable/bg_header_aboutus" />
 
     	        <ImageView
     	            android:id="@+id/imageView3"
@@ -44,7 +44,8 @@
                     android:layout_gravity="right"
                     android:gravity="right">
 
-    	            <TextView
+    	            <!--
+					<TextView
     	                android:id="@+id/textView1"
     	                android:layout_width="wrap_content"
     	                android:layout_height="wrap_content"
@@ -53,19 +54,31 @@
     	                android:textStyle="bold"
                         android:layout_gravity="right"
                         android:gravity="right"/>
+					-->
 
-    	            <TextView
+					<TextView
+						android:id="@+id/textView2"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:layout_gravity="center"
+						android:gravity="center"
+						android:layout_marginTop="@dimen/dimen_20dp"
+						android:text="@string/about_us_detail"
+						android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    	        </LinearLayout>
+
+    	        <!--
+				<Button <TextView
     	                android:id="@+id/textView2"
     	                android:layout_width="wrap_content"
     	                android:layout_height="wrap_content"
-                        android:layout_gravity="right"
+                        android:layout_gravity="center"
                         android:gravity="right"
-    	                android:layout_marginTop="@dimen/dimen_10dp"
+						android:textStyle="bold"
+    	                android:layout_marginTop="@dimen/dimen_20dp"
     	                android:text="@string/about_us_detail"
-    	                android:textAppearance="?android:attr/textAppearanceMedium" />
-    	        </LinearLayout>
-
-    	        <Button
+    	                android:textAppearance="?android:attr/textAppearanceLarge" />
     	            android:id="@+id/btnContactUs"
     	            android:layout_width="match_parent"
     	            android:layout_height="66dp"
@@ -75,6 +88,7 @@
     	            android:textColor="@color/text_white_cloor"
     	            android:textSize="@dimen/text_size_24sp"
     	            android:textStyle="bold" />
+    	            -->
 
     	    </LinearLayout>
 

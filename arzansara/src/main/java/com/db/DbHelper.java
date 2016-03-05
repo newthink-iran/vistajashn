@@ -92,7 +92,8 @@ public class DbHelper extends SQLiteOpenHelper {
 	    		+ "news_url TEXT,"
 	    		+ "photo_url TEXT,"
 	    		+ "is_deleted INTEGER, "
-	    		+ "updated_at INTEGER"
+	    		+ "updated_at INTEGER,"
+				+ "viewCount INTEGER"
 	    		+ ");");
 	    
 	    
@@ -112,7 +113,8 @@ public class DbHelper extends SQLiteOpenHelper {
 				+ "is_deleted INTEGER, "
 				+ "updated_at INTEGER, "
 				+ "exp_date INTEGER, "
-				+ "discount_val INTEGER "
+				+ "discount_val INTEGER, "
+				+ "viewCount INTEGER "
 				+ ");");
 
 		db.execSQL("CREATE TABLE IF NOT EXISTS settings("
@@ -136,7 +138,6 @@ public class DbHelper extends SQLiteOpenHelper {
 		db.execSQL("DROP TABLE IF EXISTS ratings");
 		db.execSQL("DROP TABLE IF EXISTS photos");
 		db.execSQL("DROP TABLE IF EXISTS news");
-		db.execSQL("DROP TABLE IF EXISTS favorites");
 		db.execSQL("DROP TABLE IF EXISTS discounts");
 		db.execSQL("DROP TABLE IF EXISTS settings");
 	}

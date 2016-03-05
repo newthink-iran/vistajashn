@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_id">894251478257928</string>
+    <string name="app_id">894251476357928</string>
     <string name="IO_Exception_getFromLocation">خطای ورودی/خروجی در  Geocoder.getFromLocation()</string>
     <string name="no_name"></string>
-    <string name="app_name">ارزان سرا</string>
+    <string name="app_name">فروشگاه عدالت</string>
     <string name="action_settings">تنظیمات</string>
     <string name="hello_world">سلام دنیا!</string>
     <string name="no_results_found">هیچ نتیجه ای پیدا نشد.</string>
@@ -87,16 +87,14 @@
     <string name="share">Share</string>
     <string name="placeholder_review">نظر شما</string>
     <string name="chars_left">کاراکتر باقی مانده است</string>
-    <string name="about_us_detail">"گروه مهندسی ویستا پرداز نواندیش \n شماره تماس: 33517735-031"</string>
-    <string name="about_us_detail_1">ارزانسرای رضوی در سال 1392 در مساحتی حدود 700متر با هدف دسترسی اسان و ارزان همشهریان گرامی به مایحتاج خود افتتاح گردید.\n به همینی بامنظور با استفاده از جدید ترین دانش روز و به کارگیری کارمندان آشنا به امور مشتری مداری اقدام به چیدمان حرفه ایی محصولات نموده ایم.\n فروشگاه مواد غذایی رضوی  با بهره گیر از مدیریتی با تجربه سعی بر آن داشته تا بتواند مرغوبترین کالاها را با نازل ترین قیمت و در حداقل زمان در اختیار مشتریان خود قرار دهد \n همچنین در جهت سلامت همشهریان عزیز اقدام به تهیه و توزیع برترین محصولات از لحاظ کیفی نموده ایم.\n امید است این اقدامات مورد رضایت حق تعالی و مردم شریف شهرستان واقع گردد.\n ساعات کار:\n همه روزه  صبح از ساعت 8 الی 10 شب    (حتی روزهای تعطیل)
-
-</string>
+    <string name="about_us_detail">گروه مهندسی کامپیوتر ویستا پرداز نواندیش \n\n مشاوره - نیازسنجی - طراحی - اجرا - نگهداری \n\n آدرس: اصفهان، خمینی شهر، بلوار طالقانی، مجتمع عرشیا، طبقه دوم \n\n تلفن: 33517735 - 031</string>
+    <string name="about_us_detail_1"></string>
     <string name="about_us_detail_2">"توضیحات لازم"</string>
     <string name="about_us_detail_3">"توضیحات لازم"</string>
 
     <string name="contact_us">تماس با ما</string>
     <string name="terms_and_conditions">ایده، طراحی و اجرا</string>
-    <string name="terms_and_conditions_details">مشاوره، نیازسنجی، طراحی و پیاده سازی سیستم های نوین بازاریابی ومبتنی بر فناوری اطلاعات\n\n\n---------------------------------------------------\nدفتر تهران: شرکت مبتکران نوین آویژه\n---------------------------------------------------\n\nآدرس: تهران، میدان هفت تیر، خیابان قائم مقام فراهانی،\nکوچه بهادری، پلاک 2، واحد 7\n\nتلفن: 021-88843022\n\nوبسایت: www.novinavijeh.com\n\nنمابر: 021-89789169\n\nایمیل: onfo@novinavijeh.com\n\n\n---------------------------------------------------\nدفتر اصفهان: شرکت داده گستر خط روشن\n---------------------------------------------------\n\nآدرس: اصفهان،بلوار دانشگاه صنعتی اصفهان، شهرک علمی و تحقیقاتی اصفهان/nساختمان فن آفرینی 2، واحد شماره 122\n\nتلفن: 031-33932087\n\nکد پستی: 84156-83163\n\nنمابر: 021-89783042\n\nایمیل: info@khateroshan.com</string>
+    <string name="terms_and_conditions_details"></string>
     <string name="logout">خروج</string>
     <string name="text_empty">-------</string>
     <string name="email_subject_company">استعلام از ویستا جشن</string>
@@ -142,5 +140,6 @@
     <string name="empty_mobile_error">فیلد موبایل خالی است.</string>
     <string name="empty_mobile_details">لطفا شماره موبایل خود را وارد نمایید</string>
     <string name="discounts">تخفیفات</string>
+    <string name="taTarikh">تاریخ:</string>
 
 </resources>

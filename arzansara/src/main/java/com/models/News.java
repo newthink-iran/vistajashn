@@ -19,6 +19,7 @@ public class News implements Serializable{
 	int news_id;
 	int updated_at;
 	int is_deleted;
+	int viewCount;
 
 	public void setNews_content(String news_content) {
 		this.news_content = news_content;
@@ -85,5 +86,13 @@ public class News implements Serializable{
 	
 	public int getIs_deleted() {
 		return is_deleted;
+	}
+
+	public void setViewCount(int viewCount) {
+		this.viewCount = viewCount;
+	}
+
+	public int getViewCount() {
+		return viewCount;
 	}
 }

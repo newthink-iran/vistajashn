@@ -22,7 +22,7 @@ public class Discount implements Serializable{
     int is_deleted;
     int discount_val;
     int exp_date;
-
+    int viewCount;
 
     public void setDiscount_content(String discount_content) {
         this.discount_content = discount_content;
@@ -105,5 +105,13 @@ public class Discount implements Serializable{
 
     public int getExp_date() {
         return exp_date;
+    }
+
+    public void setViewCount(int viewCount) {
+        this.viewCount = viewCount;
+    }
+
+    public int getViewCount() {
+        return viewCount;
     }
 }

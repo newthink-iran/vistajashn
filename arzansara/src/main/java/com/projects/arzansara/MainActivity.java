@@ -16,8 +16,10 @@ import twitter4j.auth.AccessToken;
 import com.adapters.MGListAdapter;
 import com.adapters.MGListAdapter.OnMGListAdapterAdapterListener;
 import com.amplitude.api.Amplitude;
+import com.asynctask.MGAsyncTask;
 import com.config.Config;
 import com.config.UIConfig;
+import com.dataparser.DataParser;
 import com.db.DbHelper;
 import com.db.Queries;
 import com.facebook.LoggingBehavior;
@@ -57,6 +59,14 @@ import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 
+import com.models.Category;
+import com.models.Data;
+import com.models.DataNews;
+import com.models.Discount;
+import com.models.News;
+import com.models.Photo;
+import com.models.Setting;
+import com.models.Store;
 import com.onesignal.OneSignal;
 import com.projects.arzansara.R;
 import com.location.LocationHelper;
@@ -129,6 +139,7 @@ import org.json.JSONObject;
 public class MainActivity extends SwipeRefreshActivity implements LocationListener, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener  {
 
     private static boolean DrawerFlag = false;
+    public static boolean IsFirst = true;
 	private DrawerLayout mDrawerLayout;
     private ListView mDrawerList;
     private ActionBarDrawerToggle mDrawerToggle;
@@ -169,7 +180,11 @@ public class MainActivity extends SwipeRefreshActivity implements LocationListen
 
         Amplitude.getInstance().initialize(this, "cb4b1ef78f74bfec992fe6500fd21f4c").enableForegroundTracking(getApplication());
 
-        OneSignal.startInit(this).init();
+        //OneSignal.enableNotificationsWhenActive(true);
+
+        OneSignal.startInit(this)
+                .setNotificationOpenedHandler(new ExampleNotificationOpenedHandler())
+                .init();
         //OneSignal.enableNotificationsWhenActive(true);
 
         super.onCreate(savedInstanceState);
@@ -200,6 +215,8 @@ public class MainActivity extends SwipeRefreshActivity implements LocationListen
         mDrawerList.setOnItemClickListener(new SlideMenuClickListener());
  
         updateMenuList();
+
+        IsFirst = true;
         
         // enabling action bar app icon and behaving it as toggle button
         getActionBar().setDisplayHomeAsUpEnabled(true);
@@ -303,7 +320,7 @@ public class MainActivity extends SwipeRefreshActivity implements LocationListen
     public void showMainView() {
     	getActionBar().show();
     	displayView(0);
-    	showAds();
+    	//showAds();
     }
  
     
@@ -650,7 +667,7 @@ public class MainActivity extends SwipeRefreshActivity implements LocationListen
 	@Override
     public void onStart()  {
         super.onStart();
-        
+
         if(Session.getActiveSession() != null)
         	Session.getActiveSession().addCallback(statusCallback);
         
@@ -1150,7 +1167,7 @@ public class MainActivity extends SwipeRefreshActivity implements LocationListen
 		// TODO Auto-generated method stub
 		mLocationRequest = LocationRequest.create();
         mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
-        mLocationRequest.setInterval(1000); // Update location every second
+        mLocationRequest.setInterval(100000); // Update location every second elyas!!!! ziadesh kardam
 
         LocationServices.FusedLocationApi.requestLocationUpdates(
                 mGoogleApiClient, mLocationRequest, this);
@@ -1176,29 +1193,141 @@ public class MainActivity extends SwipeRefreshActivity implements LocationListen
         }
     }
 
-    /*private class ExampleNotificationOpenedHandler implements OneSignal.NotificationOpenedHandler {
-        @Override
-        public void notificationOpened(String message, JSONObject additionalData, boolean isActive) {
-            String messageTitle = "پیام جدید", messageBody = message;
 
-            try {
-                if (additionalData != null) {
-                    if (additionalData.has("title"))
-                        messageTitle = additionalData.getString("title");
-                    if (additionalData.has("actionSelected"))
-                        messageBody += "\nPressed ButtonID: " + additionalData.getString("actionSelected");
 
-                    messageBody = message + "\n\n توضیحات تکمیلی :\n" + additionalData.toString();
-                }
-            } catch (JSONException e) {
+    public void getData() {
+
+        MGAsyncTask task;
+        task = new MGAsyncTask(this);
+        task.setMGAsyncTaskListener(new MGAsyncTask.OnMGAsyncTaskListener() {
+
+            @Override
+            public void onAsyncTaskProgressUpdate(MGAsyncTask asyncTask) { }
+
+            @Override
+            public void onAsyncTaskPreExecute(MGAsyncTask asyncTask) {
+
+                asyncTask.dialog.hide();
             }
 
-            new AlertDialog.Builder(MainActivity.this)
-                    .setTitle(messageTitle)
-                    .setMessage(messageBody)
+            @Override
+            public void onAsyncTaskPostExecute(MGAsyncTask asyncTask) {
+                // TODO Auto-generated method stub
+                //MainActivity main = (MainActivity) getActivity();
+                //Queries q = main.getQueries();
+                //storeList = q.getStoresFeatured();
+                //newsList = q.getNews();
+
+                //createSlider();
+                //showList();
+
+
+            }
+
+            @Override
+            public void onAsyncTaskDoInBackground(MGAsyncTask asyncTask) {
+                // TODO Auto-generated method stub
+                try {
+                    DataParser parser = new DataParser();
+                    Data data = parser.getData(Config.DATA_JSON_URL);
+                    DataNews dataNews = parser.getDataNews(Config.DATA_NEWS_URL);
+
+                    //MainActivity main = (MainActivity) getActivity();
+
+                    //if(main == null)
+                    //    return;
+
+                    Queries q = getQueries();
+
+                    if(data == null)
+                        return;
+
+                    if(data.getCategories() != null && data.getCategories().size() > 0) {
+
+                        q.deleteTable("categories");
+                        for(Category cat : data.getCategories()) {
+                            q.insertCategory(cat);
+                        }
+                        Log.e("HOME FRAGMENT LOG", "Store count =" + data.getCategories().size());
+                    }
+
+                    if(data.getPhotos() != null && data.getPhotos().size() > 0) {
+
+                        q.deleteTable("photos");
+                        for(Photo photo : data.getPhotos()) {
+                            q.insertPhoto(photo);
+                        }
+                    }
+
+                    if(data.getStores() != null && data.getStores().size() > 0) {
+
+                        q.deleteTable("stores");
+                        for(Store store : data.getStores()) {
+                            q.insertStore(store);
+                        }
+                        Log.e("HOME FRAGMENT LOG", "Store count =" + data.getStores().size());
+                    }
+
+                    if(data.getDiscounts() != null && data.getDiscounts().size() > 0) {
+
+                        q.deleteTable("discounts");
+                        for(Discount discount : data.getDiscounts()) {
+                            q.insertDiscount(discount);
+                        }
+                        Log.e("HOME FRAGMENT LOG", "Discount count =" + data.getDiscounts().size());
+                    }
+
+                    if(data.getSettings() != null && data.getSettings().size() > 0) {
+
+                        q.deleteTable("settings");
+                        for(Setting setting : data.getSettings()) {
+                            q.insertSettings(setting);
+                        }
+                        Log.e("HOME FRAGMENT LOG", "Discount count =" + data.getSettings().size());
+                    }
+
+                    if(dataNews.getNews() != null && dataNews.getNews().size() > 0) {
+
+                        q.deleteTable("news");
+                        for(News news : dataNews.getNews()) {
+                            q.insertNews(news);
+                        }
+                        Log.e("HOME FRAGMENT LOG", "Store count =" + dataNews.getNews().size());
+                    }
+
+                }
+                catch(Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        task.execute();
+
+    }
+
+    private class ExampleNotificationOpenedHandler implements OneSignal.NotificationOpenedHandler {
+        @Override
+        public void notificationOpened(String message, JSONObject additionalData, boolean isActive) {
+            //String messageTitle = "پیام جدید", messageBody = message;
+            //displayView(0);
+           /* try {
+                if (additionalData != null) {
+                    //if (additionalData.getString("type").equals("news"))
+                        //displayView(1);
+
+                    //else if (additionalData.getString("type").equals("discount"))
+                       //displayView(2);
+
+                }
+            } catch (JSONException e) {
+            }*/
+
+            /*new AlertDialog.Builder(MainActivity.this)
+                    .setTitle("salam")
+                    .setMessage("salam")
                     .setCancelable(true)
                     .setPositiveButton("OK", null)
-                    .create().show();
+                    .create().show();*/
         }
-    }*/
+    }
 }

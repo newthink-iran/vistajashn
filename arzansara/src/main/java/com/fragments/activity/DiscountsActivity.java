@@ -61,6 +61,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 
 import info.semsamot.actionbarrtlizer.ActionBarRtlizer;
 import info.semsamot.actionbarrtlizer.RtlizeEverything;
@@ -202,16 +203,16 @@ public class DiscountsActivity extends SwipeRefreshActivity implements OnClickLi
 //        TextView tvGalleryCount = (TextView) findViewById(R.id.tvGalleryCount2);
 //
 //
-        Button contBtn = (Button) findViewById(R.id.cont);
+        ImageView contBtn = (ImageView) findViewById(R.id.cont);
         contBtn.setOnClickListener(this);
 
-        Button buttonFavorite = (Button) findViewById(R.id.ButtonFavorite);
+        ImageView buttonFavorite = (ImageView) findViewById(R.id.ButtonFavorite);
         buttonFavorite.setOnClickListener(this);
         Favorite fave = q.getFavoriteByStoreId(discount.getDiscount_id());
         if (fave != null)
-            buttonFavorite.setText("حذف از علاقه مندی ها");
+            buttonFavorite.setImageResource(R.drawable.button_call);
         else
-            buttonFavorite.setText("افزودن به علاقه مندی ها");
+            buttonFavorite.setImageResource(R.drawable.button_fav);
 
         /*Button comments = (Button) findViewById(R.id.comments);
         comments.setOnClickListener(this);*/
@@ -275,6 +276,15 @@ public class DiscountsActivity extends SwipeRefreshActivity implements OnClickLi
 
         tvDetails.setText(Html.fromHtml(address));
 
+        TextView tvDiscountVal = (TextView) findViewById(R.id.tvDiscountVal);
+
+        int diffDate = discount.getCreated_at() + (discount.getExp_date()*24*60*60);
+        Date d = DateTimeHelper.getDateFromTimeStamp(diffDate);
+        String date = Utilities.FarsiDate(d);
+
+        String myTxt = discount.getDiscount_val() + "% تخفیف تنها تا پایان " + date;
+        tvDiscountVal.setText(myTxt);
+
 
         Handler h = new Handler();
 //		h.postDelayed(new Runnable() {
@@ -319,13 +329,13 @@ public class DiscountsActivity extends SwipeRefreshActivity implements OnClickLi
         Favorite fave = q.getFavoriteByStoreId(discount.getDiscount_id());
         if (fave != null) {
             q.deleteFavorite(discount.getDiscount_id());
-            ((Button) view).setText("افزودن به علاقه مندی ها");
+            ((ImageView) view).setImageResource(R.drawable.button_fav);
 
         } else {
             fave = new Favorite();
             fave.setStore_id(discount.getDiscount_id());
             q.insertFavorite(fave);
-            ((Button) view).setText("حذف از علاقه مندی ها");
+            ((ImageView) view).setImageResource(R.drawable.button_call);
         }
     }
 

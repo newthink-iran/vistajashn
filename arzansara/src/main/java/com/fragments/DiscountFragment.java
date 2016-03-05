@@ -172,8 +172,8 @@ public class DiscountFragment extends Fragment implements OnItemClickListener, O
 				TextView tvTitle = (TextView) v.findViewById(R.id.tvTitle);
 				tvTitle.setText(name);
 				
-				TextView tvSubtitle = (TextView) v.findViewById(R.id.tvSubtitle);
-				tvSubtitle.setText(Html.fromHtml(address));
+				//TextView tvSubtitle = (TextView) v.findViewById(R.id.tvSubtitle);
+				//tvSubtitle.setText(Html.fromHtml(address));
 
 				TextView tvDiscountVal = (TextView) v.findViewById(R.id.tvDiscountVal);
 				tvDiscountVal.setText(discountValue + "% تخفیف");

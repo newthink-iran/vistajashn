@@ -115,12 +115,12 @@ public class HomeFragment extends Fragment implements OnItemClickListener, OnCli
 		main.showSwipeProgress();
 		main.getDebugKey();
         // my edit //
-        Queries q = main.getQueries();
-        storeList = q.getStoresFeatured();
-        newsList = q.getNews();
+        //Queries q = main.getQueries();
+        //storeList = q.getStoresFeatured();
+       // newsList = q.getNews();
         //if(!storeList.isEmpty() || !newsList.isEmpty() )
         //createSlider();
-        //showList();
+        showList();
 
         // end my edit //
 
@@ -152,13 +152,12 @@ public class HomeFragment extends Fragment implements OnItemClickListener, OnCli
 			public void onAsyncTaskPostExecute(MGAsyncTask asyncTask) {
 				// TODO Auto-generated method stub
 				MainActivity main = (MainActivity) getActivity();
-				Queries q = main.getQueries();
-				storeList = q.getStoresFeatured();
-				newsList = q.getNews();
+				//Queries q = main.getQueries();
+				//storeList = q.getStoresFeatured();
+				//newsList = q.getNews();
 				
-				createSlider();
+				//createSlider();
 				showList();
-				
 
 				main.hideSwipeProgress();
 			}
@@ -166,78 +165,86 @@ public class HomeFragment extends Fragment implements OnItemClickListener, OnCli
 			@Override
 			public void onAsyncTaskDoInBackground(MGAsyncTask asyncTask) {
 				// TODO Auto-generated method stub
-				try {
-					DataParser parser = new DataParser();
-					Data data = parser.getData(Config.DATA_JSON_URL);
-					DataNews dataNews = parser.getDataNews(Config.DATA_NEWS_URL);
-					
-					MainActivity main = (MainActivity) getActivity();
-					
-					if(main == null)
-						return;
-					
-					Queries q = main.getQueries();
+				MainActivity main = (MainActivity) getActivity();
+				if(main == null)
+					return;
 
-					if(data == null)
-						return;
-					
-					if(data.getCategories() != null && data.getCategories().size() > 0) {
-						
-						q.deleteTable("categories");
-						for(Category cat : data.getCategories()) {
-							q.insertCategory(cat);
-						}
-						Log.e("HOME FRAGMENT LOG", "Store count =" + data.getCategories().size());
-					}
-					
-					if(data.getPhotos() != null && data.getPhotos().size() > 0) {
-						
-						q.deleteTable("photos");
-						for(Photo photo : data.getPhotos()) {
-							q.insertPhoto(photo);
-						}
-					}
-					
-					if(data.getStores() != null && data.getStores().size() > 0) {
-						
-						q.deleteTable("stores");
-						for(Store store : data.getStores()) {
-							q.insertStore(store);
-						}
-						Log.e("HOME FRAGMENT LOG", "Store count =" + data.getStores().size());
-					}
+				if(main.IsFirst){
+					main.IsFirst = false;
+					try {
+						DataParser parser = new DataParser();
+						Data data = parser.getData(Config.DATA_JSON_URL);
+						DataNews dataNews = parser.getDataNews(Config.DATA_NEWS_URL);
 
-					if(data.getDiscounts() != null && data.getDiscounts().size() > 0) {
+						//MainActivity main = (MainActivity) getActivity();
 
-						q.deleteTable("discounts");
-						for(Discount discount : data.getDiscounts()) {
-							q.insertDiscount(discount);
+						if(main == null)
+							return;
+
+						Queries q = main.getQueries();
+
+						if(data == null)
+							return;
+
+						if(data.getCategories() != null && data.getCategories().size() > 0) {
+
+							q.deleteTable("categories");
+							for(Category cat : data.getCategories()) {
+								q.insertCategory(cat);
+							}
+							Log.e("HOME FRAGMENT LOG", "Store count =" + data.getCategories().size());
 						}
-						Log.e("HOME FRAGMENT LOG", "Discount count =" + data.getDiscounts().size());
-					}
 
-					if(data.getSettings() != null && data.getSettings().size() > 0) {
+						if(data.getPhotos() != null && data.getPhotos().size() > 0) {
 
-						q.deleteTable("settings");
-						for(Setting setting : data.getSettings()) {
-							q.insertSettings(setting);
+							q.deleteTable("photos");
+							for(Photo photo : data.getPhotos()) {
+								q.insertPhoto(photo);
+							}
 						}
-						Log.e("HOME FRAGMENT LOG", "Discount count =" + data.getSettings().size());
-					}
-					
-					if(dataNews.getNews() != null && dataNews.getNews().size() > 0) {
-						
-						q.deleteTable("news");
-						for(News news : dataNews.getNews()) {
-							q.insertNews(news);
-						}
-						Log.e("HOME FRAGMENT LOG", "Store count =" + dataNews.getNews().size());
-					}
 
+						if(data.getStores() != null && data.getStores().size() > 0) {
+
+							q.deleteTable("stores");
+							for(Store store : data.getStores()) {
+								q.insertStore(store);
+							}
+							Log.e("HOME FRAGMENT LOG", "Store count =" + data.getStores().size());
+						}
+
+						if(data.getDiscounts() != null && data.getDiscounts().size() > 0) {
+
+							q.deleteTable("discounts");
+							for(Discount discount : data.getDiscounts()) {
+								q.insertDiscount(discount);
+							}
+							Log.e("HOME FRAGMENT LOG", "Discount count =" + data.getDiscounts().size());
+						}
+
+						if(data.getSettings() != null && data.getSettings().size() > 0) {
+
+							q.deleteTable("settings");
+							for(Setting setting : data.getSettings()) {
+								q.insertSettings(setting);
+							}
+							Log.e("HOME FRAGMENT LOG", "Discount count =" + data.getSettings().size());
+						}
+
+						if(dataNews.getNews() != null && dataNews.getNews().size() > 0) {
+
+							q.deleteTable("news");
+							for(News news : dataNews.getNews()) {
+								q.insertNews(news);
+							}
+							Log.e("HOME FRAGMENT LOG", "Store count =" + dataNews.getNews().size());
+						}
+
+					}
+					catch(Exception e) {
+						e.printStackTrace();
+					}
 				}
-				catch(Exception e) {
-					e.printStackTrace();
-				}
+
 			}
 		});
 		task.execute();
@@ -306,7 +313,7 @@ public class HomeFragment extends Fragment implements OnItemClickListener, OnCli
 		Button giftBtn = (Button) viewInflate.findViewById(R.id.giftBtn);
 		giftBtn.setOnClickListener(this);*/
 
-
+		/*
 		MGListAdapter adapter = new MGListAdapter(
 				getActivity(), newsList.size(), R.layout.news_entry);
 		
@@ -347,7 +354,7 @@ public class HomeFragment extends Fragment implements OnItemClickListener, OnCli
 
 
 				/* elyas : farsi date */
-				Date d = DateTimeHelper.getDateFromTimeStamp(news.getCreated_at());
+				/*Date d = DateTimeHelper.getDateFromTimeStamp(news.getCreated_at());
 				String date = Utilities.FarsiDate(d);
 
 				//String date = DateTimeHelper.getStringDateFromTimeStamp(news.getCreated_at(), "MM/dd/yyyy" );
@@ -355,7 +362,7 @@ public class HomeFragment extends Fragment implements OnItemClickListener, OnCli
 				tvDate.setText(date);
 			}
 		});
-		listView.setAdapter(adapter);
+		listView.setAdapter(adapter); */
 	}
 
 
@@ -507,7 +514,7 @@ public class HomeFragment extends Fragment implements OnItemClickListener, OnCli
 				ft.commit();
 				break;
 			case R.id.button4:
-				fragment = new FavoriteFragment_news();
+				fragment = new FavoriteDiscounts();
 				ft = getFragmentManager().beginTransaction();
 				ft.replace(R.id.frame_container, fragment);
 				ft.addToBackStack(null);
