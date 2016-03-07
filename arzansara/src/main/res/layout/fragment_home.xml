@@ -110,86 +110,55 @@
 
     <!-- </LinearLayout> -->
 
-    <TextView
-        android:layout_width="200dp"
-        android:layout_height="50dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:text="تازه ترین   اخبار"
-        android:textColor="#ffffff"
-        android:rotation="90"
-        android:background="@drawable/rounded_textview"
-        android:layout_marginTop="100dp"
-        android:layout_marginLeft="-80dp"
-        android:layout_marginStart="-80dp"
-        android:padding="@dimen/dimen_10dp"
-        android:textSize="@dimen/text_size_20sp"
+
+    <ImageView
         android:id="@+id/button1"
-        />
-
-    <TextView
-        android:layout_width="200dp"
-        android:layout_height="50dp"
-        android:layout_alignParentRight="true"
-        android:layout_alignBaseline="@+id/button1"
-        android:layout_alignParentEnd="true"
-        android:text="تازه ترین تخفیفات"
-        android:textColor="#ffffff"
-        android:rotation="270"
-        android:background="@drawable/rounded_textview"
-        android:layout_marginTop="@dimen/activity_vertical_margin"
-        android:padding="@dimen/dimen_10dp"
-        android:textSize="@dimen/text_size_20sp"
-        android:id="@+id/button2"
-        android:layout_marginRight="-80dp"
-        android:layout_marginEnd="-80dp"/>
-
-    <TextView
-        android:layout_width="200dp"
-        android:layout_height="50dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentBottom="true"
-
-        android:rotation="90"
-        android:textColor="#ffffff"
-        android:background="@drawable/rounded_textview"
-        android:text="درباره  فروشگاه"
-        android:padding="@dimen/dimen_10dp"
-        android:textSize="@dimen/text_size_20sp"
-        android:id="@+id/button3"
-        android:layout_marginBottom="150dp"
-        android:layout_marginLeft="-80dp"
-        android:layout_marginStart="-80dp"
-/>
-
-    <TextView
-        android:layout_width="200dp"
-        android:layout_height="50dp"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignBaseline="@+id/button3"
-        android:text="علاقه مندی های من"
-        android:textColor="#ffffff"
-        android:rotation="270"
-        android:background="@drawable/rounded_textview"
-        android:padding="@dimen/dimen_10dp"
-        android:textSize="@dimen/text_size_20sp"
-        android:id="@+id/button4"
-        android:layout_marginRight="-80dp"
-        android:layout_marginEnd="-80dp"/>
-
-    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="گروه نرم افزاری ویستاپرداز نواندیش"
-        android:textColor="#ffffff"
-        android:background="@drawable/rounded_textview"
-        android:padding="@dimen/dimen_10dp"
-        android:textSize="@dimen/text_size_20sp"
-        android:id="@+id/button5"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:src="@drawable/btn_news"
+        />
+
+    <ImageView
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:src="@drawable/btn_discounts"
+        />
+
+    <ImageView
+        android:id="@+id/button3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
+        android:src="@drawable/btn_about"
+        />
+
+    <ImageView
+        android:id="@+id/button4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:src="@drawable/btn_fav"
+        />
+
+    <ImageView
+        android:id="@+id/button5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:src="@drawable/btn_newthink"
+        />
 
 
     <ListView

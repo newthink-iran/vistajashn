@@ -48,6 +48,7 @@
                 android:layout_gravity="right"
                 android:layout_weight="0.5"
                 android:gravity="center"
+                android:textStyle="bold"
                 android:text="Small Text"
                 android:textColor="@color/text_white_cloor"
                 android:textSize="@dimen/text_size_18sp" />
@@ -59,6 +60,7 @@
                 android:layout_marginRight="@dimen/dimen_5dp"
                 android:lines="@integer/num_new_lines_2"
                 android:layout_gravity="right"
+                android:textStyle="bold"
                 android:gravity="center"
                 android:layout_weight="0.5"
                 android:text="Small Text"

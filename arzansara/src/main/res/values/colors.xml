@@ -5,7 +5,7 @@
     
     <color name="unselected_text_color">#929292</color>
     
-    <color name="slider_bg_label">#A7000000</color>
+    <color name="slider_bg_label">#a79e1e62</color>
     
     <color name="text_white_cloor">#ffffff</color>
     
@@ -25,7 +25,7 @@
     
     <color name="view_bg_color">#fff7f7f7</color>
     
-    <color name="theme_orange_color">#ff662e</color>
+    <color name="theme_orange_color">#fff100</color>
     
     <color name="theme_orange_color_alpha_66">#D6ff662e</color>
     <color name="bg_gray_color">#f0f0f0</color>

@@ -124,7 +124,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Medium Text"
-                android:textColor="@color/theme_orange_color"
+                android:textColor="#ff0000"
                 android:textSize="@dimen/text_size_20sp"
                 android:textStyle="bold"
                 android:layout_gravity="center"
@@ -136,7 +136,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/dimen_10dp"
-                android:minHeight="100dp"
+                android:minHeight="50dp"
                 android:text="Medium Text"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:gravity="right"
@@ -146,7 +146,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_margin="@dimen/dimen_30dp">
+                android:layout_margin="@dimen/dimen_10dp">
 
                 <RelativeLayout
                     android:layout_width="wrap_content"

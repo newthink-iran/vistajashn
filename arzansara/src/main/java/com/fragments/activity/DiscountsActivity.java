@@ -196,7 +196,7 @@ public class DiscountsActivity extends SwipeRefreshActivity implements OnClickLi
         buttonFavorite.setOnClickListener(this);
         Favorite fave = q.getFavoriteByStoreId(discount.getDiscount_id());
         if (fave != null)
-            buttonFavorite.setImageResource(R.drawable.button_call);
+            buttonFavorite.setImageResource(R.drawable.button_unfav);
         else
             buttonFavorite.setImageResource(R.drawable.button_fav);
 
@@ -321,7 +321,7 @@ public class DiscountsActivity extends SwipeRefreshActivity implements OnClickLi
             fave = new Favorite();
             fave.setStore_id(discount.getDiscount_id());
             q.insertFavorite(fave);
-            ((ImageView) view).setImageResource(R.drawable.button_call);
+            ((ImageView) view).setImageResource(R.drawable.button_unfav);
         }
     }
 

@@ -37,6 +37,7 @@ import com.slider.MGSliderAdapter.OnMGSliderAdapterListener;
 import com.utilities.MGUtilities;
 
 import android.annotation.SuppressLint;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -73,6 +74,7 @@ public class HomeFragment extends Fragment implements OnItemClickListener, OnCli
 	ArrayList<Store> storeList;
 	ArrayList<News> newsList;
 	MGAsyncTask task;
+	ProgressDialog progressDialog;
 	
 	public HomeFragment() { }
 	
@@ -112,7 +114,16 @@ public class HomeFragment extends Fragment implements OnItemClickListener, OnCli
 			.build();
 		
 		MainActivity main = (MainActivity) getActivity();
-		main.showSwipeProgress();
+		//main.showSwipeProgress();
+
+		if(main.IsFirst){
+			progressDialog = new ProgressDialog(this.getActivity());
+			progressDialog.setMessage("لطفا شکیبا باشید...");
+			progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+			progressDialog.setCancelable(false);
+			progressDialog.show();
+		}
+
 		main.getDebugKey();
         // my edit //
         //Queries q = main.getQueries();
@@ -159,7 +170,27 @@ public class HomeFragment extends Fragment implements OnItemClickListener, OnCli
 				//createSlider();
 				showList();
 
-				main.hideSwipeProgress();
+				//main.hideSwipeProgress();
+				if(main.IsFirst){
+					main.IsFirst = false;
+					progressDialog.hide();
+				}
+
+
+				ImageView btn1 = (ImageView) viewInflate.findViewById(R.id.button1);
+				btn1.setEnabled(true);
+
+				ImageView btn2 = (ImageView) viewInflate.findViewById(R.id.button2);
+				btn2.setEnabled(true);
+
+				ImageView btn3 = (ImageView) viewInflate.findViewById(R.id.button3);
+				btn3.setEnabled(true);
+
+				ImageView btn4 = (ImageView) viewInflate.findViewById(R.id.button4);
+				btn4.setEnabled(true);
+
+				ImageView btn5 = (ImageView) viewInflate.findViewById(R.id.button5);
+				btn5.setEnabled(true);
 			}
 			
 			@Override
@@ -170,7 +201,6 @@ public class HomeFragment extends Fragment implements OnItemClickListener, OnCli
 					return;
 
 				if(main.IsFirst){
-					main.IsFirst = false;
 					try {
 						DataParser parser = new DataParser();
 						Data data = parser.getData(Config.DATA_JSON_URL);
@@ -272,19 +302,19 @@ public class HomeFragment extends Fragment implements OnItemClickListener, OnCli
 		listView.setOnItemClickListener(this);
 		listView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
 
-		TextView btn1 = (TextView) viewInflate.findViewById(R.id.button1);
+		ImageView btn1 = (ImageView) viewInflate.findViewById(R.id.button1);
 		btn1.setOnClickListener(this);
 
-		TextView btn2 = (TextView) viewInflate.findViewById(R.id.button2);
+		ImageView btn2 = (ImageView) viewInflate.findViewById(R.id.button2);
 		btn2.setOnClickListener(this);
 
-		TextView btn3 = (TextView) viewInflate.findViewById(R.id.button3);
+		ImageView btn3 = (ImageView) viewInflate.findViewById(R.id.button3);
 		btn3.setOnClickListener(this);
 
-		TextView btn4 = (TextView) viewInflate.findViewById(R.id.button4);
+		ImageView btn4 = (ImageView) viewInflate.findViewById(R.id.button4);
 		btn4.setOnClickListener(this);
 
-		TextView btn5 = (TextView) viewInflate.findViewById(R.id.button5);
+		ImageView btn5 = (ImageView) viewInflate.findViewById(R.id.button5);
 		btn5.setOnClickListener(this);
 
 
