@@ -87,7 +87,7 @@
     <string name="share">Share</string>
     <string name="placeholder_review">نظر شما</string>
     <string name="chars_left">کاراکتر باقی مانده است</string>
-    <string name="about_us_detail">گروه مهندسی کامپیوتر ویستا پرداز نواندیش \n\n مشاوره - نیازسنجی - طراحی - اجرا - نگهداری \n\n آدرس: اصفهان، خمینی شهر، بلوار طالقانی، مجتمع عرشیا، طبقه دوم \n\n تلفن: 33517735 - 031 \n\n همراه: 09131275381 \n\n وب سایت: www.newthink.ir</string>
+    <string name="about_us_detail">گروه مهندسی ویستا پرداز نواندیش \n\n طراحی سایت - اپلیکیشن موبایل - مشاوره - پشتیبانی \n\n آدرس: اصفهان، خمینی شهر، بلوار طالقانی، مجتمع عرشیا، طبقه دوم \n\n تلفن: 33517735 - 031 \n\n همراه: 09131275381 \n\n وب سایت: www.newthink.ir</string>
     <string name="about_us_detail_1"></string>
     <string name="about_us_detail_2">"توضیحات لازم"</string>
     <string name="about_us_detail_3">"توضیحات لازم"</string>
@@ -141,5 +141,6 @@
     <string name="empty_mobile_details">لطفا شماره موبایل خود را وارد نمایید</string>
     <string name="discounts">تخفیفات</string>
     <string name="taTarikh">تاریخ:</string>
+    <string name="header_route">مسیریاب</string>
 
 </resources>

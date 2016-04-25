@@ -37,11 +37,12 @@ public class UIConfig {
 	public static Menu HEADER_CATEGORIES = new Menu(R.string.header_categories, -1, -1, HeaderType.HeaderType_LABEL);
 	public static Menu HEADER_EXTRAS = new Menu(R.string.header_extras, -1,-1, HeaderType.HeaderType_LABEL);
 	public static Menu HEADER_USER = new Menu(R.string.header_users, -1, -1, HeaderType.HeaderType_LABEL);
-	
+
+	private static final Menu MENU_ROUTE = new Menu(R.string.header_route, R.drawable.ic_news, R.drawable.ic_news, HeaderType.HeaderType_CATEGORY);
 	public static Menu[] MENUS_NOT_LOGGED = {
 		
 	//	HEADER_CATEGORIES,
-	//	MENU_HOME,
+		MENU_HOME,
 	//	MENU_NEWS,
 	//	MENU_DISCOUNTS,
 	//	MENU_ABOUT_US1,
@@ -62,6 +63,7 @@ public class UIConfig {
 	//	HEADER_USER,
 	//	MENU_REGISTER,
 	//	MENU_LOGIN,
+		MENU_ROUTE,
 		MENU_EXIT
 	};
 	

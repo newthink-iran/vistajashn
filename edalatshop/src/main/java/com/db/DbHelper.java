@@ -113,7 +113,7 @@ public class DbHelper extends SQLiteOpenHelper {
 				+ "is_deleted INTEGER, "
 				+ "updated_at INTEGER, "
 				+ "exp_date INTEGER, "
-				+ "discount_val INTEGER, "
+				+ "discount_val TEXT, "
 				+ "viewCount INTEGER "
 				+ ");");
 

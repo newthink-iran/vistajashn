@@ -48,10 +48,13 @@ import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.refreshlayout.SwipeRefreshActivity;
 import com.usersession.UserAccessSession;
 import com.usersession.UserSession;
+import com.utilities.MGUtilities;
 
+import android.content.ComponentName;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -138,12 +141,12 @@ public class MainActivity extends SwipeRefreshActivity implements LocationListen
             getWindow().getDecorView().setLayoutDirection(View.LAYOUT_DIRECTION_RTL);
         }*/
 
-        Amplitude.getInstance().initialize(this, "cb4b1ef78f74bfec992fe6500fd21f4c").enableForegroundTracking(getApplication());
+        Amplitude.getInstance().initialize(this, "701046880c75b600c7a2238bda04b1c9").enableForegroundTracking(getApplication());
 
-        //OneSignal.enableNotificationsWhenActive(true);
+        OneSignal.enableNotificationsWhenActive(true);
 
         OneSignal.startInit(this)
-                .setNotificationOpenedHandler(new ExampleNotificationOpenedHandler())
+                /*.setNotificationOpenedHandler(new ExampleNotificationOpenedHandler())*/
                 .init();
         //OneSignal.enableNotificationsWhenActive(true);
 
@@ -347,6 +350,38 @@ public class MainActivity extends SwipeRefreshActivity implements LocationListen
 //        menu.findItem(R.id.action_settings).setVisible(!drawerOpen);
         return super.onPrepareOptionsMenu(menu);
     }
+
+    private void route() {
+
+        double lat_val = 32.678958;
+        double long_val = 51.604459;
+
+        if(lat_val == 0 || long_val == 0) {
+            MGUtilities.showAlertView(
+                    this,
+                    R.string.action_error,
+                    R.string.cannot_proceed);
+            return;
+        }
+
+//		String geo = String.format("geo:%f,%f?q=%f,%f",
+//				store.getLat(),
+//				store.getLon(),
+//				store.getLat(),
+//				store.getLon() );
+
+        String geo = String.format("http://maps.google.com/maps?f=d&daddr=%s,%s&dirflg=d",
+                lat_val,
+                long_val) ;
+
+//		String geo = String.format("http://maps.google.com/maps?f=d&daddr=%s&dirflg=d",
+//				store.getStore_address()) ;
+
+        Intent intent = new Intent(android.content.Intent.ACTION_VIEW, Uri.parse(geo));
+//		Uri.parse("geo:55.74274,37.56577?q=55.74274,37.56577 (name)"));
+        intent.setComponent(new ComponentName("com.google.android.apps.maps", "com.google.android.maps.MapsActivity"));
+        this.startActivity(intent);
+    }
  
     
     private void displayView(int position) {
@@ -363,14 +398,16 @@ public class MainActivity extends SwipeRefreshActivity implements LocationListen
 	        
 	        case 0:
 	            fragment = new HomeFragment();
+
 	            break;
 	        case 1:
-                fragment = new NewsFragment();;
+                //fragment = new NewsFragment();;
+                route();
                 break;
             case 2:
-                fragment = new DiscountFragment();
+                doExit();
                 break;
-            case 3:
+           /* case 3:
                 fragment = new AboutUsFragment1();
                 break;
             /*case 4:
@@ -379,7 +416,7 @@ public class MainActivity extends SwipeRefreshActivity implements LocationListen
             case 5:
                 fragment = new AboutUsFragment3();
                 break;*/
-	        case 4:
+	       /* case 4:
 	            fragment = new FavoriteFragment_news();
 	            break;
 	        /*case 4:
@@ -405,7 +442,7 @@ public class MainActivity extends SwipeRefreshActivity implements LocationListen
 	            fragment = new TermsConditionFragment();
 	            break;*/
 
-            case 5:
+           /* case 5:
                 doExit();
                 break;
 	            
@@ -426,7 +463,7 @@ public class MainActivity extends SwipeRefreshActivity implements LocationListen
 			case 10:
 				Intent i = new Intent(this, LoginActivity.class);
 				this.startActivity(i);
-				break;
+				break;*/
  
 	        default:
 	            break;
@@ -978,7 +1015,7 @@ public class MainActivity extends SwipeRefreshActivity implements LocationListen
     }
 
 
-    private class ExampleNotificationOpenedHandler implements OneSignal.NotificationOpenedHandler {
+    /*private class ExampleNotificationOpenedHandler implements OneSignal.NotificationOpenedHandler {
         @Override
         public void notificationOpened(String message, JSONObject additionalData, boolean isActive) {
             //String messageTitle = "پیام جدید", messageBody = message;
@@ -1001,6 +1038,6 @@ public class MainActivity extends SwipeRefreshActivity implements LocationListen
                     .setCancelable(true)
                     .setPositiveButton("OK", null)
                     .create().show();*/
-        }
-    }
+       /* }
+    }*/
 }

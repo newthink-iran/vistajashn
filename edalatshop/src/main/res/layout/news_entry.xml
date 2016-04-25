@@ -50,7 +50,7 @@
                 android:gravity="center"
                 android:text="Small Text"
                 android:textColor="@color/text_white_cloor"
-                android:textSize="@dimen/text_size_18sp" />
+                android:textSize="@dimen/text_size_14sp" />
 
             <TextView
                 android:id="@+id/tvViewCount"
@@ -63,7 +63,7 @@
                 android:layout_weight="0.5"
                 android:text="Small Text"
                 android:textColor="@color/text_white_cloor"
-                android:textSize="@dimen/text_size_18sp" />
+                android:textSize="@dimen/text_size_14sp" />
 
 
         </LinearLayout>

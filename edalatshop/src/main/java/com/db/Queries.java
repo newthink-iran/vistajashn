@@ -284,7 +284,7 @@ public class Queries {
 		db = dbHelper.getReadableDatabase();
 
 		//Cursor mCursor = db.rawQuery("SELECT * FROM discounts ORDER BY updated_at DESC", null);
-		Cursor mCursor = db.rawQuery("SELECT * FROM discounts", null);
+		Cursor mCursor = db.rawQuery("SELECT * FROM discounts ORDER BY discount_id DESC", null);
 		mCursor.moveToFirst();
 
 		if (!mCursor.isAfterLast()) {
@@ -299,7 +299,7 @@ public class Queries {
 				discount.setCreated_at(mCursor.getInt(mCursor.getColumnIndex("created_at")));
 				discount.setUpdated_at(mCursor.getInt(mCursor.getColumnIndex("updated_at")));
 				discount.setIs_deleted(mCursor.getInt(mCursor.getColumnIndex("is_deleted")));
-				discount.setDiscount_val(mCursor.getInt(mCursor.getColumnIndex("discount_val")));
+				discount.setDiscount_val(mCursor.getString(mCursor.getColumnIndex("discount_val")));
 				discount.setExp_date(mCursor.getInt(mCursor.getColumnIndex("exp_date")));
 				discount.setViewCount(mCursor.getInt(mCursor.getColumnIndex("viewCount")));
 
@@ -367,7 +367,7 @@ public class Queries {
 				discount.setCreated_at(mCursor.getInt(mCursor.getColumnIndex("created_at")));
 				discount.setUpdated_at(mCursor.getInt(mCursor.getColumnIndex("updated_at")));
 				discount.setIs_deleted(mCursor.getInt(mCursor.getColumnIndex("is_deleted")));
-				discount.setDiscount_val(mCursor.getInt(mCursor.getColumnIndex("discount_val")));
+				discount.setDiscount_val(mCursor.getString(mCursor.getColumnIndex("discount_val")));
 				discount.setExp_date(mCursor.getInt(mCursor.getColumnIndex("exp_date")));
 				discount.setViewCount(mCursor.getInt(mCursor.getColumnIndex("viewCount")));
 
@@ -762,7 +762,7 @@ public class Queries {
 				entry.setCreated_at(mCursor.getInt(mCursor.getColumnIndex("created_at")));
 				entry.setUpdated_at(mCursor.getInt(mCursor.getColumnIndex("updated_at")));
 				entry.setIs_deleted(mCursor.getInt(mCursor.getColumnIndex("is_deleted")));
-				entry.setDiscount_val(mCursor.getInt(mCursor.getColumnIndex("discount_val")));
+				entry.setDiscount_val(mCursor.getString(mCursor.getColumnIndex("discount_val")));
 				entry.setExp_date(mCursor.getInt(mCursor.getColumnIndex("exp_date")));
 				entry.setViewCount(mCursor.getInt(mCursor.getColumnIndex("viewCount")));
 
