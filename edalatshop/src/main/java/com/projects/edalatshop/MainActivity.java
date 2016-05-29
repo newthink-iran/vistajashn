@@ -50,6 +50,7 @@ import com.usersession.UserAccessSession;
 import com.usersession.UserSession;
 import com.utilities.MGUtilities;
 
+import android.app.AlertDialog;
 import android.content.ComponentName;
 import android.location.Address;
 import android.location.Geocoder;
@@ -97,6 +98,7 @@ import java.lang.reflect.Field;
 
 import android.graphics.Typeface;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 public class MainActivity extends SwipeRefreshActivity implements LocationListener, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener  {
@@ -1015,29 +1017,29 @@ public class MainActivity extends SwipeRefreshActivity implements LocationListen
     }
 
 
-    /*private class ExampleNotificationOpenedHandler implements OneSignal.NotificationOpenedHandler {
+    private class ExampleNotificationOpenedHandler implements OneSignal.NotificationOpenedHandler {
         @Override
         public void notificationOpened(String message, JSONObject additionalData, boolean isActive) {
-            //String messageTitle = "پیام جدید", messageBody = message;
-            //displayView(0);
-           /* try {
-                if (additionalData != null) {
-                    //if (additionalData.getString("type").equals("news"))
-                        //displayView(1);
-
-                    //else if (additionalData.getString("type").equals("discount"))
-                       //displayView(2);
-
+            String messageTitle = "پیام جدید", messageBody = message;
+            displayView(0);
+            if (additionalData != null) {
+                try {
+                    if (additionalData.getString("type").equals("news")) {
+                        displayView(1);
+                    } else if (additionalData.getString("type").equals("discount")) {
+                        displayView(2);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
                 }
-            } catch (JSONException e) {
-            }*/
+            }
 
-            /*new AlertDialog.Builder(MainActivity.this)
+            new AlertDialog.Builder(MainActivity.this)
                     .setTitle("salam")
                     .setMessage("salam")
                     .setCancelable(true)
                     .setPositiveButton("OK", null)
-                    .create().show();*/
-       /* }
-    }*/
+                    .create().show();
+        }
+    }
 }

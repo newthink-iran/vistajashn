@@ -7,7 +7,7 @@ android {
 
     defaultConfig {
         manifestPlaceholders = [manifestApplicationId: "${applicationId}",
-                                onesignal_app_id: "49ec9de6-74b7-4f6f-8711-b92c9a93825f",
+                                onesignal_app_id: "1c3efbae-1d41-484b-8149-016926a9db1c",
                                 onesignal_google_project_number: "576054748157"]
         applicationId "com.projects.edalatshop"
         minSdkVersion 14
