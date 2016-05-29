@@ -1,12 +1,17 @@
 package com.fragments.activity;
 
 import java.util.ArrayList;
+import java.util.List;
+
 import com.adapters.MGListAdapter;
 import com.adapters.MGListAdapter.OnMGListAdapterAdapterListener;
 import com.amplitude.api.Amplitude;
 import com.config.UIConfig;
 import com.db.DbHelper;
 import com.db.Queries;
+import com.felipecsl.asymmetricgridview.library.model.AsymmetricItem;
+import com.felipecsl.asymmetricgridview.library.widget.AsymmetricGridView;
+import com.image.cache.Utils;
 import com.imageview.MGImageView;
 import com.models.Category;
 import com.models.Favorite;
@@ -93,9 +98,12 @@ public class StoreActivity extends SwipeRefreshActivity implements OnItemClickLi
 		
 		hideSwipeProgress();
 		
-		ListView listView = (ListView) findViewById(R.id.listView);
+		//ListView listView = (ListView) findViewById(R.id.listView);
+		AsymmetricGridView listView = (AsymmetricGridView) findViewById(R.id.listView);
 		listView.setOnItemClickListener(this);
-		listView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
+		//listView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
+		listView.setRequestedColumnWidth(com.felipecsl.asymmetricgridview.library.Utils.dpToPx(this, 120));
+		final List<AsymmetricItem> items = new ArrayList<>();
 		
 		MGListAdapter adapter = new MGListAdapter(
 				StoreActivity.this, arrayData.size(), R.layout.store_entry);
