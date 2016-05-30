@@ -7,11 +7,14 @@ import com.adapters.MGListAdapter;
 import com.adapters.MGListAdapter.OnMGListAdapterAdapterListener;
 import com.amplitude.api.Amplitude;
 import com.config.Config;
+import com.config.Constants;
 import com.config.UIConfig;
 import com.db.Queries;
+import com.fragments.activity.DiscountsActivity;
 import com.fragments.activity.NewsDetailActivity2;
 import com.helpers.DateTimeHelper;
 import com.imageview.MGImageView;
+import com.models.Discount;
 import com.models.News;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.utilities.MGUtilities;
@@ -26,6 +29,7 @@ import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.text.Html;
 import android.text.Spanned;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -42,12 +46,16 @@ public class NewsFragment extends Fragment implements OnItemClickListener, OnCli
 	private View viewInflate;
 	private ArrayList<News> arrayData;
 	DisplayImageOptions options;
-	
+	private String title=null;
 	public NewsFragment() { }
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		
+		if(getArguments()!=null) {
+			Bundle bundle = getArguments();
+			if (bundle.containsKey(Constants.KEY_NOTIFY_TITLE))
+				title = bundle.getString(Constants.KEY_NOTIFY_TITLE);
+		}
 		viewInflate = inflater.inflate(R.layout.fragment_news, null);
 		return viewInflate;
 	}
@@ -177,7 +185,36 @@ public class NewsFragment extends Fragment implements OnItemClickListener, OnCli
 		listView.setAdapter(adapter);
 		adapter.notifyDataSetChanged();
 	}
-	
+	@Override
+	public void onResume() {
+		super.onResume();
+		if(title!=null){
+			new Handler().post(new Runnable() {
+				@Override
+				public void run() {
+					MainActivity main = (MainActivity) NewsFragment.this.getActivity();
+					final Queries q = main.getQueries();
+					arrayData = q.getNews();
+					for(int i=0;i<arrayData.size();i++){
+						if(arrayData.get(i).getNews_title().equals(title)){
+							Constants.type=null;
+							Constants.title=null;
+							title=null;
+							final News news = arrayData.get(i);
+							Intent intent = new Intent(getActivity(), NewsDetailActivity2.class);
+							Amplitude.getInstance().logEvent(news.getNews_title());
+							intent.putExtra("news", news);
+							getActivity().startActivity(intent);
+							break;
+
+						}
+					}
+				}
+			});
+
+		}
+
+	}
 	@Override
 	public void onItemClick(AdapterView<?> adapterView, View v, int pos, long resId) {
 		// TODO Auto-generated method stub

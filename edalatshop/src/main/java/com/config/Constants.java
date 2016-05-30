@@ -37,4 +37,10 @@ public class Constants {
 	
 	public static String FRAGMENT_TAB = "FRAGMENT_TAB";
 	public static String FRAGMENT_SPLASH = "FRAGMENT_SPLASH";
+
+	public static String KEY_NOTIFY_TYPE = "type";
+	public static String KEY_NOTIFY_TITLE = "title";
+	public static String KEY_NEWS = "news";
+	public static String KEY_DISCOUNT = "discount";
+	public static  String type,title;
 }

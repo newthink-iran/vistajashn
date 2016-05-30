@@ -8,6 +8,7 @@ import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.text.Html;
 import android.text.Spanned;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,6 +23,7 @@ import com.adapters.MGListAdapter;
 import com.adapters.MGListAdapter.OnMGListAdapterAdapterListener;
 import com.amplitude.api.Amplitude;
 import com.config.Config;
+import com.config.Constants;
 import com.config.UIConfig;
 import com.db.Queries;
 import com.fragments.activity.DiscountsActivity;
@@ -40,6 +42,7 @@ import java.util.Date;
 public class DiscountFragment extends Fragment implements OnItemClickListener, OnClickListener{
 
 	private View viewInflate;
+	private String title=null;
 	private ArrayList<Discount> arrayData;
 	DisplayImageOptions options;
 
@@ -47,13 +50,18 @@ public class DiscountFragment extends Fragment implements OnItemClickListener, O
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
+		if(getArguments()!=null) {
+			Bundle bundle = getArguments();
+			if (bundle.containsKey(Constants.KEY_NOTIFY_TITLE))
+				title = bundle.getString(Constants.KEY_NOTIFY_TITLE);
+		}
 		viewInflate = inflater.inflate(R.layout.fragment_discounts, null);
 		return viewInflate;
 	}
 	
 	@Override
 	public void onSaveInstanceState(Bundle outState) {
+
 		super.onSaveInstanceState(outState);	
 	}
 
@@ -61,7 +69,7 @@ public class DiscountFragment extends Fragment implements OnItemClickListener, O
 	public void onViewCreated(View view, Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onViewCreated(view, savedInstanceState);
-		
+
 		MainActivity main = (MainActivity) this.getActivity();
 		final Queries q = main.getQueries();
 
@@ -100,12 +108,17 @@ public class DiscountFragment extends Fragment implements OnItemClickListener, O
 			@Override
 			public void run() {
 				// TODO Auto-generated method stub
+
 				arrayData  = q.getDiscounts();
+
 				showList();
+
+
 			}
 		}, Config.DELAY_SHOW_ANIMATION);
 		
 		main.showSwipeProgress();
+
 	}
 	
 	private void showList() {
@@ -124,14 +137,14 @@ public class DiscountFragment extends Fragment implements OnItemClickListener, O
 				getActivity(), arrayData.size(), R.layout.discount_entry);
 		
 		adapter.setOnMGListAdapterAdapterListener(new OnMGListAdapterAdapterListener() {
-			
+
 			@Override
 			public void OnMGListAdapterAdapterCreated(MGListAdapter adapter, View v,
 					int position, ViewGroup viewGroup) {
 				// TODO Auto-generated method stub
-				
+
 				final Discount discount = arrayData.get(position);
-				
+
 				MGImageView imgViewPhoto = (MGImageView) v.findViewById(R.id.imgViewPhoto);
 				imgViewPhoto.setCornerRadius(0.0f);
 				imgViewPhoto.setBorderWidth(UIConfig.BORDER_WIDTH);
@@ -147,16 +160,16 @@ public class DiscountFragment extends Fragment implements OnItemClickListener, O
 						getActivity().startActivity(i);
 					}
 				});
-				
+
 				if(discount.getPhoto_url() != null) {
 					MainActivity.getImageLoader().displayImage(discount.getPhoto_url(), imgViewPhoto, options);
 				}
 				else {
 					imgViewPhoto.setImageResource(UIConfig.SLIDER_PLACEHOLDER);
 				}
-				
+
 				imgViewPhoto.setTag(position);
-				
+
 				Spanned name = Html.fromHtml(discount.getDiscount_title());
 				//Spanned address = Html.fromHtml(discount.getDiscount_content());
 				String address = discount.getDiscount_content();
@@ -164,10 +177,10 @@ public class DiscountFragment extends Fragment implements OnItemClickListener, O
 				address = address.replace("&gt;", ">");
 
 				Spanned discountValue = Html.fromHtml(String.valueOf(discount.getDiscount_val()));
-				
+
 				TextView tvTitle = (TextView) v.findViewById(R.id.tvTitle);
 				tvTitle.setText(name);
-				
+
 				//TextView tvSubtitle = (TextView) v.findViewById(R.id.tvSubtitle);
 				//tvSubtitle.setText(Html.fromHtml(address));
 
@@ -188,7 +201,39 @@ public class DiscountFragment extends Fragment implements OnItemClickListener, O
 		listView.setAdapter(adapter);
 		adapter.notifyDataSetChanged();
 	}
-	
+
+	@Override
+	public void onResume() {
+		super.onResume();
+		if(title!=null){
+			new Handler().post(new Runnable() {
+				@Override
+				public void run() {
+					MainActivity main = (MainActivity) DiscountFragment.this.getActivity();
+					final Queries q = main.getQueries();
+					arrayData  = q.getDiscounts();
+					for(int i=0;i<arrayData.size();i++){
+						if(arrayData.get(i).getDiscount_title().equals(title)){
+
+							Constants.type=null;
+							Constants.title=null;
+							title=null;
+							final Discount discount = arrayData.get(i);
+							Amplitude.getInstance().logEvent(discount.getDiscount_title());
+							Intent intent = new Intent(getActivity(), DiscountsActivity.class);
+							intent.putExtra("discount", discount);
+							getActivity().startActivity(intent);
+							break;
+
+						}
+					}
+				}
+			});
+
+		}
+
+	}
+
 	@Override
 	public void onItemClick(AdapterView<?> adapterView, View v, int pos, long resId) {
 		// TODO Auto-generated method stub
