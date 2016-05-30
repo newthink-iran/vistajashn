@@ -12,6 +12,7 @@ import com.adapters.MGListAdapter;
 import com.adapters.MGListAdapter.OnMGListAdapterAdapterListener;
 import com.amplitude.api.Amplitude;
 import com.config.Config;
+import com.config.Constants;
 import com.config.UIConfig;
 import com.db.DbHelper;
 import com.db.Queries;
@@ -125,6 +126,7 @@ public class MainActivity extends SwipeRefreshActivity implements LocationListen
 
     private LocationRequest mLocationRequest;
     private GoogleApiClient mGoogleApiClient;
+
     boolean mUpdatesRequested = false;
     
     // Handle to SharedPreferences for this app
@@ -135,7 +137,7 @@ public class MainActivity extends SwipeRefreshActivity implements LocationListen
     private Fragment currFragment;
   
     private GetAddressTask getAddressTask;
-    
+
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -148,7 +150,7 @@ public class MainActivity extends SwipeRefreshActivity implements LocationListen
         OneSignal.enableNotificationsWhenActive(true);
 
         OneSignal.startInit(this)
-                /*.setNotificationOpenedHandler(new ExampleNotificationOpenedHandler())*/
+                .setNotificationOpenedHandler(new ExampleNotificationOpenedHandler())
                 .init();
         //OneSignal.enableNotificationsWhenActive(true);
 
@@ -281,9 +283,9 @@ public class MainActivity extends SwipeRefreshActivity implements LocationListen
     }
 
     public void showMainView() {
-    	getActionBar().show();
-    	displayView(0);
-    	//showAds();
+        getActionBar().show();
+        displayView(0);
+        //showAds();
     }
  
     
@@ -403,7 +405,7 @@ public class MainActivity extends SwipeRefreshActivity implements LocationListen
 
 	            break;
 	        case 1:
-                //fragment = new NewsFragment();;
+//                fragment = new NewsFragment();;
                 route();
                 break;
             case 2:
@@ -496,13 +498,18 @@ public class MainActivity extends SwipeRefreshActivity implements LocationListen
         				
                         FragmentManager fragmentManager = MainActivity.this.getSupportFragmentManager();
                         fragmentManager.beginTransaction()
-                                .replace(R.id.frame_container, currFragment).commit();
+                                .replace(R.id.frame_container, currFragment)
+                                .commit();
         			}
         		}, Config.DELAY_SHOW_ANIMATION + 200);
         	}
         	else {
-        		
-        		currFragment = fragment;
+                if(Constants.title!=null&&Constants.type!=null) {
+                    Bundle bundle = new Bundle();
+                    bundle.putString(Constants.KEY_NOTIFY_TYPE, Constants.type);
+                    bundle.putString(Constants.KEY_NOTIFY_TITLE, Constants.title);
+                    fragment.setArguments(bundle);
+                }
                 FragmentManager fragmentManager = this.getSupportFragmentManager();
                 fragmentManager.beginTransaction()
                         .replace(R.id.frame_container, fragment).commit();
@@ -1021,25 +1028,55 @@ public class MainActivity extends SwipeRefreshActivity implements LocationListen
         @Override
         public void notificationOpened(String message, JSONObject additionalData, boolean isActive) {
             String messageTitle = "پیام جدید", messageBody = message;
-            displayView(0);
-            if (additionalData != null) {
-                try {
-                    if (additionalData.getString("type").equals("news")) {
-                        displayView(1);
-                    } else if (additionalData.getString("type").equals("discount")) {
-                        displayView(2);
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
+            Constants.type=null;Constants.title=null;
+//      displayView(0);
+            try {
+                if((additionalData.getString("type")!=null)&&(additionalData.getString("title")!=null)) {
+                    Constants.type = additionalData.getString("type");
+                    Constants.title = additionalData.getString("title");
+                    Log.i("LOG","ExampleNotificationOpenedHandler"+additionalData.getString("type")+"  :  "+additionalData.getString("title"));
                 }
-            }
 
-            new AlertDialog.Builder(MainActivity.this)
-                    .setTitle("salam")
-                    .setMessage("salam")
-                    .setCancelable(true)
-                    .setPositiveButton("OK", null)
-                    .create().show();
+//                FragmentManager fm = MainActivity.this.getSupportFragmentManager();
+//                for(int i = 0; i < fm.getBackStackEntryCount(); ++i) {
+//                    fm.popBackStackImmediate(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+//                }
+
+                // update the main content by replacing fragments
+//                Fragment fragment = null;
+//                fragment = new HomeFragment();
+//                if(title!=null&&type!=null) {
+//                    Bundle bundle = new Bundle();
+//                    bundle.putString(Constants.KEY_NOTIFY_TYPE, type);
+//                    bundle.putString(Constants.KEY_NOTIFY_TITLE, title);
+//                    fragment.setArguments(bundle);
+//                }
+//                FragmentManager fragmentManager =  MainActivity.this.getSupportFragmentManager();
+//                fragmentManager.beginTransaction()
+//                        .replace(R.id.frame_container, fragment).commit();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+//            if (additionalData != null) {
+//                try {
+////                    Log.i("LOG","type:   "+additionalData.getString("type"));
+////                    Log.i("LOG","title:   "+additionalData.getString("title"));
+//                    if (additionalData.getString("type").equals("news")) {
+//                        displayView(1,additionalData.getString("type"),additionalData.getString("title"));
+//                    } else if (additionalData.getString("type").equals("discount")) {
+//                        displayView(2,additionalData.getString("title"));
+//                    }
+//                } catch (JSONException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+
+//            new AlertDialog.Builder(MainActivity.this)
+//                    .setTitle("salam")
+//                    .setMessage("salam")
+//                    .setCancelable(true)
+//                    .setPositiveButton("OK", null)
+//                    .create().show();
         }
     }
 }

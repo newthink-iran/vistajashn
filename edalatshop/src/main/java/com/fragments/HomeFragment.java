@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import com.asynctask.MGAsyncTask;
 import com.asynctask.MGAsyncTask.OnMGAsyncTaskListener;
 import com.config.Config;
+import com.config.Constants;
 import com.config.UIConfig;
 import com.dataparser.DataParser;
 import com.db.Queries;
@@ -49,6 +50,7 @@ import android.widget.TextView;
 public class HomeFragment extends Fragment implements OnItemClickListener, OnClickListener {
 	
 	private View viewInflate;
+	private String type=null,title=null;;
 	DisplayImageOptions options;
 	ArrayList<Store> storeList;
 	ArrayList<News> newsList;
@@ -60,13 +62,25 @@ public class HomeFragment extends Fragment implements OnItemClickListener, OnCli
 	@SuppressLint("InflateParams") 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+		if(Constants.title!=null&&Constants.type!=null) {
+			if (getArguments() != null) {
+				Bundle bundle = getArguments();
+
+				if (bundle.containsKey(Constants.KEY_NOTIFY_TYPE))
+					type = bundle.getString(Constants.KEY_NOTIFY_TYPE);
+
+				if (bundle.containsKey(Constants.KEY_NOTIFY_TITLE))
+					title = bundle.getString(Constants.KEY_NOTIFY_TITLE);
+			}
+		}
 		viewInflate = inflater.inflate(R.layout.fragment_home, null);
 		return viewInflate;
 	}
 	
 	@Override
 	public void onSaveInstanceState(Bundle outState) {
-		super.onSaveInstanceState(outState);		
+
+		super.onSaveInstanceState(outState);
 	}
 	
 	@Override
@@ -80,8 +94,10 @@ public class HomeFragment extends Fragment implements OnItemClickListener, OnCli
 	@Override
 	public void onViewCreated(View view, Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
+
 		super.onViewCreated(view, savedInstanceState);
-		
+
+
 		options = new DisplayImageOptions.Builder()
 			.showImageOnLoading(UIConfig.SLIDER_PLACEHOLDER)
 			.showImageForEmptyUri(UIConfig.SLIDER_PLACEHOLDER)
@@ -134,7 +150,6 @@ public class HomeFragment extends Fragment implements OnItemClickListener, OnCli
 			
 			@Override
 			public void onAsyncTaskPreExecute(MGAsyncTask asyncTask) {
-				
 				asyncTask.dialog.hide();
 			}
 			
@@ -147,6 +162,7 @@ public class HomeFragment extends Fragment implements OnItemClickListener, OnCli
 				//newsList = q.getNews();
 				
 				//createSlider();
+
 				showList();
 
 				//main.hideSwipeProgress();
@@ -170,6 +186,24 @@ public class HomeFragment extends Fragment implements OnItemClickListener, OnCli
 
 				ImageView btn5 = (ImageView) viewInflate.findViewById(R.id.button5);
 				btn5.setEnabled(true);
+
+				if(type!=null) {
+					if(type.equals(Constants.KEY_NEWS)) {
+						if(title!=null) {
+							onClickNewsFragment(title);
+						}
+					}
+
+				}
+				if(type!=null) {
+
+					if(type.equals(Constants.KEY_DISCOUNT)) {
+						if(title!=null) {
+							onClickDiscountFragment(title);
+						}
+					}
+				}
+
 			}
 			
 			@Override
@@ -482,6 +516,36 @@ public class HomeFragment extends Fragment implements OnItemClickListener, OnCli
     	slider.setSliderAnimation(5000);
     	slider.resumeSliderAnimation();*/
 	}
+private void onClickNewsFragment(String title){
+		Fragment fragment = null;
+		FragmentTransaction ft = null;
+		this.type=null;
+		this.title=null;
+		fragment = new NewsFragment();
+		Bundle bundle = new Bundle();
+		bundle.putString(Constants.KEY_NOTIFY_TITLE, title);
+		fragment.setArguments(bundle);
+		ft = getFragmentManager().beginTransaction();
+		ft.replace(R.id.frame_container, fragment);
+		ft.addToBackStack(null);
+		ft.commit();
+	}
+	private void onClickDiscountFragment(String title){
+		Fragment fragment = null;
+		FragmentTransaction ft = null;
+		this.type=null;
+		this.title=null;
+		fragment = new DiscountFragment();
+		Bundle bundle = new Bundle();
+		bundle.putString(Constants.KEY_NOTIFY_TITLE, title);
+		fragment.setArguments(bundle);
+		ft = getFragmentManager().beginTransaction();
+		ft.replace(R.id.frame_container, fragment);
+		ft.addToBackStack(null);
+		ft.commit();
+	}
+
+
 
 	@Override
 	public void onClick(View v) {
