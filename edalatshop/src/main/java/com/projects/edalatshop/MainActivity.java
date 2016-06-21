@@ -252,6 +252,7 @@ public class MainActivity extends SwipeRefreshActivity implements LocationListen
     //check user for accepeting quit application
     @Override
     public void onBackPressed() {
+
         if(currFragment instanceof HomeFragment && DrawerFlag == false){
             doExit();
         }
@@ -504,6 +505,7 @@ public class MainActivity extends SwipeRefreshActivity implements LocationListen
         		}, Config.DELAY_SHOW_ANIMATION + 200);
         	}
         	else {
+                currFragment = fragment;
                 if(Constants.title!=null&&Constants.type!=null) {
                     Bundle bundle = new Bundle();
                     bundle.putString(Constants.KEY_NOTIFY_TYPE, Constants.type);
